@@ -75,12 +75,7 @@ function showTable($row, $arr, $user_username, $gameType)
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../style.css">
-	  <style type="text/css">
-	    .page {
-	    	padding-top: 0;
-	    }
-	  </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 

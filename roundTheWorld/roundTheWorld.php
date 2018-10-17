@@ -9,8 +9,7 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../css/general.css">
-	<link rel="stylesheet" type="text/css" href="roundTheWorld.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 

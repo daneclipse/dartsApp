@@ -8,12 +8,7 @@ $user_username = $_GET['username'];
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="css/general.css">
-	<style type="text/css">
-		.navBar h1 {
-			width: 33.3%;
-		}
-	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 

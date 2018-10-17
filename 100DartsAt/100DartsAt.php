@@ -10,8 +10,6 @@ $targetNumber = $_GET['game'];
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../css/general.css">
-	<link rel="stylesheet" type="text/css" href="100DartsAt.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

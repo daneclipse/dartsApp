@@ -8,10 +8,7 @@ $user_username = $_GET['username'];
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="../style.css">
-	<link rel="stylesheet" type="text/css" href="ticTacToe.css">
-	<link rel="stylesheet" type="text/css" href="../statsMediaQueries.css">
-	<link rel="stylesheet" type="text/css" href="ticMediaQueries.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
