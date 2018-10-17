@@ -1,0 +1,141 @@
+/* AREA TO CHOOSE WHO THROWS FIRST */
+.playerOrder {
+	min-width: 200px;
+	min-height: 300px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.block {
+	display: block;
+	margin: 10px auto;
+}
+
+.playersToOrder {
+	text-align: left;
+	display: inline-block;
+}
+
+.playerOrder button {
+	font-size: 20px;
+	padding: 10px;
+}
+
+.playersToOrder li {
+	min-height: 50px;
+	min-width: 200px;
+	line-height: 50px;
+}
+
+/* AREA THAT DISPLAYS THE DARTBOARD */
+.board {
+	height: 60%;
+	margin: 0 auto;
+}
+
+svg {
+	max-height: 800px;
+	margin: 0 auto;
+}
+
+/* AREA THAT HOLDS THE GAME BUTTONS & SCOREBOARDS*/
+.game {
+	height: 40%;
+	width: 100%;
+}
+
+.gameButtons {
+	height: 15%;
+	text-align: left;
+	max-width: 1500px;
+	padding-left: 0.6%;
+}
+
+.gameButtons button {
+	padding: 10px;
+}
+
+#checkoutArea {
+	background-color: #333;
+	color: #fff;
+	height: 15%;
+	text-align: center;
+}
+
+/* AREA TO DISPLAY THE PLAYERS NAME & SCORES*/
+.playerBox {
+	color: white;
+	text-align: center;
+	height: 30%;
+	margin-top: 2%;
+	max-width: 1500px;
+}
+
+.scoreboardSection {
+	color: white;
+	text-align: center;
+	background-color: #432326;
+	display: inline-block;
+	height: 100%;
+	width: 16%;
+	float: left;
+	margin-left: 0.6%;
+	overflow: hidden;
+}
+
+/* GREEN BAR THAT INDICATES WHO THREW FIRST */
+.playerThrowBox {
+	height: 10px;
+	width: 100%;
+	background-color: #91c46b;
+}
+
+/* SMALL GREEN BOX TO INDICATE WHEN A LEG HAS BEEN WON*/
+.legWonBox {
+	height: 20px;
+	width: 20px;
+	background-color: #91c46b;
+	margin: 2px;
+}
+
+/* AFTER EACH LEG, DISPLAYS BUTTONS TO VIEW STATS & TO MOVE ON */
+
+.statsArea {
+	margin-top: 80px;
+}
+
+.playerStatsArea button {
+	font-size: 20px;
+	padding: 10px;
+	margin-bottom: 20px; 
+}
+
+.playerStatsArea button:hover {
+	background-color: #333;
+	color: #fff;
+}
+
+.nextLegButton {
+	font-size: 20px;
+	padding: 10px;
+	margin-bottom: 20px; 
+}
+
+.nextLegButton:hover {
+	background-color: #91c46b;
+	color: #fff;
+}
+
+.right {
+	float: right;
+}
+
+.completeGame {
+	font-size: 20px;
+	padding: 10px;
+	color: white;
+}
+
+.completeGame:hover {
+	border: 2px solid #333;
+}
