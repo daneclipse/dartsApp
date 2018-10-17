@@ -1,0 +1,12 @@
+.navBar h1 {
+	width: 33.3%;
+}
+
+.gameOptions {
+	max-height: 250px;
+}
+
+.gameSetup {
+	text-align: center;
+	margin-top: 50px;
+}
