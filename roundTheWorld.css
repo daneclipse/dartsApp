@@ -1,0 +1,110 @@
+.scoreboard {
+	margin-top: 7px;
+	width: 100%;
+	height: 151px;
+	background-color: #333;
+}
+
+.half {
+	height: 50%;
+}
+
+.inner_half{
+	height: 100%;
+	width: 5%;
+	display: inline-block;
+	float: left;
+	padding-top: 10px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.inner_half:nth-child(even) {
+	background-color: #fff;
+}
+
+.inner_half:nth-child(even) p {
+	color: #333;
+}
+
+.numbersHit {
+	vertical-align: top;
+}
+
+.regularText {
+	color: white;
+	font-size: 30px;
+}
+
+.board {
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+svg {
+	max-height: 800px;
+}
+
+.lower_scoreboard {
+	width: 80%;
+	height: 100px;
+	margin: 100px auto;
+}
+
+.inner_scoreboard {
+	background-color: #333;
+	width: 16%;
+	height: 100%;
+	display: inline-block;
+	color: #fff;
+	font-size: 24px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.inner_scoreboard p {
+	margin-top: 20px;
+	color: #fff;
+}
+
+.gameButtons {
+	height: 50px;
+	margin: 20px auto;
+	text-align: left;
+	max-width: 1500px;
+	padding-left: 0.6%;
+}
+
+.gameButtons button {
+	font-size: 24px;
+	padding: 10px;
+}
+
+@media only screen and (max-width: 1450px)
+{
+	.page {
+		padding-top: 20px;
+	}
+
+	.scoreboard {
+		height: 100px;
+	}
+
+
+	.inner_scoreboard, .regularText {
+		font-size: 20px;
+	}
+
+	.board {
+		width: 50%;
+		margin: 20px auto;
+	}
+
+	.lower_scoreboard {
+		width: 100%;
+		margin: 20px 0;
+		padding-left: 2%;
+	}
+
+}
