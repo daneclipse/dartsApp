@@ -26,31 +26,7 @@ if ($dataRows > 0) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
-	<style type="">
-		.navBar h1, .navBar a
-		{
-			width: 33.3%;
-		}
-		.accountForms
-		{
-			width: 1200px;
-			height: 500px;
-			margin: 0 auto;
-		}
-		.accountForms h2
-		{
-			width: 50%;
-			float: left;
-		}
-		.form
-		{
-			float: left;
-		}
-		.smallForm
-		{
-			margin-right: 200px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/account.css">
 </head>
 <body>
 
