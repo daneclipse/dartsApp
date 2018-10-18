@@ -5,6 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<style type="text/css">
+		.form 
+		{
+			height: 225px;
+		}
+	</style>
 </head>
 <body>
 
@@ -63,7 +69,7 @@
 			<form action="login.php" method="post">
 				<input type="text" name="username" placeholder="Username"><br />
 				<input type="password" name="password" placeholder="Password"><br />
-				<input class="submitForm" type="submit" name="submit" value="Log in">
+				<input class="submitForm greenButton" type="submit" name="submit" value="Log in">
 			</form>
 		</div><!-- CLOSES DIV WITH CLASS FORM -->
 	</div><!-- CLOSES DIV WITH CLASS PAGE -->

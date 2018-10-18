@@ -74,7 +74,7 @@
 				<input type="text" name="username" placeholder="Username"><br />
 				<input type="email" name="email" placeholder="Email"><br />
 				<input type="password" name="password" placeholder="Password"><br />
-				<input class="submitForm" type="submit" name="submit" value="Register">
+				<input class="submitForm greenButton" type="submit" name="submit" value="Register">
 			</form>
 		</div><!-- CLOSES DIV WITH CLASS FORM -->
 	</div><!-- CLOSES DIV WITH CLASS PAGE -->
