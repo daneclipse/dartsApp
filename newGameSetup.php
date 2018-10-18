@@ -191,7 +191,7 @@ $(inputPassword).attr({
 	'placeholder': 'Password'
 })
 $(submitInput).attr({
-	'class': 'submitForm',
+	'class': 'submitForm greenButton',
 	'type': 'submit',
 	'name': 'submit',
 	'value': 'Log in'
@@ -237,7 +237,10 @@ trad.on('click', function()
 			$('.oppOption').css('opacity', '0.2');
 			$(this).css('opacity', '1');
 			$('.opponent').empty();
-			$('#gameSetup').append(form);
+			$('.gameSetupArea').append(form);
+			$(form).css('height', '225px');
+			$(form).css('float', 'left');
+			$(form).css('margin', '30px 50px');
 		}
 		else if (oppSelected == 'guest')
 		{
