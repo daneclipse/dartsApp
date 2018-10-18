@@ -12,13 +12,13 @@ function showTable($row, $arr, $user_username)
       echo
       '<table border = "1">
       <tr>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=date">Game Date</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=date" id="date">Game Date</a></th>
       <th>Target Number</th>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=single">Singles Hit</a></th>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=double">Doubles Hit</a></th>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=treble">Trebles Hit</a></th>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=points">Points Scored</a></th>
-      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=score">Total Scored</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=single" id="singles">Singles Hit</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=double" id="doubles">Doubles Hit</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=treble" id="trebles">Trebles Hit</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=points" id="points">Points Scored</a></th>
+      <th><a href="view100DartsStats.php?username=' . $user_username . '&stats=every&page=1&order=score" id="total">Total Scored</a></th>
       <th>Darts Missed</th>
       </tr>';
       // $order = $_GET['order'];
@@ -34,13 +34,13 @@ function showTable($row, $arr, $user_username)
         $totalScored = $row['totalScored'];
         $dartsMissed = $row['dartsMissed'];
 
-        echo '<td>' . $date . '</td>';
+        echo '<td class="date">' . $date . '</td>';
         echo '<td>' . $targetNumber . '</td>';
-        echo '<td>' . $singlesHit . '</td>';
-        echo '<td>' . $doublesHit . '</td>';
-        echo '<td>' . $treblesHit . '</td>';
-        echo '<td>' . $pointsScored . '</td>';
-        echo '<td>' . $totalScored . '</td>';
+        echo '<td class="singles">' . $singlesHit . '</td>';
+        echo '<td class="doubles">' . $doublesHit . '</td>';
+        echo '<td class="trebles">' . $treblesHit . '</td>';
+        echo '<td class="points">' . $pointsScored . '</td>';
+        echo '<td class="total">' . $totalScored . '</td>';
         echo '<td>' . $dartsMissed . '</td></tr>';
       }
       echo '</table><br />';
@@ -53,6 +53,16 @@ function showTable($row, $arr, $user_username)
 <head>
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="../css/general.css">
+	<link rel="stylesheet" type="text/css" href="../css/account.css">
+	<link rel="stylesheet" type="text/css" href="../css/stats.css">
+	<style type="text/css">
+	    .viewStatsButton
+	    {
+	      margin: 50px 15%;
+	    }
+	</style>
 </head>
 <body>
 
@@ -63,11 +73,6 @@ function showTable($row, $arr, $user_username)
 	</div><!-- CLOSE DIV WITH CLASS NAVBAR -->
 
 	<div class="page">
-		<div class="viewStatsButtons">
-	      <a class="viewStatsButton" href="../X01/viewX01Stats.php?username=<?=$user_username;?>">X01 Stats</a>
-	      <a class="viewStatsButton" href="../roundTheWorld/viewWorldStats.php?username=<?=$user_username;?>">Round the world stats</a>
-	      <a class="viewStatsButton" href="../cricket/viewCricketStats.php?username=<?=$user_username;?>">Cricket stats</a>
-	    </div><!-- CLOSE DIV WITH ID VIEWSTATSBUTTON -->
 		<h1>100 Darts Stats</h1>
 		<div class="viewStatsButtons">
 			<a id="everyButton" class="viewStatsButton" href="view100DartsStats.php?username=<?=$user_username;?>&stats=every&page=1">EVERY GAME</a>
@@ -264,6 +269,49 @@ function showTable($row, $arr, $user_username)
   		$('#bestButton').addClass('active');
   		$('#everyButton').removeClass('active');
   	}
+
+      // ADDS ACTIVE FUNCTION TO TH & ALL DATA IN THIS COLUMN WHICH USER HAS ORDERED STATS BY
+      // CHECKS TO SEE IF URL INCLUDES 'ORDER'
+      // THEN GETS THE PART OF THE URL THAT FOLLOWS 'ORDER='
+      if (location.search.includes('order')) 
+      {
+        if (location.search.split('order=')[1] == 'date') 
+        {
+          $('#date').parent().addClass('active');
+          $('.date').addClass('active');
+        }
+        else if (location.search.split('order=')[1] == 'single') 
+        {
+          $('#singles').parent().addClass('active');
+          $('.singles').addClass('active');
+        }
+        else if (location.search.split('order=')[1] == 'double') 
+        {
+          $('#doubles').parent().addClass('active');
+          $('.doubles').addClass('active');
+        }
+        else if (location.search.split('order=')[1] == 'treble') 
+        {
+          $('#trebles').parent().addClass('active');
+          $('.trebles').addClass('active');
+        }
+        else if (location.search.split('order=')[1] == 'points') 
+        {
+          $('#points').parent().addClass('active');
+          $('.points').addClass('active');
+        }
+        else if (location.search.split('order=')[1] == 'score') 
+        {
+          $('#total').parent().addClass('active');
+          $('.total').addClass('active');
+        }
+      }
+      else
+      {
+          $('#date').parent().addClass('active');
+          $('.date').addClass('active');
+      }
+
   </script>
 
 </body>

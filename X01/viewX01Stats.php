@@ -301,6 +301,8 @@
           }
 
           // ADDS ACTIVE FUNCTION TO TH & ALL DATA IN THIS COLUMN WHICH USER HAS ORDERED STATS BY
+          // CHECKS TO SEE IF URL INCLUDES 'ORDER'
+          // THEN GETS THE PART OF THE URL THAT FOLLOWS 'ORDER='
           if (location.search.includes('order')) 
           {
             if (location.search.split('order=')[1] == 'date') 
@@ -333,6 +335,11 @@
               $('#double').parent().addClass('active');
               $('.double').addClass('active');
             }
+          }
+          else
+          {
+              $('#date').parent().addClass('active');
+              $('.date').addClass('active');
           }
 
   </script>
