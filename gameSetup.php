@@ -14,6 +14,7 @@ $game = $_GET['game'];
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
 	<link rel="stylesheet" type="text/css" href="css/account.css">
+	<link rel="stylesheet" type="text/css" href="css/gameSetup.css">
 </head>
 <body>
 
@@ -24,6 +25,7 @@ $game = $_GET['game'];
 	</div>
 
 	<div class="page">
+
 		<?php
 
 		if (!isset($_GET['username'])) 
@@ -160,6 +162,7 @@ $('.showGameInfo').on('click', function()
 	$($(this).siblings('.gameInfo')[0]).toggleClass('hidden');
 })
 
+
 var startButton = document.createElement('button');
 startButton.textContent = 'start game';
 $(startButton).addClass('submitForm');
@@ -174,11 +177,14 @@ trad.on('click', function()
 	$('#gameSetup').empty();
 	$('.opponent').empty();
 	if ($('#gameSetup')[0].childElementCount == 0) 
-	{
-		$('#gameSetup').append('<h2>Set up your game</h2><select id="selectOpponent"><option>Choose an opponent</option><option value="0">Single Player</option><option value="1">Play v GUEST</option><option value="2">Play v OTHER USER</option><option value="3">Play v COMPUTER</option></select>');
-	}
+	// {
+	// 	$('#gameSetup').append('<h2>Set up your game</h2><select id="selectOpponent"><option>Choose an opponent</option><option value="0">Single Player</option><option value="1">Play v GUEST</option><option value="2">Play v OTHER USER</option><option value="3">Play v COMPUTER</option></select>');
+	// }
 
-	var selectOpponent = $('#selectOpponent');
+	// var selectOpponent = $('#selectOpponent');
+	{
+
+	}
 
 	// WHEN YOU CHOOSE TO PLAY V GUEST
 	// CREATES INPUT TO PUT NAME & BUTTON TO CONFIRM NAME
