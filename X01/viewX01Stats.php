@@ -9,16 +9,16 @@
       echo
       '<table border = "1">
       <tr>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=date">Date</a></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=date" id="date">Date</a></th>
       <th>Leg Target</th>
       <th>Total Scored</th>
       <th>Result</th>
       <th>Opponent</th>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=dartsUsed">Darts Used</a></th>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=oneAverage">One dart average</a></th>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=tda">TDA</a></th>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=checkout">Checkout</a></th>
-      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=double">Double %</a></button></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=dartsUsed" id="darts">Darts Used</a></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=oneAverage" id="oda">One dart average</a></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=tda" id="tda">TDA</a></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=checkout" id="checkout">Checkout</a></th>
+      <th><a href="viewX01Stats.php?username=' . $user_username . '&stats=leg&page=1&order=double" id="double">Double %</a></button></th>
       <th>Double hit</th>
       <th>Highest Score</th>
       <th>Missed darts</th>
@@ -42,7 +42,7 @@
         $missedDarts = $row['dartsMissed'];
 
 
-        echo '<td>' . $date . '</td>';
+        echo '<td class="date">' . $date . '</td>';
         echo '<td>' . $legTarget . '</td>';
         echo '<td>' . $totalScored . '</td>';
         if ($legOutcome == 'won') 
@@ -64,11 +64,11 @@
           $oppButton = '<td>' . $opponentName . '</td>';
         }
         echo $oppButton;
-        echo '<td>' . $dartsUsed . '</td>';
-        echo '<td>' . $average . '</td>';
-        echo '<td>' . $tda . '</td>';
-        echo '<td>' . $checkout . '</td>';
-        echo '<td>' . $doublePercent . '</td>';
+        echo '<td class="darts">' . $dartsUsed . '</td>';
+        echo '<td class="oda">' . $average . '</td>';
+        echo '<td class="tda">' . $tda . '</td>';
+        echo '<td class="checkout">' . $checkout . '</td>';
+        echo '<td class="double">' . $doublePercent . '</td>';
         if ($doubleHit == '25') 
         {
           $doubleHit = 'bullseye';
@@ -87,6 +87,16 @@
 <head>
 	<title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS FILES -->
+  <link rel="stylesheet" type="text/css" href="../css/general.css">
+  <link rel="stylesheet" type="text/css" href="../css/account.css">
+  <link rel="stylesheet" type="text/css" href="../css/stats.css">
+  <style type="text/css">
+    .viewStatsButton
+    {
+      margin: 50px 15%;
+    }
+  </style>
 </head>
 <body>
 
@@ -97,11 +107,6 @@
 </div><!-- CLOSE DIV WITH CLASS NAVBAR -->
 
 <div class="page">
-  <div class="viewStatsButtons">
-    <a class="viewStatsButton" href="../100DartsAt/view100DartsStats.php?username=<?=$user_username;?>">100 Darts Stats</a>
-    <a class="viewStatsButton" href="../roundTheWorld/viewWorldStats.php?username=<?=$user_username;?>">Round the world stats</a>
-    <a class="viewStatsButton" href="../cricket/viewCricketStats.php?username=<?=$user_username;?>">Cricket stats</a>
-  </div><!-- CLOSE DIV WITH ID VIEWSTATSBUTTON -->
   <h1>X01 Stats</h1>
   <div class="viewStatsButtons">
     <a id="legButton" class="viewStatsButton" href="viewX01Stats.php?username=<?=$user_username;?>&stats=leg&page=1">LEG STATS</a>
@@ -293,6 +298,41 @@
           {
             $('#overallButton').addClass('active');
             $('#legButton').removeClass('active');
+          }
+
+          // ADDS ACTIVE FUNCTION TO TH & ALL DATA IN THIS COLUMN WHICH USER HAS ORDERED STATS BY
+          if (location.search.includes('order')) 
+          {
+            if (location.search.split('order=')[1] == 'date') 
+            {
+              $('#date').parent().addClass('active');
+              $('.date').addClass('active');
+            }
+            else if (location.search.split('order=')[1] == 'dartsUsed') 
+            {
+              $('#darts').parent().addClass('active');
+              $('.darts').addClass('active');
+            }
+            else if (location.search.split('order=')[1] == 'oneAverage') 
+            {
+              $('#oda').parent().addClass('active');
+              $('.oda').addClass('active');
+            }
+            else if (location.search.split('order=')[1] == 'tda') 
+            {
+              $('#tda').parent().addClass('active');
+              $('.tda').addClass('active');
+            }
+            else if (location.search.split('order=')[1] == 'checkout') 
+            {
+              $('#checkout').parent().addClass('active');
+              $('.checkout').addClass('active');
+            }
+            else if (location.search.split('order=')[1] == 'double') 
+            {
+              $('#double').parent().addClass('active');
+              $('.double').addClass('active');
+            }
           }
 
   </script>
