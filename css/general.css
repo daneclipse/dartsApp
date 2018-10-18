@@ -86,13 +86,30 @@ html, body
 	float: left;
 	text-decoration: none;
 	text-align: center;
-	font-size: 40px;
+	font-size: 30px;
 	line-height: 80px;
 }
 
 .navBar a:hover 
 {
 	background-color: black;
+}
+
+/* WHEN ACCOUNT NAME IS DISPLAYED IN NAVBAR */
+.navBar h1
+{
+	height: 100%;
+	background-color: #f5f7fa;
+	font-size: 50px;
+	line-height: 80px;
+	text-align: left;
+	padding-left: 20px;
+}
+
+/* WHEN LOGGED INTO ACCOUNT, CHANGES LOG OUT COLOUR TO RED */
+.logOutButton a
+{
+	color: #d9534f;
 }
 
 /* GAME OPTIONS - INDEX.PHP, GAMESETUP.PHP */

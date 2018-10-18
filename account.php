@@ -18,6 +18,15 @@ if ($numRows <= 0)
 <head>
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<style type="text/css">
+		.navBar h1, .navBar a 
+		{
+			width: 20%;
+			float: left;
+		}
+	</style>
 </head>
 <body>
 
