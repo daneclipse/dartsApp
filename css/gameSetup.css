@@ -1,8 +1,14 @@
-.gameSetupArea 
+#gameSetup
 {
 	width: 80%;
 	margin: 0 auto;
-	height: 200px;
+	height: 300px;
+}
+
+.gameSetupArea
+{
+	height: 100%;
+	width: 100%;
 }
 
 .innerSetupArea
@@ -11,9 +17,15 @@
 	float: left;
 	height: 100%;
 }
+
+.innerSetupArea h2
+{
+	height: 10%;
+}
+
 .option
 {
-	height: 33.3%;
+	height: 30%;
 	background-color: #fff;
 	border: 5px solid #f5f7fa;
 	border-radius: 25px;
@@ -23,4 +35,10 @@
 .setupHeader 
 {
 	opacity: 0.2;
+}
+
+.opponent
+{
+	width: 60%;
+	margin: 20px auto;
 }

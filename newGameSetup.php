@@ -77,9 +77,7 @@ $game = $_GET['game'];
 					</div>
 					<p class="showGameInfo fa fa-info-circle"></p>
 				</div>
-			</div>
-			<div class="gameSetup">
-			<div id="gameSetup"></div>';
+			</div><div id="gameSetup"></div>';
 		}
 
 		?>
@@ -234,12 +232,12 @@ trad.on('click', function()
 		var oppSelected = $(this).attr('data-value');
 		if (oppSelected == 'user') 
 		{
-			$('.targetOption').css('opacity', '0.2');
-			$('.legsOption').css('opacity', '0.2');
+			$('.innerSetupArea')[1].remove();
+			$('.innerSetupArea')[1].remove();
 			$('.oppOption').css('opacity', '0.2');
 			$(this).css('opacity', '1');
 			$('.opponent').empty();
-			$('.opponent').append(form);
+			$('#gameSetup').append(form);
 		}
 		else if (oppSelected == 'guest')
 		{
@@ -250,6 +248,7 @@ trad.on('click', function()
 			$('.opponent').empty();
 			$('.opponent').append(guestInput);
 			$('.opponent').append(confirmInput);
+			
 			confirmInput.onclick = function()
 			{
 				var guestName = $(guestInput).val();
@@ -296,8 +295,7 @@ trad.on('click', function()
 				if (legsSelected != 0) 
 				{
 					console.log(oppSelected + ', ' + targetSelected + ', ' + legsSelected);
-					$('.gameSetup').append('<br /><br />');
-					$('.gameSetup').append(startButton);
+					$('.opponent').append(startButton);
 				}
 				$(startButton).on('click', function()
 				{
