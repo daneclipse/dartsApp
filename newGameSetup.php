@@ -114,10 +114,14 @@ $game = $_GET['game'];
 									{
 										if (isset($_GET['game'])) 
 										{
-											if (isset($_GET['innings'])) 
+											$game = $_GET['game'];
+											if ($game == 'cricket') 
 											{
-												$innings = $_GET['innings'];
-												header('Location: cricket/cricketGame.php?username='.$user_username.'&opponent='.$oppUsername.'&innings='.$innings);
+												if (isset($_GET['innings'])) 
+												{
+													$innings = $_GET['innings'];
+													header('Location: cricket/cricketGame.php?username='.$user_username.'&opponent='.$oppUsername.'&innings='.$innings);
+												}
 											}
 										}
 										else
@@ -474,6 +478,141 @@ dartsAt.on('click', function()
 	})
 })
 
+// // CRICKET GAME
+var cricketGame = $('#cricketGame');
+cricketGame.on('click', function()
+{
+
+	var cricketSetup = document.createElement('div');
+	$(cricketSetup).attr({'class' : 'gameSetupArea', 'id' : 'cricketSetup'});
+	var cricketOpp = document.createElement('div');
+	$(cricketOpp).attr({'class' : 'innerSetupArea'});
+	var crickOppTitle = document.createElement('h2');
+	$(crickOppTitle).attr({'class' : 'setupHeader', 'id' : 'cricketOppHeader'});
+	$(crickOppTitle).text('choose opponent');
+	var crickOppOne = document.createElement('p');
+	$(crickOppOne).attr({'class' : 'option crickOppOption', 'data-value' : 'guest'});
+	$(crickOppOne).text('v guest');
+	var crickOppTwo = document.createElement('p');
+	$(crickOppTwo).attr({'class' : 'option crickOppOption', 'data-value' : 'user'});
+	$(crickOppTwo).text('v other user');
+
+	$(cricketOpp).append(crickOppTitle);
+	$(cricketOpp).append(crickOppOne);
+	$(cricketOpp).append(crickOppTwo);
+
+	var cricketInnings = document.createElement('div');
+	$(cricketInnings).attr({'class' : 'innerSetupArea'});
+	var crickInningsTitle = document.createElement('h2');
+	$(crickInningsTitle).attr({'class' : 'setupHeader', 'id' : 'cricketInningsHeader'});
+	$(crickInningsTitle).text('choose innings');
+	var crickInnOne = document.createElement('p');
+	$(crickInnOne).attr({'class' : 'option crickInnOption', 'data-value' : '1'});
+	$(crickInnOne).text('1');
+	var crickInnTwo = document.createElement('p');
+	$(crickInnTwo).attr({'class' : 'option crickInnOption', 'data-value' : '2'});
+	$(crickInnTwo).text('2');
+
+	$(cricketInnings).append(crickInningsTitle);
+	$(cricketInnings).append(crickInnOne);
+	$(cricketInnings).append(crickInnTwo);
+
+	$(cricketSetup).append(cricketInnings);
+	$(cricketSetup).append(cricketOpp);
+
+	$('.gameOption').css('opacity', '0.2');
+	$(this).parent().css('opacity', '1');
+	$('#gameTitle').text('Cricket');
+	$('#gameSetup').empty();
+	$('.opponent').empty();
+
+	if ($('#gameSetup')[0].childElementCount == 0) 
+	{
+		$('#gameSetup').append(cricketSetup);
+		$(crickInningsTitle).css('opacity', '1');
+		$('.crickOppOption').off();
+
+		// CHOOSE THE INNINGS INSIDE SO WE CAN GET GUESTNAME
+		$('.crickInnOption').on('click', function()
+		{
+			var inningsSelected = $(this).attr('data-value');
+			if (inningsSelected != '') 
+			{
+				$(crickInningsTitle).css('opacity', '0.2');
+				$(crickOppTitle).css('opacity', '1');
+				$('.crickInnOption').css('opacity', '0.2');
+				$(this).css('opacity', '1');
+			}
+
+			$('.crickOppOption').on('click', function()
+			{
+				$('.crickOppOption').css('opacity', '0.2');
+				$(this).css('opacity', '1');
+				var oppSelected = $(this).attr('data-value');
+				if (oppSelected != '') 
+				{
+					if (oppSelected == 'guest') 
+					{
+						$('.opponent').empty();
+						$('.opponent').append(guestInput);
+						$('.opponent').append(confirmInput);
+						confirmInput.onclick = function()
+						{
+							var guestName = $(guestInput).val();
+							if (guestName != '') 
+							{
+								$(this).remove();
+								$(guestInput).remove();
+								$('.opponent').append('<p id="guestName">' + guestName + '</p>');
+								$('.opponent').append(startButton);
+								startButton.onclick = function()
+								{
+									location.replace('cricket/cricketGame.php?username=<?=$user_username;?>&guest='+ guestName + '&innings=' + inningsSelected);
+								}
+							}
+							else
+							{
+								$('crickInnOption').off();
+							}
+						}
+					}
+					else if (oppSelected == 'user')
+					{
+						$('.opponent').empty();
+						$('.opponent').append(form);
+						$(form).attr('action', 'gameSetup.php?username=<?=$user_username;?>&game=cricket&innings=' + inningsSelected);
+						$(form).css('height', '225px');
+					}
+				}
+			})
+		})
+	}
+})
+	// startButton.onclick = function()
+	// {
+	// 	var guestName = $(guestInput).val();
+	// 	// MAKE SURE THE GUEST HAS ENTERED A NAME
+	// 	if (guestName != '') 
+	// 	{
+	// 		var innings = $('#chooseInnings :selected').val();
+	// 		if (innings != 0) 
+	// 		{
+	// 			location.replace('cricket/cricketGame.php?username=<?=$user_username;?>&guest=' + guestName + '&innings=' + innings);
+	// 		}
+	// 		else
+	// 		{
+	// 			alert('please choose a number of innings');
+	// 		}
+			
+	// 	}
+	// 	else
+	// 	{
+	// 		alert('Please enter your opponents name');
+	// 	}
+	// }
+
+
+
 // // ROUND THE WORLD GAME
 // var worldGame = $('#worldGame');
 // worldGame.on('click', function()
@@ -531,138 +670,6 @@ dartsAt.on('click', function()
 // 	{
 // 		location.replace('ticTacToe/ticTacToe.php?username=<?=$user_username;?>');
 // 	}
-// })
-
-// // CRICKET GAME
-// var cricketGame = $('#cricketGame');
-// cricketGame.on('click', function()
-// {
-// 	$('.gameOption').css('opacity', '0.2');
-// 	$(this).parent().css('opacity', '1');
-// 	$('#gameTitle').text('Cricket');
-// 	$('#gameSetup').empty();
-// 	$('.opponent').empty();
-// 	var selectInnings = document.createElement('select');
-// 	$(selectInnings).attr('id', 'chooseInnings');
-// 	var selectNumber = document.createElement('option');
-// 	var oneInnings = document.createElement('option');
-// 	var twoInnings = document.createElement('option');
-// 	$(selectNumber).attr('value', 0);
-// 	$(oneInnings).attr('value', 1);
-// 	$(twoInnings).attr('value', 2);
-// 	selectNumber.textContent = 'number of innings';
-// 	oneInnings.textContent = 'one innings';
-// 	twoInnings.textContent = 'two innings';
-// 	$(selectInnings).append(selectNumber);
-// 	$(selectInnings).append(oneInnings);
-// 	$(selectInnings).append(twoInnings);
-
-// 	if ($('#gameSetup')[0].childElementCount == 0) 
-// 	{
-// 		$('#gameSetup').append('<h2>Set up your game</h2><select id="cricketOpponent"><option>Choose an opponent</option><option value="0">Play v GUEST</option><option value="1">Play v OTHER USER</option><option value="2">Play v COMPUTER</option></select>');
-// 	}
-	
-// 	var cricketOpponent = $('#cricketOpponent');
-// 	var chooseInnings = $('#chooseInnings');
-
-// 	cricketOpponent.on('change', function()
-// 	{
-// 		var opponentChosen = $('#cricketOpponent :selected').val();
-
-// 		// WHEN YOU CHOOSE TO PLAY V GUEST
-// 		// CREATES INPUT TO PUT NAME & BUTTON TO CONFIRM NAME
-// 		if (opponentChosen == 0) 
-// 		{
-// 			$('.opponent').empty();
-// 			var guestInput = document.createElement('input');
-// 			$(guestInput).attr('placeholder', 'Opponents Name');
-
-// 			$('.opponent').empty();
-// 			$('.opponent').append(guestInput);
-// 			$('.opponent').append('<br />');
-// 			$('#gameSetup').append(selectInnings);
-// 			$('.opponent').append(startButton);
-// 			startButton.onclick = function()
-// 			{
-// 				var guestName = $(guestInput).val();
-// 				// MAKE SURE THE GUEST HAS ENTERED A NAME
-// 				if (guestName != '') 
-// 				{
-// 					var innings = $('#chooseInnings :selected').val();
-// 					if (innings != 0) 
-// 					{
-// 						location.replace('cricket/cricketGame.php?username=<?=$user_username;?>&guest=' + guestName + '&innings=' + innings);
-// 					}
-// 					else
-// 					{
-// 						alert('please choose a number of innings');
-// 					}
-					
-// 				}
-// 				else
-// 				{
-// 					alert('Please enter your opponents name');
-// 				}
-// 			}
-// 		}
-// 		// WHEN YOU CHOOSE TO PLAY V USER (PERSON WITH ACCOUNT)
-// 		// CREATES FORM FOR THEIR NAME & PASSWORD WITH SUBMIT BUTTON
-// 		else if (opponentChosen == 1)
-// 		{
-// 			$('.opponent').empty();
-// 			var form = document.createElement('form');
-// 			$(form).addClass('form');
-// 			var inputName = document.createElement('input');
-// 			var inputPassword = document.createElement('input');
-// 			var submitInput = document.createElement('input');
-// 			$(form).attr({
-// 				'class': 'form',
-// 				'method': 'post',
-// 				'action': ''
-// 			})
-// 			$(inputName).attr({
-// 				'type': 'text',
-// 				'name': 'opponentUsername',
-// 				'placeholder': 'Username'
-// 			})
-// 			$(inputPassword).attr({
-// 				'type': 'password',
-// 				'name': 'opponentPassword',
-// 				'placeholder': 'Password'
-// 			})
-// 			$(submitInput).attr({
-// 				'class': 'submitForm',
-// 				'type': 'submit',
-// 				'name': 'submit',
-// 				'value': 'Log in'
-// 			})
-// 			$(form).append(inputName);
-// 			$(form).append(inputPassword);
-// 			$(form).append(submitInput);
-
-// 			$('#gameSetup').append(selectInnings);
-			
-// 			$('#chooseInnings').on('change', function()
-// 			{
-// 				$('.opponent').empty();
-// 				var innings = $('#chooseInnings :selected').val();
-// 				if (innings != 0) 
-// 				{
-// 					$('.opponent').append(form);
-// 					$(form).attr('action', 'gameSetup.php?username=<?=$user_username;?>&game=cricket&innings=' + innings);
-// 				}
-// 				else
-// 				{
-// 					$(form).remove();
-// 				}
-
-// 			})
-// 		}
-// 		else
-// 		{
-// 			$('.opponent').empty();
-// 		}
-// 	})
 // })
 
 </script>
