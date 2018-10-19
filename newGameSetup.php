@@ -145,6 +145,7 @@ $game = $_GET['game'];
 
 			?>
 		</div>
+
 	</div>
 
 <script
@@ -202,20 +203,92 @@ $(form).append(submitInput);
 
 var startButton = document.createElement('button');
 startButton.textContent = 'start game';
-$(startButton).addClass('submitForm');
+$(startButton).addClass('submitForm greenButton');
 
 // X01 GAME
 var trad = $('#x01Game');
 trad.on('click', function()
 {
+	// HIGHLIGHT & DIM RELEVANT GAMES
 	$('.gameOption').css('opacity', '0.2');
 	$(this).parent().css('opacity', '1');
+	// CHANGE TITLE TEXT & EMPTY GAMESETUP & OPPONENT DIVS
 	$('#gameTitle').text('X01');
 	$('#gameSetup').empty();
 	$('.opponent').empty();
+	// CREATE AREA TO SET UP X01 GAME
+	var setupDiv = document.createElement('div');
+	$(setupDiv).attr({'class' : 'gameSetupArea', 'id' : 'x01Setup'});
+	// CREATE SETUP OPTIONS - OPPONENT, TARGET & LEGS
+	// CREATE OPPONENT OPTIONS
+	var oppDiv = document.createElement('div');
+	$(oppDiv).attr({'class' : 'innerSetupArea', 'id' : 'x01Opp'});
+	var oppTitle = document.createElement('h2');
+	$(oppTitle).attr({'class' : 'setupHeader', 'id' : 'oppHeading'});
+	$(oppTitle).text('choose opponent');
+	var firstOpp = document.createElement('p');
+	$(firstOpp).attr({'class' : 'option oppOption', 'data-value' : 'single'});
+	$(firstOpp).text('single player');
+	var secondOpp = document.createElement('p');
+	$(secondOpp).attr({'class' : 'option oppOption', 'data-value' : 'guest'});
+	$(secondOpp).text('v guest');
+	var thirdOpp = document.createElement('p');
+	$(thirdOpp).attr({'class' : 'option oppOption', 'data-value' : 'user'});
+	$(thirdOpp).text('v other user');
+	$(oppDiv).append(oppTitle);
+	$(oppDiv).append(firstOpp);
+	$(oppDiv).append(secondOpp);
+	$(oppDiv).append(thirdOpp);
+
+	$(setupDiv).append(oppDiv);
+
+	// CREATE TARGET OPTIONS
+	var targetDiv = document.createElement('div');
+	$(targetDiv).attr({'class' : 'innerSetupArea', 'id' : 'x01Target'});
+	var targetTitle = document.createElement('h2');
+	$(targetTitle).attr({'class' : 'setupHeader', 'id' : 'targetHeading'});
+	$(targetTitle).text('choose target');
+	var firstTarget = document.createElement('p');
+	$(firstTarget).attr({'class' : 'option targetOption', 'data-value' : '301'});
+	$(firstTarget).text('301');
+	var secondTarget = document.createElement('p');
+	$(secondTarget).attr({'class' : 'option targetOption', 'data-value' : '501'});
+	$(secondTarget).text('501');
+	var thirdTarget = document.createElement('p');
+	$(thirdTarget).attr({'class' : 'option targetOption', 'data-value' : '601'});
+	$(thirdTarget).text('601');
+	$(targetDiv).append(targetTitle);
+	$(targetDiv).append(firstTarget);
+	$(targetDiv).append(secondTarget);
+	$(targetDiv).append(thirdTarget);
+
+	$(setupDiv).append(targetDiv);
+
+	// CREATE LEGS OPTIONS
+	var legsDiv = document.createElement('div');
+	$(legsDiv).attr({'class' : 'innerSetupArea', 'id' : 'x01Legs'});
+	var legsTitle = document.createElement('h2');
+	$(legsTitle).attr({'class' : 'setupHeader', 'id' : 'legsHeading'});
+	$(legsTitle).text('choose legs');
+	var firstLegs = document.createElement('p');
+	$(firstLegs).attr({'class' : 'option legsOption', 'data-value' : '1'});
+	$(firstLegs).text('1');
+	var secondLegs = document.createElement('p');
+	$(secondLegs).attr({'class' : 'option legsOption', 'data-value' : '2'});
+	$(secondLegs).text('2');
+	var thirdLegs = document.createElement('p');
+	$(thirdLegs).attr({'class' : 'option legsOption', 'data-value' : '3'});
+	$(thirdLegs).text('3');
+	$(legsDiv).append(legsTitle);
+	$(legsDiv).append(firstLegs);
+	$(legsDiv).append(secondLegs);
+	$(legsDiv).append(thirdLegs);
+
+	$(setupDiv).append(legsDiv);
+
 	if ($('#gameSetup')[0].childElementCount == 0) 
 	{
-		$('#gameSetup').append('<div class="gameSetupArea" id="x01Setup"><div class="innerSetupArea" id="x01Opp"><h2 class="setupHeader" id="oppHeading">choose opponent</h2><p class="option oppOption" data-value="single">single player</p><p class="option oppOption" data-value="guest">v guest</p><p class="option oppOption" data-value="user">v other user</p></div><div class="innerSetupArea" id="x01Target"><h2 class="setupHeader" id="targetHeading">choose target</h2><p class="option targetOption" data-value="301">301</p><p class="option targetOption" data-value="501">501</p><p class="option targetOption" data-value="601">601</p></div><div class="innerSetupArea" id="x01Legs"><h2 class="setupHeader" id="legsHeading">choose legs</h2><p class="option legsOption" data-value="1">1</p><p class="option legsOption" data-value="2">2</p><p class="option legsOption" data-value="3">3</p></div></div>');
+		$('#gameSetup').append(setupDiv);
 	}
 
 	$('#oppHeading').css('opacity', '1');
@@ -227,21 +300,28 @@ trad.on('click', function()
 		$('.legsOption').off();
 		$(startButton).remove();
 
+		// IF FORM IS SHOWING, NEED TO REMOVE IT & APPEND TARGET & LEGS DIV
+		if ($('.innerSetupArea').length == 1)  
+		{
+			$(form).remove();
+			$('.gameSetupArea').append(targetDiv);
+			$('.gameSetupArea').append(legsDiv);
+		}
+
 		$('#oppHeading').css('opacity', '0.2');
 		$('#targetHeading').css('opacity', '1');
+
 		var oppSelected = $(this).attr('data-value');
-		if (oppSelected == 'user') 
+		// IF SINGLE PLAYER SELECTED
+		if (oppSelected == 'single')
 		{
-			$('.innerSetupArea')[1].remove();
-			$('.innerSetupArea')[1].remove();
+			$('.targetOption').css('opacity', '0.2');
+			$('.legsOption').css('opacity', '0.2');
 			$('.oppOption').css('opacity', '0.2');
 			$(this).css('opacity', '1');
 			$('.opponent').empty();
-			$('.gameSetupArea').append(form);
-			$(form).css('height', '225px');
-			$(form).css('float', 'left');
-			$(form).css('margin', '30px 50px');
 		}
+		// IF GUEST SELECTED - ADDS INPUT & BUTTON TO ENTER GUEST NAME
 		else if (oppSelected == 'guest')
 		{
 			$('.targetOption').css('opacity', '0.2');
@@ -267,15 +347,21 @@ trad.on('click', function()
 				}
 			}
 		}
-		else if (oppSelected == 'single')
+		// IF OTHER USER SELECTED - ADD FORM FOR OTHER USER TO LOG IN
+		else if (oppSelected == 'user') 
 		{
-			$('.targetOption').css('opacity', '0.2');
-			$('.legsOption').css('opacity', '0.2');
+			$('.innerSetupArea')[1].remove();
+			$('.innerSetupArea')[1].remove();
 			$('.oppOption').css('opacity', '0.2');
 			$(this).css('opacity', '1');
 			$('.opponent').empty();
+			$('.gameSetupArea').append(form);
+			$(form).css('height', '225px');
+			$(form).css('float', 'left');
+			$(form).css('margin', '30px 200px');
 		}
-		// TARGET OPTION CLICK INSIDE SELECT OPP CLICK TO GET THE OPPSELECTED
+
+		// TARGET OPTION INSIDE SELECT OPP TO GET THE OPPSELECTED
 		$('.targetOption').on('click', function()
 		{
 			// STOPS USER FROM CLICKING LEGS BEFORE A TARGET HAS BEEN SELECTED
@@ -289,7 +375,7 @@ trad.on('click', function()
 			$('.targetOption').css('opacity', '0.2');
 			$(this).css('opacity', '1');
 
-			// LEGS OPTION CLICK INSIDE TARGET OPTION TO GET TARGETSELECTED
+			// LEGS OPTION INSIDE TARGET TO GET TARGETSELECTED
 			$('.legsOption').on('click', function()
 			{
 				var legsSelected = Number($(this).attr('data-value'));
@@ -316,123 +402,77 @@ trad.on('click', function()
 		})
 	})
 })
-// 	selectOpponent.on('change', function()
-// 	{
-// 		$('.alertMessage').remove();
-// 		var playerChosen = $('#selectOpponent :selected').val();
-// 		// if (location.href != 'http://localhost:8888/PHP%20DARTS%20APP/gameSetup.php?username=<?=$user_username;?>') 
-// 		// {
-// 		// 	location.replace('gameSetup.php?username=<?=$user_username;?>');
-// 		// }
-
-// 		// IF YOU CHOOSE TO PLAY A SINGLE PLAYER GAME (NO OPPONENT)
-// 		// EMPTY THE OPPONENT DIV, THEN APPEND THE TARGET & LEGS SELECT & START GAME BUTTON
-// 		if (playerChosen == 0) 
-// 		{
-// 			$('.opponent').empty();
-// 			$('.opponent').append(selectTarget);
-// 			$('.opponent').append(selectLegs);
-// 			$('.opponent').append(startButton);
-// 			startButton.onclick = function()
-// 				{
-// 					var target = $('#selectTarget :selected').val();
-// 					var legs = $('#selectLegs :selected').val();
-// 					location.replace('X01/x01Game.php?username=<?=$user_username;?>&target=' + target + '&legs=' + legs);
-// 				}
-// 		}
-// 		// IF YOU CHOOSE V A GUEST
-// 		// EMPTY THE OPPONENT DIV, APPEND THE GUEST INPUT, CONFORM INPUT BUTTON & START GAME BUTTON
-// 		else if (playerChosen == 1) 
-// 		{
-// 			$('.opponent').empty();
-// 			$('.opponent').append(guestInput);
-// 			$('.opponent').append(confirmInput);
-// 			confirmInput.onclick = function()
-// 			{
-// 				var guestName = $(guestInput).val();
-// 				// MAKE SURE THE GUEST HAS ENTERED A NAME
-// 				if (guestName != '') 
-// 				{
-// 					$('.opponent').append(selectTarget);
-// 					$('.opponent').append(selectLegs);
-// 					$('.opponent').append(startButton);
-// 					startButton.onclick = function()
-// 					{
-// 						var target = $('#selectTarget :selected').val();
-// 						var legs = $('#selectLegs :selected').val();
-// 						if (target == 0 || legs == 0) 
-// 						{
-// 							alert('Please set up game correctly');
-// 						}
-// 						else
-// 						{
-// 							location.replace('X01/x01Game.php?username=<?=$user_username;?>&guest=' + guestName + '&target=' + target + '&legs=' + legs);
-// 						}
-// 					}
-// 				}
-// 				else
-// 				{
-// 					alert('Please enter your opponents name');
-// 				}
-// 			}
-// 		}
-// 		// IF YOU CHOOSE TO PLAY V A USER (PERSON WITH AN ACCOUNT)
-// 		// EMPTY OPPONENT DIV, APPEND THE FORM FOR THE USER TO LOG IN
-// 		else if (playerChosen == 2) 
-// 		{
-// 			$('.opponent').empty();
-// 			$('.opponent').append(form);
-// 		}
-// 		// IF YOU CHOOSE TO PLAY V COMPUTER
-// 		// EMPTY OPPONENTS DIV, APPEND THE OPTION TO SELECT COMPUTERS DIFFICULTY, TARGET & LEGS WITH START GAME BUTTON
-// 		// else if (playerChosen == 3)
-// 		// {
-// 		// 	$('.opponent').empty();
-// 		// 	$('.opponent').append(selectComp);
-// 		// 	$('.opponent').append(selectTarget);
-// 		// 	$('.opponent').append(selectLegs);
-// 		// 	$('.opponent').append(startButton);
-// 		// }
-// 		// IF CHOOSE THE FIRST OPTION IN THE SELECT (NO GAME SELECTED)
-// 		// EMPTY OPPONENT DIV AND REMOVE START GAME BUTTON
-// 		else
-// 		{
-// 			$('.opponent').empty();
-// 			$(startButton).remove();
-// 		}
-// 	})
-// });
 
 // 100 DARTS AT GAME
-// var dartsAt = $('#dartsAtGame');
-// dartsAt.on('click', function()
-// {
-// 	$('.gameOption').css('opacity', '0.2');
-// 	$(this).parent().css('opacity', '1');
-// 	$('#gameTitle').text('100 Darts');
-// 	$('#gameSetup').empty();
-// 	$('.opponent').empty();
-// 	if ($('#gameSetup')[0].childElementCount == 0) 
-// 	{
-// 		$('#gameSetup').append('<h2>Set up your game</h2><select id="selectNumber"><option value="0">Choose an number</option><option value="20">20</option><option value="19">19</option><option value="18">18</option><option value="17">17</option><option value="16">16</option><option value="15">15</option><option value="50">Bullseye</option></select>');
-// 	}
-// 	$('#selectNumber').on('change', function()
-// 	{
-// 		var targetNumber = $('#selectNumber :selected').val();
-// 		if (targetNumber != 0) 
-// 		{
-// 			$('#gameSetup').append(startButton);
-// 			startButton.onclick = function()
-// 			{
-// 				location.replace('100DartsAt/100DartsAt.php?username=<?=$user_username;?>&game=' + targetNumber);
-// 			}
-// 		}
-// 		else
-// 		{
-// 			$(startButton).remove();
-// 		}
-// 	})
-// })
+var dartsAt = $('#dartsAtGame');
+dartsAt.on('click', function()
+{
+	var targetChosen = document.createElement('div');
+	$(targetChosen).attr({'class' : 'gameSetupArea', 'id' : 'hundredSetup'});
+	var targetsAvailable = document.createElement('div');
+	$(targetsAvailable).attr({'class' : 'innerSetupArea'});
+	var targetsTitle = document.createElement('h2');
+	$(targetsTitle).attr({'class' : 'setupHeader', 'id' : 'hundredHeader'});
+	$(targetsTitle).text('choose target');
+	var firstOption = document.createElement('p');
+	$(firstOption).attr({'class' : 'option hundredOption', 'data-value' : '20'});
+	$(firstOption).text('20');
+	var secondOption = document.createElement('p');
+	$(secondOption).attr({'class' : 'option hundredOption', 'data-value' : '19'});
+	$(secondOption).text('19');
+	var thirdOption = document.createElement('p');
+	$(thirdOption).attr({'class' : 'option hundredOption', 'data-value' : '18'});
+	$(thirdOption).text('18');
+	var fourthOption = document.createElement('p');
+	$(fourthOption).attr({'class' : 'option hundredOption', 'data-value' : '17'});
+	$(fourthOption).text('17');
+	var fifthOption = document.createElement('p');
+	$(fifthOption).attr({'class' : 'option hundredOption', 'data-value' : '16'});
+	$(fifthOption).text('16');
+	var sixthOption = document.createElement('p');
+	$(sixthOption).attr({'class' : 'option hundredOption', 'data-value' : '15'});
+	$(sixthOption).text('15');
+	var seventhOption = document.createElement('p');
+	$(seventhOption).attr({'class' : 'option hundredOption', 'data-value' : 'bullseye'});
+	$(seventhOption).text('bullseye');
+
+	$(targetsAvailable).append(targetsTitle);
+	$(targetsAvailable).append(firstOption);
+	$(targetsAvailable).append(secondOption);
+	$(targetsAvailable).append(thirdOption);
+	$(targetsAvailable).append(fourthOption);
+	$(targetsAvailable).append(fifthOption);
+	$(targetsAvailable).append(sixthOption);
+	$(targetsAvailable).append(seventhOption);
+
+	$(targetChosen).append(targetsAvailable);
+
+	$('.gameOption').css('opacity', '0.2');
+	$(this).parent().css('opacity', '1');
+	$('#gameTitle').text('100 Darts');
+	$('#gameSetup').empty();
+	$('.opponent').empty();
+	if ($('#gameSetup')[0].childElementCount == 0) 
+	{
+		$('#gameSetup').append(targetChosen);
+		$(targetsTitle).css('opacity', '1');
+	}
+
+	$('.hundredOption').on('click', function()
+	{
+		$('.hundredOption').css('opacity', '0.2');
+		$(this).css('opacity', '1');
+		var targetNumber = $(this).attr('data-value');
+		if (targetNumber != '') 
+		{
+			$('#gameSetup').append(startButton);
+			startButton.onclick = function()
+			{
+				location.replace('100DartsAt/100DartsAt.php?username=<?=$user_username;?>&game=' + targetNumber);
+			}
+		}
+	})
+})
 
 // // ROUND THE WORLD GAME
 // var worldGame = $('#worldGame');
