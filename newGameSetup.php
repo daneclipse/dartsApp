@@ -205,6 +205,7 @@ $(form).append(inputName);
 $(form).append(inputPassword);
 $(form).append(submitInput);
 
+// CREATE START BUTTON
 var startButton = document.createElement('button');
 startButton.textContent = 'start game';
 $(startButton).addClass('submitForm greenButton');
@@ -478,11 +479,10 @@ dartsAt.on('click', function()
 	})
 })
 
-// // CRICKET GAME
+// CRICKET GAME
 var cricketGame = $('#cricketGame');
 cricketGame.on('click', function()
 {
-
 	var cricketSetup = document.createElement('div');
 	$(cricketSetup).attr({'class' : 'gameSetupArea', 'id' : 'cricketSetup'});
 	var cricketOpp = document.createElement('div');
@@ -532,7 +532,6 @@ cricketGame.on('click', function()
 		$(crickInningsTitle).css('opacity', '1');
 		$('.crickOppOption').off();
 
-		// CHOOSE THE INNINGS INSIDE SO WE CAN GET GUESTNAME
 		$('.crickInnOption').on('click', function()
 		{
 			var inningsSelected = $(this).attr('data-value');
@@ -543,7 +542,7 @@ cricketGame.on('click', function()
 				$('.crickInnOption').css('opacity', '0.2');
 				$(this).css('opacity', '1');
 			}
-
+			// CHOOSE THE OPPONENT INSIDE SO WE CAN GET INNINGS SELECTED
 			$('.crickOppOption').on('click', function()
 			{
 				$('.crickOppOption').css('opacity', '0.2');
@@ -587,6 +586,62 @@ cricketGame.on('click', function()
 			})
 		})
 	}
+})
+
+// ROUND THE WORLD GAME
+// 100 DARTS AT GAME
+var wordlGame = $('#worldGame');
+wordlGame.on('click', function()
+{
+	var sectionChosen = document.createElement('div');
+	$(sectionChosen).attr({'class' : 'gameSetupArea', 'id' : 'worldSetup'});
+	var sectionsAvailable = document.createElement('div');
+	$(sectionsAvailable).attr({'class' : 'innerSetupArea'});
+	var sectionTitle = document.createElement('h2');
+	$(sectionTitle).attr({'class' : 'setupHeader', 'id' : 'worldHeader'});
+	$(sectionTitle).text('choose target');
+	var singleSection = document.createElement('p');
+	$(singleSection).attr({'class' : 'option worldOption', 'data-value' : 'singles'});
+	$(singleSection).text('trebles');
+	var doubleSection = document.createElement('p');
+	$(doubleSection).attr({'class' : 'option worldOption', 'data-value' : 'doubles'});
+	$(doubleSection).text('doubles');
+	var trebleSection = document.createElement('p');
+	$(trebleSection).attr({'class' : 'option worldOption', 'data-value' : 'trebles'});
+	$(trebleSection).text('trebles');
+
+	$(sectionsAvailable).append(sectionTitle);
+	$(sectionsAvailable).append(singleSection);
+	$(sectionsAvailable).append(doubleSection);
+	$(sectionsAvailable).append(trebleSection);
+
+	$(sectionChosen).append(sectionsAvailable);
+
+	$('.gameOption').css('opacity', '0.2');
+	$(this).parent().css('opacity', '1');
+	$('#gameTitle').text('100 Darts');
+	$('#gameSetup').empty();
+	$('.opponent').empty();
+	if ($('#gameSetup')[0].childElementCount == 0) 
+	{
+		$('#gameSetup').append(sectionChosen);
+		$(sectionTitle).css('opacity', '1');
+	}
+
+	$('.worldOption').on('click', function()
+	{
+		$('.worldOption').css('opacity', '0.2');
+		$(this).css('opacity', '1');
+		var targetSection = $(this).attr('data-value');
+		if (targetSection != '') 
+		{
+			$('#gameSetup').append(startButton);
+			startButton.onclick = function()
+			{
+				location.replace('roundTheWorld/roundTheWorld.php?username=<?=$user_username;?>&game=' + targetSection);
+			}
+		}
+	})
 })
 	// startButton.onclick = function()
 	// {
