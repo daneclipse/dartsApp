@@ -50,9 +50,19 @@ html, body
 	background-color: #d9534f;
 }
 
+.redButton:hover
+{
+	background-color: #bc2e29;
+}
+
 .greenButton 
 {
 	background-color: #91c46b;
+}
+
+.greenButton:hover
+{
+	background-color: #6ca441;
 }
 
 /* FRIENDLY OPTION */

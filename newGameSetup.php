@@ -15,6 +15,9 @@ $game = $_GET['game'];
 	<link rel="stylesheet" type="text/css" href="css/general.css">
 	<link rel="stylesheet" type="text/css" href="css/account.css">
 	<link rel="stylesheet" type="text/css" href="css/gameSetup.css">
+	<style type="text/css">
+
+	</style>
 </head>
 <body>
 
@@ -29,7 +32,7 @@ $game = $_GET['game'];
 
 		if (!isset($_GET['username'])) 
 		{
-			echo '<div class="form"><form action="gameSetup.php" method="get"><input type="text" name="username" placeholder="Name"><br /><input class="submitForm" type="submit" value="Enter name"></form></div>';
+			echo '<div class="form"><form action="newGameSetup.php" method="get"><input type="text" name="username" placeholder="Name"><br /><input class="submitForm greenButton" type="submit" value="Enter name"></form></div>';
 			$name = $_GET['username'];
 			header('gameSetup.php?username=' .$name);
 		}
@@ -123,6 +126,14 @@ $game = $_GET['game'];
 													header('Location: cricket/cricketGame.php?username='.$user_username.'&opponent='.$oppUsername.'&innings='.$innings);
 												}
 											}
+											else if ($game == 'ticTacToe')
+											{
+												if (isset($_GET['games'])) 
+												{
+													$games = $_GET['games'];
+													header('Location: ticTacToe/ticTacToe.php?username='.$user_username.'&opponent='.$oppUsername.'&games='.$games);
+												}
+											}
 										}
 										else
 										{
@@ -164,14 +175,13 @@ $('.showGameInfo').on('click', function()
 	$($(this).siblings('.gameInfo')[0]).toggleClass('hidden');
 })
 
-
 // WHEN YOU CHOSSE TO PLAY V GUEST (PERSON WITHOUT ACCOUNT)
 // CREATES INPUT FOR THEIR NAME
 var guestInput = document.createElement('input');
 $(guestInput).attr('placeholder', 'Opponents Name');
 var confirmInput = document.createElement('button');
 confirmInput.textContent = 'enter name';
-$(confirmInput).addClass('submitForm');
+$(confirmInput).addClass('greenButton setupButton');
 
 // WHEN YOU CHOOSE TO PLAY V USER (PERSON WITH ACCOUNT)
 // CREATES FORM FOR THEIR NAME & PASSWORD WITH SUBMIT BUTTON
@@ -208,7 +218,7 @@ $(form).append(submitInput);
 // CREATE START BUTTON
 var startButton = document.createElement('button');
 startButton.textContent = 'start game';
-$(startButton).addClass('submitForm greenButton');
+$(startButton).addClass('greenButton setupButton');
 
 // X01 GAME
 var trad = $('#x01Game');
@@ -217,13 +227,16 @@ trad.on('click', function()
 	// HIGHLIGHT & DIM RELEVANT GAMES
 	$('.gameOption').css('opacity', '0.2');
 	$(this).parent().css('opacity', '1');
+
 	// CHANGE TITLE TEXT & EMPTY GAMESETUP & OPPONENT DIVS
 	$('#gameTitle').text('X01');
 	$('#gameSetup').empty();
 	$('.opponent').empty();
+
 	// CREATE AREA TO SET UP X01 GAME
 	var setupDiv = document.createElement('div');
 	$(setupDiv).attr({'class' : 'gameSetupArea', 'id' : 'x01Setup'});
+
 	// CREATE SETUP OPTIONS - OPPONENT, TARGET & LEGS
 	// CREATE OPPONENT OPTIONS
 	var oppDiv = document.createElement('div');
@@ -457,6 +470,7 @@ dartsAt.on('click', function()
 	$('#gameTitle').text('100 Darts');
 	$('#gameSetup').empty();
 	$('.opponent').empty();
+
 	if ($('#gameSetup')[0].childElementCount == 0) 
 	{
 		$('#gameSetup').append(targetChosen);
@@ -470,7 +484,7 @@ dartsAt.on('click', function()
 		var targetNumber = $(this).attr('data-value');
 		if (targetNumber != '') 
 		{
-			$('#gameSetup').append(startButton);
+			$('.opponent').append(startButton);
 			startButton.onclick = function()
 			{
 				location.replace('100DartsAt/100DartsAt.php?username=<?=$user_username;?>&game=' + targetNumber);
@@ -483,23 +497,8 @@ dartsAt.on('click', function()
 var cricketGame = $('#cricketGame');
 cricketGame.on('click', function()
 {
-	var cricketSetup = document.createElement('div');
-	$(cricketSetup).attr({'class' : 'gameSetupArea', 'id' : 'cricketSetup'});
-	var cricketOpp = document.createElement('div');
-	$(cricketOpp).attr({'class' : 'innerSetupArea'});
-	var crickOppTitle = document.createElement('h2');
-	$(crickOppTitle).attr({'class' : 'setupHeader', 'id' : 'cricketOppHeader'});
-	$(crickOppTitle).text('choose opponent');
-	var crickOppOne = document.createElement('p');
-	$(crickOppOne).attr({'class' : 'option crickOppOption', 'data-value' : 'guest'});
-	$(crickOppOne).text('v guest');
-	var crickOppTwo = document.createElement('p');
-	$(crickOppTwo).attr({'class' : 'option crickOppOption', 'data-value' : 'user'});
-	$(crickOppTwo).text('v other user');
 
-	$(cricketOpp).append(crickOppTitle);
-	$(cricketOpp).append(crickOppOne);
-	$(cricketOpp).append(crickOppTwo);
+	var cricketSetup = document.createElement('div');
 
 	var cricketInnings = document.createElement('div');
 	$(cricketInnings).attr({'class' : 'innerSetupArea'});
@@ -518,6 +517,24 @@ cricketGame.on('click', function()
 	$(cricketInnings).append(crickInnTwo);
 
 	$(cricketSetup).append(cricketInnings);
+
+	$(cricketSetup).attr({'class' : 'gameSetupArea', 'id' : 'cricketSetup'});
+	var cricketOpp = document.createElement('div');
+	$(cricketOpp).attr({'class' : 'innerSetupArea'});
+	var crickOppTitle = document.createElement('h2');
+	$(crickOppTitle).attr({'class' : 'setupHeader', 'id' : 'cricketOppHeader'});
+	$(crickOppTitle).text('choose opponent');
+	var crickOppOne = document.createElement('p');
+	$(crickOppOne).attr({'class' : 'option crickOppOption', 'data-value' : 'guest'});
+	$(crickOppOne).text('v guest');
+	var crickOppTwo = document.createElement('p');
+	$(crickOppTwo).attr({'class' : 'option crickOppOption', 'data-value' : 'user'});
+	$(crickOppTwo).text('v other user');
+
+	$(cricketOpp).append(crickOppTitle);
+	$(cricketOpp).append(crickOppOne);
+	$(cricketOpp).append(crickOppTwo);
+
 	$(cricketSetup).append(cricketOpp);
 
 	$('.gameOption').css('opacity', '0.2');
@@ -579,7 +596,7 @@ cricketGame.on('click', function()
 					{
 						$('.opponent').empty();
 						$('.opponent').append(form);
-						$(form).attr('action', 'gameSetup.php?username=<?=$user_username;?>&game=cricket&innings=' + inningsSelected);
+						$(form).attr('action', 'newGameSetup.php?username=<?=$user_username;?>&game=cricket&innings=' + inningsSelected);
 						$(form).css('height', '225px');
 					}
 				}
@@ -589,7 +606,6 @@ cricketGame.on('click', function()
 })
 
 // ROUND THE WORLD GAME
-// 100 DARTS AT GAME
 var wordlGame = $('#worldGame');
 wordlGame.on('click', function()
 {
@@ -622,6 +638,7 @@ wordlGame.on('click', function()
 	$('#gameTitle').text('100 Darts');
 	$('#gameSetup').empty();
 	$('.opponent').empty();
+
 	if ($('#gameSetup')[0].childElementCount == 0) 
 	{
 		$('#gameSetup').append(sectionChosen);
@@ -635,7 +652,7 @@ wordlGame.on('click', function()
 		var targetSection = $(this).attr('data-value');
 		if (targetSection != '') 
 		{
-			$('#gameSetup').append(startButton);
+			$('.opponent').append(startButton);
 			startButton.onclick = function()
 			{
 				location.replace('roundTheWorld/roundTheWorld.php?username=<?=$user_username;?>&game=' + targetSection);
@@ -643,89 +660,121 @@ wordlGame.on('click', function()
 		}
 	})
 })
-	// startButton.onclick = function()
-	// {
-	// 	var guestName = $(guestInput).val();
-	// 	// MAKE SURE THE GUEST HAS ENTERED A NAME
-	// 	if (guestName != '') 
-	// 	{
-	// 		var innings = $('#chooseInnings :selected').val();
-	// 		if (innings != 0) 
-	// 		{
-	// 			location.replace('cricket/cricketGame.php?username=<?=$user_username;?>&guest=' + guestName + '&innings=' + innings);
-	// 		}
-	// 		else
-	// 		{
-	// 			alert('please choose a number of innings');
-	// 		}
-			
-	// 	}
-	// 	else
-	// 	{
-	// 		alert('Please enter your opponents name');
-	// 	}
-	// }
 
+// TIC TAC TOE GAME
+var ticGame = $('#ticGame');
+ticGame.on('click', function()
+{
 
+	var ticSetup = document.createElement('div');
+	$(ticSetup).attr({'class' : 'gameSetupArea', 'id' : 'ticSetup'});
+	var ticGames = document.createElement('div');
+	$(ticGames).attr({'class' : 'innerSetupArea', 'id' : 'ticGameSetup'});
+	var ticGamesTitle = document.createElement('h2');
+	$(ticGamesTitle).attr({'class' : 'setupHeader', 'id' : 'ticGamesHeader'});
+	$(ticGamesTitle).text('num of games');
+	var gamesOne = document.createElement('p');
+	$(gamesOne).attr({'class' : 'option ticGameOption', 'data-value' : '1'});
+	$(gamesOne).text('1');
+	var gamesTwo = document.createElement('p');
+	$(gamesTwo).attr({'class' : 'option ticGameOption', 'data-value' : '2'});
+	$(gamesTwo).text('2');
+	var gamesThree = document.createElement('p');
+	$(gamesThree).attr({'class' : 'option ticGameOption', 'data-value' : '3'});
+	$(gamesThree).text('3');
 
-// // ROUND THE WORLD GAME
-// var worldGame = $('#worldGame');
-// worldGame.on('click', function()
-// {
-// 	$('.gameOption').css('opacity', '0.2');
-// 	$(this).parent().css('opacity', '1');
-// 	$('#gameTitle').text('Round the world');
-// 	$('#gameSetup').empty();
-// 	$('.opponent').empty();
-// 	if ($('#gameSetup')[0].childElementCount == 0) 
-// 	{
-// 		$('#gameSetup').append('<h2>Set up your game</h2><select id="selectGameType"><option value="0">Choose game type</option><option value="1">Singles</option><option value="2">Doubles</option><option value="3">Trebles</option></select>');
-// 	}
-// 	$('#selectGameType').on('change', function()
-// 	{
-// 		var selectedGame = $('#selectGameType :selected').val();
-// 		if (selectedGame != 0) 
-// 		{
-// 			$('#gameSetup').append(startButton);
-// 			startButton.onclick = function()
-// 			{
-// 				if (selectedGame == 1) 
-// 				{
-// 					var game = 'singles';
-// 				}
-// 				else if (selectedGame == 2)
-// 				{
-// 					var game = 'doubles';
-// 				}
-// 				else if (selectedGame == 3)
-// 				{
-// 					var game = 'trebles';
-// 				}
-// 				location.replace('roundTheWorld/roundTheWorld.php?username=<?=$user_username;?>&game=' + game);
-// 			}
-// 		}
-// 		else
-// 		{
-// 			$(startButton).remove();
-// 		}
-// 	})
-// })
+	$(ticGames).append(ticGamesTitle);
+	$(ticGames).append(gamesOne);
+	$(ticGames).append(gamesTwo);
+	$(ticGames).append(gamesThree);
 
-// // TIC TAC TOE GAME
-// var ticGame = $('#ticGame');
-// ticGame.on('click', function()
-// {
-// 	$('.gameOption').css('opacity', '0.2');
-// 	$(this).parent().css('opacity', '1');
-// 	$('#gameTitle').text('Tic Tac Toe');
-// 	$('#gameSetup').empty();
-// 	$('.opponent').empty();
-// 	$('#gameSetup').append(startButton);
-// 	startButton.onclick = function()
-// 	{
-// 		location.replace('ticTacToe/ticTacToe.php?username=<?=$user_username;?>');
-// 	}
-// })
+	$(ticSetup).append(ticGames);
+
+	var ticOpp = document.createElement('div');
+	$(ticOpp).attr({'class' : 'innerSetupArea', 'id' : 'ticOpponent'});
+	var ticOppTitle = document.createElement('h2');
+	$(ticOppTitle).attr({'class' : 'setupHeader', 'id' : 'ticOppHeader'});
+	$(ticOppTitle).text('choose opponent');
+	var ticOppOne = document.createElement('p');
+	$(ticOppOne).attr({'class' : 'option ticOppOption', 'data-value' : 'guest'});
+	$(ticOppOne).text('v guest');
+	var ticOppTwo = document.createElement('p');
+	$(ticOppTwo).attr({'class' : 'option ticOppOption', 'data-value' : 'user'});
+	$(ticOppTwo).text('v other user');
+
+	$(ticOpp).append(ticOppTitle);
+	$(ticOpp).append(ticOppOne);
+	$(ticOpp).append(ticOppTwo);
+
+	$(ticSetup).append(ticOpp);
+
+	$('.gameOption').css('opacity', '0.2');
+	$(this).parent().css('opacity', '1');
+	$('#gameTitle').text('Cricket');
+	$('#gameSetup').empty();
+	$('.opponent').empty();
+
+	if ($('#gameSetup')[0].childElementCount == 0) 
+	{
+		$('#gameSetup').append(ticSetup);
+		$(ticGamesTitle).css('opacity', '1');
+		$('.ticOppOption').off();
+
+		$('.ticGameOption').on('click', function()
+		{
+			var gamesSelected = $(this).attr('data-value');
+			if (gamesSelected != '') 
+			{
+				$(ticGamesTitle).css('opacity', '0.2');
+				$(ticOppTitle).css('opacity', '1');
+				$('.ticGameOption').css('opacity', '0.2');
+				$(this).css('opacity', '1');
+			}
+			// CHOOSE THE OPPONENT INSIDE SO WE CAN GET GAMES SELECTED
+			$('.ticOppOption').on('click', function()
+			{
+				$('.ticOppOption').css('opacity', '0.2');
+				$(this).css('opacity', '1');
+				var oppSelected = $(this).attr('data-value');
+				if (oppSelected != '') 
+				{
+					if (oppSelected == 'guest') 
+					{
+						$('.opponent').empty();
+						$('.opponent').append(guestInput);
+						$('.opponent').append(confirmInput);
+						confirmInput.onclick = function()
+						{
+							var guestName = $(guestInput).val();
+							if (guestName != '') 
+							{
+								$(this).remove();
+								$(guestInput).remove();
+								$('.opponent').append('<p id="guestName">' + guestName + '</p>');
+								$('.opponent').append(startButton);
+								startButton.onclick = function()
+								{
+									location.replace('ticTacToe/ticTacToe.php?username=<?=$user_username;?>&guest='+ guestName + '&games=' + gamesSelected);
+								}
+							}
+							else
+							{
+								$('ticGameOption').off();
+							}
+						}
+					}
+					else if (oppSelected == 'user')
+					{
+						$('.opponent').empty();
+						$('.opponent').append(form);
+						$(form).attr('action', 'newGameSetup.php?username=<?=$user_username;?>&game=ticTacToe&games=' + gamesSelected);
+						$(form).css('height', '225px');
+					}
+				}
+			})
+		})
+	}
+})
 
 </script>
 

@@ -31,14 +31,17 @@ include('connection.php');
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="../css/general.css">
+	<link rel="stylesheet" type="text/css" href="../css/game.css">
 </head>
 <body>
-
+<!-- 
 	<div class="navBar">
 		<h1 class="accountName"><?= $user_username;?></h1>
 		<a href="../account.php?username=<?=$user_username;?>">Back to account</a>
 		<a href="../index.php">Home</a>
-	</div>
+	</div> -->
 
 	<div class="page">
 
@@ -247,8 +250,8 @@ include('connection.php');
 
 			<div class="game">
 				<div class="gameButtons">
-					<button id="undoScore">undo</button>
-					<button id="friendly">Friendly</button>
+					<button class="redButton" id="undoScore">undo</button>
+					<button class="greenButton" id="friendly">Friendly</button>
 				</div>
 				<p id="checkoutArea"></p>
 				<p id="stats"></p>
@@ -314,7 +317,7 @@ if(user != '')
 var playerOrder = $('.playerOrder');
 var playersToOrder = $('.playersToOrder');
 var submitOrder = document.createElement('button');
-$(submitOrder).addClass('block');
+$(submitOrder).addClass('greenButton startGameButton');
 
 if (opponent != '') 
 {

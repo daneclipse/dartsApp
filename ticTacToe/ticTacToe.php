@@ -1,6 +1,8 @@
 <?php
 
 $user_username = $_GET['username'];
+$opponent = $_GET['opponent'];
+$games = $_GET['games'];
 
 ?>
 
@@ -46,7 +48,7 @@ $user_username = $_GET['username'];
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="possibleTargets.js"></script>
-	<script type="text/javascript" src="ticTacToe.js"></script>
+  <script type="text/javascript" src="ticTacToe.js"></script>
 
 </body>
 </html>

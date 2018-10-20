@@ -1,3 +1,25 @@
+/* FORM FOR WHEN QUICK GAME WAS SELECTED */
+.form
+{
+	height: 150px;
+	margin: 50px auto;
+	float: none;
+}
+
+.setupButton
+{
+	padding: 10px 20px;
+	font-size: 22px;
+	color: #fff;
+}
+
+.setupButton:hover
+{
+	background-color: #719952;
+	cursor: pointer;
+}
+
+/* AREA WHERE THE GAME IS SETUP */
 #gameSetup
 {
 	width: 80%;
@@ -15,6 +37,7 @@
 {
 	width: 33.3%;
 	float: left;
+	height: 100%;
 }
 
 .innerSetupArea h2
@@ -90,4 +113,12 @@
 	width: 66.6%;
 	margin: 0 auto;
 	float: none;
+}
+
+/* TIC TAC TOE SETUP */
+#ticSetup .innerSetupArea
+{
+	height: 100%;
+	width: 50%;
+	float: left;
 }

@@ -18,7 +18,7 @@ include('connection.php');
 	<div class="navBar">
 		<a href="register.php">Register</a>
 		<a href="login.php">Log in</a>
-		<a href="gameSetup.php">Quick Game</a>
+		<a href="newGameSetup.php">Quick Game</a>
 	</div><!-- CLOSES DIV WITH CLASS NAVBAR -->
 
 	<div class="page">

@@ -32,7 +32,7 @@ if ($numRows <= 0)
 
 <div class="navBar">
 	<h1 class="accountName"><?= $user_username;?></h1>
-	<a href="gameSetup.php?username=<?=$user_username;?>">Start a game</a>
+	<a href="newGameSetup.php?username=<?=$user_username;?>">Start a game</a>
 	<a href="viewStats.php?username=<?=$user_username;?>">View stats</a>
 	<a href="editAccount.php?username=<?=$user_username;?>">Edit account details</a>
 	<span class="logOutButton"><a href="login.php">Log out</a></span>
