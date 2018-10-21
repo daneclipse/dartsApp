@@ -10,17 +10,21 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 <head>
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="../css/general.css">
+	<link rel="stylesheet" type="text/css" href="../css/game.css">
 </head>
 <body>
 
-	<div class="navBar">
+<!-- 	<div class="navBar">
 		<h1 class="accountName"><?= $user_username;?></h1>
 		<a href="../gameSetup.php?username=<?=$user_username;?>">Choose different game</a>
 		<a href="../account.php?username=<?=$user_username;?>">Back to account</a>
 		<a href="../index.php">Home</a>
-	</div>
+	</div> -->
 
-	<div class="page">
+	<div class="page" id="worldPage">
+		<span class="quitGame">X</span>
 		<h3>
 			<?php
 
@@ -43,7 +47,7 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 			?>
 		</h3>
 		<br />
-		<div class="scoreboard">
+		<div class="scoreboard" id="worldScoreboard">
 			<div class="half numbersNeeded">
 				<div class="inner_half"><p class="regularText">1</p></div>
 				<div class="inner_half"><p class="regularText">2</p></div>
@@ -287,17 +291,19 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 
 			</svg><!-- CLOSE SVG/ DARTBOARD -->
 		</div><!-- CLOSE DIV WITH CLASS BOARD -->
-		<div class="gameButtons">
-			<button id="undoScore">undo</button>
-			<button id="friendly">Friendly</button>
-		</div>
-		<div class="lower_scoreboard">
-			<div class="inner_scoreboard">Aim at<p id="aimAt"></p></div>
-			<div class="inner_scoreboard">Singles Hit<p id="gameSingles"></p></div>
-			<div class="inner_scoreboard">Doubles Hit<p id="gameDoubles"></p></div>
-			<div class="inner_scoreboard">Trebles Hit<p id="gameTrebles"></p></div>
-			<div class="inner_scoreboard">Game Score<p id="gameScore"></p></div>
-			<div class="inner_scoreboard">Darts Missed<p id="missed"></p></div>
+		<div class="game" id="worldGame">
+			<div class="gameButtons">
+				<button class="redButton" id="undoScore">undo</button>
+				<button class="greenButton" id="friendly">Friendly</button>
+			</div>
+			<div class="lower_scoreboard">
+				<div class="worldInner_scoreboard">Aim at<p class="worldScore" id="aimAt"></p></div>
+				<div class="worldInner_scoreboard">Singles Hit<p class="worldScore" id="gameSingles"></p></div>
+				<div class="worldInner_scoreboard">Doubles Hit<p class="worldScore" id="gameDoubles"></p></div>
+				<div class="worldInner_scoreboard">Trebles Hit<p class="worldScore" id="gameTrebles"></p></div>
+				<div class="worldInner_scoreboard">Game Score<p class="worldScore" id="gameScore"></p></div>
+				<div class="worldInner_scoreboard">Darts Missed<p class="worldScore" id="missed"></p></div>
+			</div>
 		</div>
 	</div><!-- CLOSE DIV WITH CLASS PAGE -->
 

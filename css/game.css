@@ -299,7 +299,69 @@ span.numDartsLeft
 	border: 5px solid #f7f5fa;
 }
 
+/* ROUND THE WORLD GAME */
+#worldScoreboard
+{
+	height: 10%;
+}
 
+.half
+{
+	height: 50%;
+	margin: 0;
+}
+
+.inner_half
+{
+	width: 5%;
+	height: 100%;
+	float: left;
+	background-color: #333;
+}
+
+.inner_half:nth-child(even)
+{
+	background-color: #fff;
+	color: #333;
+}
+
+#worldPage .board
+{
+	height: 60%;
+}
+
+#worldGame
+{
+	height: 20%;
+	float: none;
+}
+
+#worldGame .gameButtons
+{
+	height: 20%;
+	padding-left: 0;
+	margin: 0;
+}
+
+#worldGame .lower_scoreboard
+{
+	height: 80%;
+}
+
+.worldInner_scoreboard
+{
+	width: 16.5%;
+	height: 100%;
+	float: left;
+	background-color: #333;
+	color: #fff;
+	border: 2px solid #f7f5fa;
+}
+
+.worldScore
+{
+	height: 80%;
+}
 
 
 
