@@ -49,6 +49,8 @@ include('connection.php');
 				<div class="playersToOrder"></div>
 			</div>
 
+			<span class="quitGame">X</span>
+
 			<div class="board" id="board">
 				<svg height="100%" version="1.1" viewBox="-225 -225 450 450" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -464,6 +466,17 @@ function createOrder( player, index )
 		return false;
 	}
 }
+
+// BUTTON TO QUIT THE GAME & GO BACK TO ACCOUNT
+var quitButton = $('.quitGame');
+$(quitButton).on('click', function()
+{
+	var quit = confirm('are you sure you want to quit the game?');
+	if (quit) 
+	{
+		location.replace('../account.php?username=<?=$user_username;?>');
+	}
+})
 
 </script>
 

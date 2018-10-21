@@ -14,32 +14,34 @@ $innings = $_GET['innings'];
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="../css/general.css">
+	<link rel="stylesheet" type="text/css" href="../css/game.css">
 </head>
 <body>
 
-	<div class="navBar">
+<!-- 	<div class="navBar">
 		<h1 class="accountName"><?= $user_username;?></h1>
 		<a href="../account.php?username=<?=$user_username;?>">Back to account</a>
 		<a href="../index.php">Home</a>
-	</div>
+	</div> -->
 
 	<div class="page">
+		<span class="quitGame">X</span>
 
 		<div class="playerOrder">
 			<p>Top player is the bowler and throws first</p>
 			<div class="playersToOrder"></div>
 		</div>
-		
-		<!-- <h1 id="bowlerTitle">Bowler - <span id="bowlerName"></span>, you throw first</h1> -->
 
 		<div class="scoreboards">
 
 			<div class="gameScoreboard">
-				<p id="gameInnings">First Innings</p>
-				<p id="gameScore">0 - </p>
-				<p id="gameWickets">0</p>
-				<p id="firstInningsScore"></p>
-				<p id="oppScore"></p>
+				<p class="inner_gameScoreboard" id="gameInnings">First Innings</p>
+				<p class="inner_gameScoreboard" id="gameScore">0 - </p>
+				<p class="inner_gameScoreboard" id="gameWickets"> 0</p>
+				<p class="inner_gameScoreboard" id="firstInningsScore"></p>
+				<p class="inner_gameScoreboard" id="oppScore"></p>
 			</div>
 			<div class="half_scoreboard bowlerArea">
 				<div class="inner_half"><p class="bowlerScore" id="bowlerOne">1</div>
@@ -66,7 +68,7 @@ $innings = $_GET['innings'];
 				<div class="inner_half"><p class="batterScore" id="10"></p></div>
 			</div>
 		</div>
-		<div class="game">
+		<div class="game" id="cricketGame">
 			<div class="board" id="board">
 					<svg height="100%" version="1.1" viewBox="-225 -225 450 450" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -266,11 +268,11 @@ $innings = $_GET['innings'];
 					</svg><!-- CLOSE SVG/ DARTBOARD -->
 				</div><!-- CLOSE DIV WITH CLASS BOARD -->
 
-			<div class="gameButtons">
-				<button id="undoScore">undo</button>
-				<button id="friendly">Friendly</button>
+			<div class="gameButtons" id="cricketButtons">
+				<button class="redButton" id="undoScore">undo</button>
+				<button class="greenButton" id="friendly">Friendly</button>
 			</div>
-			<div class="scoreboard">
+			<div class="scoreboard" id="cricketScoreboard">
 				<div class="inner_scoreboard"><p id="nameSection"></p><p id="playerTypeSection"></p></div>
 				<div class="inner_scoreboard"><p id="firstSection"></p></div>
 				<div class="inner_scoreboard"><p id="secondSection"></p></div>
@@ -381,6 +383,7 @@ $innings = $_GET['innings'];
 	function orderSelection()
 	{
 		submitOrder.textContent = 'submit order';
+		$(submitOrder).addClass('startGameButton greenButton');
 		playerOrder.prepend(submitOrder);
 		for (var i = 0; i < players.players.length; i++) 
 		{
@@ -478,6 +481,16 @@ $innings = $_GET['innings'];
 			return false;
 		}
 	}
+
+	var quitButton = $('.quitGame');
+	$(quitButton).on('click', function()
+	{
+		var quit = confirm('are you sure you want to quit the game?');
+		if (quit) 
+		{
+			location.replace('../account.php?username=<?=$user_username;?>');
+		}
+	})
 
 
   </script>

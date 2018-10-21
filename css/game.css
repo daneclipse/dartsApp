@@ -1,8 +1,26 @@
+.quitGame
+{
+	float: right;
+	font-size: 20px;
+}
+
+.quitGame:hover
+{
+	cursor: pointer;
+}
+
 .page 
 {
 	width: 100%;
 	height: 100%;
 	padding: 20px;
+}
+
+.startGameButton
+{
+	font-size: 24px;
+	padding: 10px 20px;
+	color: #fff;
 }
 
 /* USED TO CHOOSE THE ORDER OF THROW */
@@ -12,13 +30,6 @@
 	margin: 100px auto;
 	text-align: center;
 	font-size: 30px;
-}
-
-.startGameButton
-{
-	font-size: 24px;
-	padding: 10px 20px;
-	color: #fff;
 }
 
 .playersToOrder
@@ -67,10 +78,13 @@
 	margin: 0 auto;
 }
 
+/* UNDO & FRIENDLY BUTTON */
 .gameButtons
 {
+	width: 80%;
 	height: 10%;
 	padding-left: 1%;
+	margin: 0 auto;
 }
 
 .gameButtons button
@@ -81,6 +95,7 @@
 	color: #fff;
 }
 
+/* AREA APPEND TO PAGE FOR EVERY PLAYER TO DISPLAY NAME & SCORES */
 .playerBox
 {
 	height: 35%;
@@ -97,15 +112,192 @@
 	background-color: #333;
 }
 
+/* AREA THAT DISPLAYS PLAYER NAME */
 .scoreboardSection:first-of-type
 {
 	width: 10%;
 }
 
 
+/* 100 DARTS AT GAME */
+.scoreboard
+{
+	width: 80%;
+	height: 30%;
+	margin: 0 auto;
+}
 
+.inner_scoreboard
+{
+	height: 100%;
+	width: 45%;
+	float: left;
+}
 
+.third_height
+{
+	height: 33.3%;
+	width: 50%;
+	margin: 0 auto;
+	text-align: left;
+}
 
+.enterScore
+{
+	height: 100%;
+	float: right;
+	background-color: #fff;
+	width: 80px;
+	border: 2px solid #f5f7fa;
+}
+
+.dartsLeft
+{
+	height: 100%;
+	width: 10%;
+	float: left;
+	text-align: center;
+	font-size: 30px;
+}
+
+span.numDartsLeft
+{
+	display: block;
+	padding: 10px 20px;
+	background-color: #fff;
+}
+
+#hundredGame
+{
+	height: 10%;
+}
+
+#hundredGame .gameButtons
+{
+	height: 20%;
+}
+
+#hundredGame .playerBox
+{
+	height: 75%;
+	padding-top: 1%;
+	padding-left: 1%;
+	margin-top: 0;
+}
+
+.section
+{
+	height: 100%;
+	float: left;
+}
+
+.nameSection
+{
+	width: 15%;
+	margin-right: 5%;
+	background-color: #333;
+}
+
+.scoreSection
+{
+	width: 80%;
+}
+
+.innerSection
+{
+	height: 100%;
+	width: 30%;
+	background-color: #333;
+	margin-right: 3.3%;
+}
+
+/* CRICKET GAME */
+.playerOrder p
+{
+	margin-top: 30px;
+}
+
+.scoreboards
+{
+	height: 100%;
+	width: 20%;
+	float: left;
+}
+
+.gameScoreboard
+{
+	height: 15%;
+	border: 2px solid #333;
+}
+
+.inner_gameScoreboard
+{
+	height: 20%;
+}
+
+#gameScore, #gameWickets
+{
+	width: 50%;
+	float: left;
+}
+
+#gameScore
+{
+	text-align: right;
+}
+
+#gameWickets
+{
+	text-align: left;
+	padding-left: 5px;
+}
+
+.half_scoreboard
+{
+	height: 85%;
+	width: 50%;
+	float: left;
+}
+
+.inner_half
+{
+	height: 10%;
+	background-color: #333;
+	color: #fff;
+	border: 2px solid #f7f5fa;
+}
+
+.game
+{
+	height: 100%;
+	width: 80%;
+	float: left;
+}
+
+#cricketGame .board
+{
+	height: 80%;
+}
+
+#cricketButtons
+{
+	height: 5%;
+}
+
+#cricketScoreboard
+{
+	height: 15%;
+	padding-left: 1%;
+}
+
+#cricketScoreboard .inner_scoreboard
+{
+	width: 20%;
+	flex: left;
+	background-color: #333;
+	color: #fff;
+	border: 5px solid #f7f5fa;
+}
 
 
 

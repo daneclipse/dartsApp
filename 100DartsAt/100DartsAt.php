@@ -11,31 +11,35 @@ $targetNumber = $_GET['game'];
 <head>
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="../css/general.css">
+	<link rel="stylesheet" type="text/css" href="../css/game.css">
 </head>
 <body>
 
-	<div class="navBar">
+<!-- 	<div class="navBar">
 		<h1 class="accountName"><?= $user_username;?></h1>
 		<a href="../account.php?username=<?=$user_username;?>">Back to account</a>
 		<a href="../index.php">Home</a>
-	</div>
+	</div> -->
 
 	<div class="page">
+		<span class="quitGame">X</span>
 		<!-- INSERT PLAYER INTO hundredDarts TABLE ON DATABASE TO KEEP STATS -->	
 		<div class="scoreboard">
 			<div class="inner_scoreboard typeHit">
-				<div class="third_height">Singles Hit<p class="enterScore" id="singlesHit"></p></div>
-				<div class="third_height">Doubles Hit<p class="enterScore" id="doublesHit"></p></div>
-				<div class="third_height">Trebles Hit<p class="enterScore" id="treblesHit"></p></div>
+				<div class="third_height">Singles Hit<p class="enterScore" id="singlesHit">0</p></div>
+				<div class="third_height">Doubles Hit<p class="enterScore" id="doublesHit">0</p></div>
+				<div class="third_height">Trebles Hit<p class="enterScore" id="treblesHit">0</p></div>
 			</div>
 			<div class="dartsLeft">
 				<span class="numDartsLeft"></span><br />
 				darts left
 			</div>
 			<div class="inner_scoreboard">
-				<div class="third_height">Points Scored<p class="enterScore" id="pointsScored"></p></div>
-				<div class="third_height">Total Scored<p class="enterScore" id="totalScored"></p></div>
-				<div class="third_height">Darts Missed<p class="enterScore" id="dartsMissed"></p></div>
+				<div class="third_height">Points Scored<p class="enterScore" id="pointsScored">0</p></div>
+				<div class="third_height">Total Scored<p class="enterScore" id="totalScored">0</p></div>
+				<div class="third_height">Darts Missed<p class="enterScore" id="dartsMissed">0</p></div>
 			</div>
 		</div>
 
@@ -237,10 +241,10 @@ $targetNumber = $_GET['game'];
 
 				</svg><!-- CLOSE SVG/ DARTBOARD -->
 			</div><!-- CLOSE DIV WITH CLASS BOARD -->
-			<div class="game">
+			<div class="game" id="hundredGame">
 				<div class="gameButtons">
-					<button id="undoScore">undo</button>
-					<button id="friendly">Friendly</button>
+					<button class="redButton" id="undoScore">undo</button>
+					<button class="greenButton" id="friendly">Friendly</button>
 				</div>
 			</div>
 	</div>
@@ -320,6 +324,16 @@ $targetNumber = $_GET['game'];
 		$('.numDartsLeft').text(players[0].numDarts);
 		createScoreboard( players[0] );
 
+
+		var quitButton = $('.quitGame');
+		$(quitButton).on('click', function()
+		{
+			var quit = confirm('are you sure you want to quit the game?');
+			if (quit) 
+			{
+				location.replace('../account.php?username=<?=$user_username;?>');
+			}
+		})
 
 	</script>
 	<script type="text/javascript" src="100DartsAt.js"></script>
