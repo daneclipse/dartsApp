@@ -334,6 +334,16 @@ $gameType = $_GET['game']; // single, double, treble etc ..
   	}
 
   	createPlayer('<?=$user_username;?>');
+
+  	var quitGame = $('.quitGame');
+  	$(quitGame).on('click', function()
+  	{
+  		var quit = confirm('are you sure you want to quit the game?');
+  		if (quit) 
+  		{
+  			location.replace('../account.php?username=<?=$user_username;?>');
+  		}
+  	})
   </script>
 
   <script type="text/javascript" src="roundTheWorld.js"></script>

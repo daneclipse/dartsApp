@@ -363,12 +363,69 @@ span.numDartsLeft
 	height: 80%;
 }
 
+/* TIC TAC TOE GAME */
+.ticScoreboard
+{
+	width: 50%;
+	height: 10%;
+	margin: 0 auto;
+}
 
+.ticScoreboard .half
+{
+	width: 50%;
+	float: left;
+}
 
+.ticScoreboard .half p
+{
+	height: 100%;
+	width: 20%;
+	float: right;
+	background-color: #fff;
+	color: #333;
+}
 
+.ticGameBoard
+{
+	height: 80%;
+	width: 80%;
+	margin: 0 auto;
+}
 
+.ticGameBoard .innerSection
+{
+	width: 33.3%;
+	height: 33.3%;
+	float: left;
+	margin-right: 0;
+	border: 5px solid #f7f5fa;
+	font-size: 40px;
+	color: #fff;
+}
 
+#ticButtons
+{
+	height: 10%;
+	padding-left: 0;
+}
 
+#ticButtons button
+{
+	float: right;
+}
 
+.greenText
+{
+	color: #91c46b;
+}
 
+.redText
+{
+	color: #d9534f;
+}
 
+.neutralText
+{
+	color: #fff;
+}

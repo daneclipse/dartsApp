@@ -39,9 +39,9 @@ function newGame()
 	for (var i = 0; i < sections.length; i++) 
 	{
 		var randomTarget = possibleTargets[Math.floor(Math.random()*possibleTargets.length)].target;
-		$(sections[i]).removeClass('green');
-		$(sections[i]).removeClass('red');
-		$(sections[i]).addClass('neutral');
+		$(sections[i]).removeClass('greenText');
+		$(sections[i]).removeClass('redText');
+		$(sections[i]).addClass('neutralText');
 		$(sections[i]).text(randomTarget);
 	}
 	targetsOne = [];
@@ -167,23 +167,23 @@ function changeScore(targets, section)
 {
 	if (targets.length == 1) 
 	{
-		section.removeClass('neutral');
-		section.removeClass('red');
-		section.addClass('green');
+		section.removeClass('neutralText');
+		section.removeClass('redText');
+		section.addClass('greenText');
 		section.text('O');
 	}
 	else if (targets.length == 2)
 	{
-		section.removeClass('.neutral');
-		section.removeClass('green');
-		section.addClass('red');
+		section.removeClass('.neutralText');
+		section.removeClass('greenText');
+		section.addClass('redText');
 		section.text('X');
 	}
 	else
 	{
-		section.removeClass('green');
-		section.removeClass('red');
-		section.addClass('neutral')
+		section.removeClass('greenText');
+		section.removeClass('redText');
+		section.addClass('neutralText')
 		section.text(targets[0]);
 		targets.length = 0;
 		targets = [];
@@ -193,6 +193,7 @@ function changeScore(targets, section)
 
 var completeBoardButton = document.createElement('button');
 completeBoardButton.textContent = 'complete game';
+$(completeBoardButton).addClass('greenButton');
 
 // CHECK THE BOARD TO SEE IF THERE IS THREE IN A ROW
 function checkBoard(area)
