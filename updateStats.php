@@ -212,5 +212,32 @@ else if ($game == 'cricket')
 	}
 
 }
+else if ($game == 'ticTacToe')
+{
+	$opponent = $_GET['opponent'];
+	$marker = $_GET['marker'];
+	$games = $_GET['games'];
+	$gamesWon = $_GET['gamesWon'];
+	$targets = $_GET['targets'];
+	$targetOne = $_GET['targetOne'];
+	$targetTwo = $_GET['targetTwo'];
+	$targetThree = $_GET['targetThree'];
+	$targetFour = $_GET['targetFour'];
+	$targetFive = $_GET['targetFive'];
+	$targetSix = $_GET['targetSix'];
+	$dartsUsed = $_GET['darts'];
+
+	$insertUser = "INSERT INTO ticTacToe (username, opponent, marker, games, gamesWon, targets, targetOne, targetTwo, targetThree, targetFour, targetFive, targetSix, dartsUsed, game_date) VALUES ('$user_username', '$opponent', '$marker', '$games', '$gamesWon', '$targets', '$targetOne', '$targetTwo', '$targetThree', '$targetFour', '$targetFive', '$targetSix', '$dartsUsed', NOW())";
+	$insertQuery = mysqli_query($dbc, $insertUser);
+	$databaseRows = mysqli_affected_rows($dbc);
+	if ($databaseRows > 0) 
+	{
+		echo 'STATS ADDED';
+	}
+	else
+	{
+		echo 'Error ' . E_ALL;
+	}
+}
 
 ?>

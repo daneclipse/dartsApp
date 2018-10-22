@@ -83,12 +83,12 @@ $games = $_GET['games'];
 		var player = 
 		{
 			name: name,
+			marker: '',
 			gamesToWin: Number('<?=$games;?>'),
 			gamesWon: 0,
 			targets: 0,
 			targetsHit: [],
 			dartsUsed: 0,
-			dartsMissed: 0
 		}
 		players.players.push(player);
 		localStorage.players = JSON.stringify(players.players);
@@ -165,6 +165,8 @@ $games = $_GET['games'];
 				$('.ticGameBoard').show();
 				$('#ticButtons').show();
 				localStorage.players = JSON.stringify(players.players);
+				players.players[0].marker = 'noughts';
+				players.players[1].marker = 'crosses';
 				playerOrder.remove();
 				$(this).remove();
 				$.getScript('possibleTargets.js');

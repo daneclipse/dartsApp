@@ -171,6 +171,9 @@ function changeScore(targets, section)
 		section.removeClass('redText');
 		section.addClass('greenText');
 		section.text('O');
+		players.players[0].targets++;
+		players.players[0].targetsHit.push(targets[0]);
+		console.log(players.players[0]);
 	}
 	else if (targets.length == 2)
 	{
@@ -178,6 +181,11 @@ function changeScore(targets, section)
 		section.removeClass('greenText');
 		section.addClass('redText');
 		section.text('X');
+		players.players[0].targets--;
+		players.players[0].targetsHit.pop();
+		players.players[1].targets++;
+		players.players[1].targetsHit.push(targets[0]);
+		console.log(players);
 	}
 	else
 	{
@@ -185,15 +193,21 @@ function changeScore(targets, section)
 		section.removeClass('redText');
 		section.addClass('neutralText')
 		section.text(targets[0]);
+		players.players[1].targets--;
+		players.players[1].targetsHit.pop();
 		targets.length = 0;
 		targets = [];
 	}
-	console.log(targets);
+	// console.log(targets);
 }
 
 var completeBoardButton = document.createElement('button');
-completeBoardButton.textContent = 'complete game';
+completeBoardButton.textContent = 'complete board';
 $(completeBoardButton).addClass('greenButton');
+
+var completeGame = document.createElement('button');
+completeGame.textContent = 'complete game';
+$(completeGame).addClass('greenButton');
 
 // CHECK THE BOARD TO SEE IF THERE IS THREE IN A ROW
 function checkBoard(area)
@@ -215,15 +229,51 @@ function checkBoard(area)
 					alert('NOUGHTS WIN');
 					noughtScore++;
 					$('#nought').text(noughtScore);
+					players.players[0].gamesWon++;
+					if (players.players[0].gamesWon == players.players[0].gamesToWin) 
+					{
+						$('.gameButtons').prepend(completeGame);
+						completeGame.onclick = function()
+						{
+							var complete = confirm('finish the game, ' + players.players[0].name + ' is the winner');
+							if (complete) 
+							{
+								updateStats( players.players[0] );
+								location.replace('../account.php?username=<?=$user_username;?>');
+							}
+						}
+					}
+					else
+					{
+						newGame();
+						$(this).remove();
+					}
 				}
 				else if (first == 'X')
 				{
 					alert('CROSSES WIN');
 					crossScore++;
 					$('#cross').text(crossScore);
+					players.players[1].gamesWon++;
+					if (players.players[1].gamesWon == players.players[1].gamesToWin) 
+					{
+						$('.gameButtons').prepend(completeGame);
+						completeGame.onclick = function()
+						{
+							var complete = confirm('finish the game, ' + players.players[1].name + ' is the winner');
+							if (complete) 
+							{
+								updateStats( players.players[1] );
+								location.replace('../account.php?username=<?=$user_username;?>');
+							}
+						}
+					}
+					else
+					{
+						newGame();
+						$(this).remove();
+					}
 				}
-				newGame();
-				$(this).remove();
 			})
 
 		}
@@ -241,3 +291,98 @@ function checkBoard(area)
 	}
 }
 
+function updateStats( player )
+{
+	if (players.players.length == 2) 
+	{
+		for (var i = 0; i < players.players.length - 1; i++) 
+		{
+			if (player.name == players.players[i].name) 
+			{
+				if (window.location.search.includes('guest')) 
+				{
+					var oppName = window.location.search.split("&")[1].split("guest=")[1];
+				}
+				else if (window.location.search.includes('opponent')) 
+				{
+					var checkName = window.location.search.split("&")[1].split("opponent=")[1];
+					if (player.name == checkName) 
+					{
+						var oppName = window.location.search.split("?username=")[1].split('&')[0];
+					}
+					else
+					{
+						var oppName = window.location.search.split("&")[1].split("opponent=")[1];
+					}
+				}
+				else if (window.location.search.includes('playerOne'))
+				{
+					if (window.location.search.includes('playerTwo')) 
+					{
+						var checkName = window.location.search.split("&")[1].split("playerTwo=")[1];
+						if (player.name == checkName) 
+						{
+							var oppName = window.location.search.split("&")[1].split("playerOne=")[1];
+						}
+						else
+						{
+							var oppName = window.location.search.split("&")[1].split("playerTwo=")[1];
+						}
+					}
+					else
+					{
+						var oppName = 'no opponent';
+					}
+				}
+			}
+			else
+			{
+				var oppName = players.players[i].name;
+			}
+		}
+	}
+	else
+	{
+		var oppName = 'no opponent';
+	}
+
+	var firstTarget = player.targetsHit[0];
+	var secondTarget = player.targetsHit[1];
+	var thirdTarget = player.targetsHit[2];
+	if (player.targetsHit.length > 2) 
+	{
+		var fourthTarget = player.targetsHit[3];
+		var fifthTarget = player.targetsHit[4];
+		var sixthTarget = player.targetsHit[5];
+	}
+	else
+	{
+		var fourthTarget = '';
+		var fifthTarget = '';
+		var sixthTarget = '';
+	}
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{
+			$('#stats').innerHTML = this.responseText;
+		}
+	}
+	xmlhttp.open('GET', '../updateStats.php?name='+player.name+
+		'&game=ticTacToe'+
+		'&marker='+player.marker+
+		'&opponent='+oppName+
+		'&games='+player.gamesToWin+
+		'&gamesWon='+player.gamesWon+
+		'&targets='+player.targets+
+		'&targetOne='+firstTarget+
+		'&targetTwo='+secondTarget+
+		'&targetThree='+thirdTarget+
+		'&targetFour='+fourthTarget+
+		'&targetFive='+fifthTarget+
+		'&targetSix='+sixthTarget+
+		'&darts='+player.dartsUsed, true);
+	xmlhttp.send();
+}
