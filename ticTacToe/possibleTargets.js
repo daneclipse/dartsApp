@@ -241,19 +241,26 @@ var possibleTargets = [
 	},
 	{
 		number: 61,
-		target: 'bull'
+		target: 'outerbull'
 	},
 	{
 		number: 62,
-		target: 'BWB'
-	},
-	{
-		number: 63,
-		target: 'TDC'
-	},
-	{
-		number: 64,
-		target: 'O41'
+		target: 'bull'
 	}
+	// REMOVED BELOW TARGETS AS THEY REQURIE ALL THREE DARTS
+	// NEED A WAY FOR THE PLAYER TO SELECT WHAT TARGETS THEY WANT TO TAKE
+	// WAIT UNTIL 3 DARTS HAVE BEEN THROWN - DETERMINE IF ANY TARGET HAS BEEN HIT - IF SO DISPLAY THEM, PLAYER TO CONFIRM?
+		// {
+		// 	number: 62,
+		// 	target: 'BWB'
+		// },
+		// {
+		// 	number: 63,
+		// 	target: 'TDC'
+		// },
+		// {
+		// 	number: 64,
+		// 	target: 'O41'
+		// }
 
 ]

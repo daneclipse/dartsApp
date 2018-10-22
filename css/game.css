@@ -429,3 +429,24 @@ span.numDartsLeft
 {
 	color: #fff;
 }
+
+/* NOUGHTS & CROSSES GAME */
+.targetBoard
+{
+	height: 300px;
+	width: 300px;
+	background-color: #333;
+	float: left;
+	display: inline-block;
+}
+
+.innerTarget
+{
+	width: 100px;
+	height: 100px;
+	border: 2px solid #f7f5fa;
+	float: left;
+	color: #fff;
+	line-height: 100px;
+	font-size: 24px;
+}
