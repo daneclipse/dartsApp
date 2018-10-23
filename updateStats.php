@@ -225,9 +225,10 @@ else if ($game == 'ticTacToe')
 	$targetFour = $_GET['targetFour'];
 	$targetFive = $_GET['targetFive'];
 	$targetSix = $_GET['targetSix'];
+	$average = $_GET['average'];
 	$dartsUsed = $_GET['darts'];
 
-	$insertUser = "INSERT INTO ticTacToe (username, opponent, marker, games, gamesWon, targets, targetOne, targetTwo, targetThree, targetFour, targetFive, targetSix, dartsUsed, game_date) VALUES ('$user_username', '$opponent', '$marker', '$games', '$gamesWon', '$targets', '$targetOne', '$targetTwo', '$targetThree', '$targetFour', '$targetFive', '$targetSix', '$dartsUsed', NOW())";
+	$insertUser = "INSERT INTO ticTacToe (username, opponent, marker, games, gamesWon, targets, targetOne, targetTwo, targetThree, targetFour, targetFive, targetSix, dartsUsed, average, game_date) VALUES ('$user_username', '$opponent', '$marker', '$games', '$gamesWon', '$targets', '$targetOne', '$targetTwo', '$targetThree', '$targetFour', '$targetFive', '$targetSix', '$dartsUsed', '$average', NOW())";
 	$insertQuery = mysqli_query($dbc, $insertUser);
 	$databaseRows = mysqli_affected_rows($dbc);
 	if ($databaseRows > 0) 

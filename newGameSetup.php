@@ -131,7 +131,7 @@ $game = $_GET['game'];
 												if (isset($_GET['games'])) 
 												{
 													$games = $_GET['games'];
-													header('Location: ticTacToe/ticTacToe.php?username='.$user_username.'&opponent='.$oppUsername.'&games='.$games);
+													header('Location: noughts&crosses/noughts&crosses.php?username='.$user_username.'&opponent='.$oppUsername.'&games='.$games);
 												}
 											}
 										}
@@ -754,7 +754,7 @@ ticGame.on('click', function()
 								$('.opponent').append(startButton);
 								startButton.onclick = function()
 								{
-									location.replace('ticTacToe/ticTacToe.php?username=<?=$user_username;?>&guest='+ guestName + '&games=' + gamesSelected);
+									location.replace('noughts&crosses/noughts&crosses.php?username=<?=$user_username;?>&guest='+ guestName + '&games=' + gamesSelected);
 								}
 							}
 							else

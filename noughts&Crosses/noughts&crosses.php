@@ -21,12 +21,12 @@ $games = $_GET['games'];
 <body>
 
 <div class="page">
-<!-- 
+
 		<div class="playerOrder">
 			<p>Top player is 'noughts' and throws first</p>
 			<div class="playersToOrder"></div>
 		</div>
- -->
+
 		<div class="targetBoard">
 			<div class="innerTarget"><p id="targetOne" class="targetText rowOne colOne diagOne"></p></div>
 			<div class="innerTarget"><p id="targetTwo" class="targetText rowOne colTwo"></p></div>
@@ -318,11 +318,7 @@ $games = $_GET['games'];
 	if (opponent != '') 
 	{
 		createPlayer(opponent);
-		$.getScript('../ticTacToe/possibleTargets.js');
-		$.getScript('noughts&crosses.js');
-		players.players[0].marker = 'noughts';
-		players.players[1].marker = 'crosses';
-		// orderSelection();
+		orderSelection();
 	}
 	else if (guest != '') 
 	{
@@ -353,118 +349,116 @@ $games = $_GET['games'];
 
 
 	// FUNCTION TO MOVE AN ITEM IN THE ARRAY TO ANOTHER INDEX
-	// function arraymove(arr, fromIndex, toIndex) 
-	// {
-	//     var element = arr[fromIndex];
-	//     arr.splice(fromIndex, 1);
-	//     arr.splice(toIndex, 0, element);
-	// }
+	function arraymove(arr, fromIndex, toIndex) 
+	{
+	    var element = arr[fromIndex];
+	    arr.splice(fromIndex, 1);
+	    arr.splice(toIndex, 0, element);
+	}
 
-	// function orderSelection()
-	// {
-	// 	$('.ticScoreboard').hide();
-	// 	$('.ticGameBoard').hide();
-	// 	$('#ticButtons').hide();
-	// 	submitOrder.textContent = 'submit order';
-	// 	playerOrder.prepend(submitOrder);
-	// 	for (var i = 0; i < players.players.length; i++) 
-	// 	{
-	// 		createOrder(players.players[i], i);
-	// 	}
-	// 	submitOrder.onclick = function()
-	// 	{
-	// 		var x = confirm('are you happy with the order of throw?');
-	// 		if (x) 
-	// 		{
-	// 			$('.ticScoreboard').show();
-	// 			$('.ticGameBoard').show();
-	// 			$('#ticButtons').show();
-	// 			localStorage.players = JSON.stringify(players.players);
-	// 			players.players[0].marker = 'noughts';
-	// 			players.players[1].marker = 'crosses';
-	// 			playerOrder.remove();
-	// 			$(this).remove();
-	// 			$.getScript('../ticTacToe/possibleTargets.js');
-	// 			$.getScript('noughts&crosses.js');
-	// 		}
-	// 	}
-	// }
+	function orderSelection()
+	{
+		$('.targetBoard').hide();
+		$('.game').hide();
+		submitOrder.textContent = 'submit order';
+		playerOrder.prepend(submitOrder);
+		for (var i = 0; i < players.players.length; i++) 
+		{
+			createOrder(players.players[i], i);
+		}
+		submitOrder.onclick = function()
+		{
+			var x = confirm('are you happy with the order of throw?');
+			if (x) 
+			{
+				$('.targetBoard').show();
+				$('.game').show();
+				localStorage.players = JSON.stringify(players.players);
+				players.players[0].marker = 'noughts';
+				players.players[1].marker = 'crosses';
+				playerOrder.remove();
+				$(this).remove();
+				$.getScript('../ticTacToe/possibleTargets.js');
+				$.getScript('noughts&crosses.js');
+			}
+		}
+	}
 
-	// // FUNCTION TO LISTS PLAYERS WITH OWN SECTION AND BUTTONS
-	// function createOrder( player, index )
-	// {
-	// 	var section = document.createElement('li');
-	// 	var moveUp = document.createElement('button');
-	// 	var moveDown = document.createElement('button');
-	// 	var buttons = document.createElement('div');
-	// 	$(moveUp).addClass('greenButton fa fa-angle-up');
-	// 	$(moveDown).addClass('redButton fa fa-angle-down');
-	// 	$(buttons).addClass('right');
-	// 	section.textContent = player.name;
-	// 	if (index == 0) 
-	// 	{
-	// 		$(buttons).append(moveDown);
-	// 	}
-	// 	else
-	// 	{
-	// 		$(buttons).append(moveUp)
-	// 	}
-	// 	section.append(buttons);
+	// FUNCTION TO LISTS PLAYERS WITH OWN SECTION AND BUTTONS
+	function createOrder( player, index )
+	{
+		var section = document.createElement('li');
+		var moveUp = document.createElement('button');
+		var moveDown = document.createElement('button');
+		var buttons = document.createElement('div');
+		$(moveUp).addClass('greenButton fa fa-angle-up');
+		$(moveDown).addClass('redButton fa fa-angle-down');
+		$(buttons).addClass('right');
+		section.textContent = player.name;
+		if (index == 0) 
+		{
+			$(buttons).append(moveDown);
+		}
+		else
+		{
+			$(buttons).append(moveUp)
+		}
+		section.append(buttons);
 
-	// 	playersToOrder.append(section);
+		playersToOrder.append(section);
 
-	// 	moveUp.onclick = function()
-	// 	{
-	// 		var current = $(this).closest('li');
-	// 		var previous = current.prev('li');
-	// 		if (index > 0) 
-	// 		{
-	// 			newIndex = index - 1;
-	// 		} 
-	// 		else 
-	// 		{
-	// 			newIndex = 0;
-	// 		}
-	// 		arraymove(players.players, index, newIndex );
-	// 		// var index = $(this).index();
-	// 		if (previous.length !== 0) 
-	// 		{
-	// 			current.insertBefore(previous);
-	// 			$(current).children().empty();
-	// 			$(current).children().append(moveDown);
-	// 			$(previous).children().empty();
-	// 			$(previous).children().append(moveUp);
-	// 		}
-	// 		localStorage.players = JSON.stringify(players.players);
-	// 		return false;
-	// 	}
+		moveUp.onclick = function()
+		{
+			var current = $(this).closest('li');
+			var previous = current.prev('li');
+			if (index > 0) 
+			{
+				newIndex = index - 1;
+			} 
+			else 
+			{
+				newIndex = 0;
+			}
+			arraymove(players.players, index, newIndex );
+			// var index = $(this).index();
+			if (previous.length !== 0) 
+			{
+				current.insertBefore(previous);
+				$(current).children().empty();
+				$(current).children().append(moveDown);
+				$(previous).children().empty();
+				$(previous).children().append(moveUp);
+			}
+			localStorage.players = JSON.stringify(players.players);
+			return false;
+		}
 
-	// 	moveDown.onclick = function()
-	// 	{
-	// 		var current = $(this).closest('li');
-	// 		var next = current.next('li');
-	// 		if (index < players.players.length) 
-	// 		{
-	// 			newIndex = index + 1;
-	// 		} 
-	// 		else 
-	// 		{
-	// 			newIndex = players.players.length - 1;
-	// 		}
-	// 		arraymove(players.players, index, newIndex );
-	// 		// var index = $(this).index();
-	// 		if (next.length !== 0) 
-	// 		{
-	// 			current.insertAfter(next);
-	// 			$(current).children().empty();
-	// 			$(current).children().append(moveUp);
-	// 			$(next).children().empty();
-	// 			$(next).children().append(moveDown);
-	// 		}
-	// 		localStorage.players = JSON.stringify(players.players);
-	// 		return false;
-	// 	}
-	// }
+		moveDown.onclick = function()
+		{
+			var current = $(this).closest('li');
+			var next = current.next('li');
+			if (index < players.players.length) 
+			{
+				newIndex = index + 1;
+			} 
+			else 
+			{
+				newIndex = players.players.length - 1;
+			}
+			arraymove(players.players, index, newIndex );
+			// var index = $(this).index();
+			if (next.length !== 0) 
+			{
+				current.insertAfter(next);
+				$(current).children().empty();
+				$(current).children().append(moveUp);
+				$(next).children().empty();
+				$(next).children().append(moveDown);
+			}
+			localStorage.players = JSON.stringify(players.players);
+			return false;
+		}
+	}
   </script>
 
 </body>

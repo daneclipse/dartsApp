@@ -59,6 +59,9 @@ var thirdSection = $('#nandcThird');
 
 newGame();
 var resetButton = $('.reset');
+var completeGameButton = document.createElement('button');
+$(completeGameButton).text('complete game');
+$(completeGameButton).addClass('greenButton');
 
 $(nameSection).text(players.players[0].name + ' - O');
 $(firstSeciton).text('');
@@ -245,9 +248,169 @@ function checkBoard(area, player)
 	{
 		if (second == third && third == first) 
 		{
-			alert(player.name + ', ' + player.marker + ' is the winner');
+			player.gamesWon++;
+			if (player.gamesWon == player.gamesToWin) 
+			{
+				alert(player.name + ', ' + player.marker + ' is the winner');
+				// FUNCTION TO END GAME
+				endGame(player);
+			}
+			else
+			{
+				if (player.marker == 'noughts') 
+				{
+					$('#nought').text(player.gamesWon);
+				}
+				else if (player.marker == 'crosses')
+				{
+					$('#cross').text(player.gamesWon);
+				}
+				newGame();
+			}
+			
 		}
 	}
+}
+
+function endGame(player)
+{
+	$('.targetBoard').hide();
+	$('.game').hide();
+	$('.page').append(player.name + ' won');
+	showStats(player);
+	$('.page').append(completeGameButton);
+	completeGameButton.onclick = function()
+	{
+		// UPDATE STATS & GO BACK TO ACCOUNT
+		updateStats(player);
+		var user_username = location.search.split('?username=')[1];
+		location.replace('../account.php?username=' + user_username);
+	}
+}
+
+// SHOWS GAME STATS OF PLAYER
+function showStats(player)
+{
+	var average = Number((player.targets / player.dartsUsed) * 100);
+	player.average = average;
+	var table = '<table>';
+	table += '<tr><th>Darts Used</th><th>Total Targets</th><th>Targets Hit</th><th>Average</th></tr>';
+	table += '<tr><td>' + player.dartsUsed + '</td>';
+	table += '<td>' + player.targets + '</td>';
+	table += '<td>' + player.targetsHit + '</td>';
+	table += '<td>' + average + '%</tr>';
+	table += '</table>';
+	$('.page').append(table);
+}
+
+// UPDATE STATS
+function updateStats( player )
+{
+	if (players.players.length == 2) 
+	{
+		for (var i = 0; i < players.players.length - 1; i++) 
+		{
+			if (player.name == players.players[i].name) 
+			{
+				// IF PLAYING A GUEST
+				if (window.location.search.includes('guest')) 
+				{
+					// IF PLAYER NAME IS EQUAL TO GUEST NAME IN URL THEN OPPONENT NAME IS THE USERNAME IN URL
+					var checkName = window.location.search.split("&")[1].split("guest=")[1];;
+					if (player.name == checkName) 
+					{
+						var oppName = window.location.search.split("?username=")[1].split('&')[0];
+					}
+					else
+					{
+						var oppName = window.location.search.split("&")[1].split("guest=")[1];;
+					}
+				}
+				// IF PLAYING OPPONENT
+				else if (window.location.search.includes('opponent')) 
+				{
+					// IF PLAYER NAME IS EQUAL TO OPPONENT NAME IN URL THEN OPPONENT IS THE USERNAME IN URL
+					var checkName = window.location.search.split("&")[1].split("opponent=")[1];
+					if (player.name == checkName) 
+					{
+						var oppName = window.location.search.split("?username=")[1].split('&')[0];
+					}
+					else
+					{
+						var oppName = window.location.search.split("&")[1].split("opponent=")[1];
+					}
+				}
+				else if (window.location.search.includes('playerOne'))
+				{
+					if (window.location.search.includes('playerTwo')) 
+					{
+						var checkName = window.location.search.split("&")[1].split("playerTwo=")[1];
+						if (player.name == checkName) 
+						{
+							var oppName = window.location.search.split("&")[1].split("playerOne=")[1];
+						}
+						else
+						{
+							var oppName = window.location.search.split("&")[1].split("playerTwo=")[1];
+						}
+					}
+					else
+					{
+						var oppName = 'no opponent';
+					}
+				}
+			}
+			else
+			{
+				var oppName = players.players[i].name;
+			}
+		}
+	}
+	else
+	{
+		var oppName = 'no opponent';
+	}
+
+	var firstTarget = player.targetsHit[0];
+	var secondTarget = player.targetsHit[1];
+	var thirdTarget = player.targetsHit[2];
+	if (player.targetsHit.length > 2) 
+	{
+		var fourthTarget = player.targetsHit[3];
+		var fifthTarget = player.targetsHit[4];
+		var sixthTarget = player.targetsHit[5];
+	}
+	else
+	{
+		var fourthTarget = '';
+		var fifthTarget = '';
+		var sixthTarget = '';
+	}
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if (this.readyState == 4 && this.status == 200) 
+		{
+			$('#stats').innerHTML = this.responseText;
+		}
+	}
+	xmlhttp.open('GET', '../updateStats.php?name='+player.name+
+		'&game=ticTacToe'+
+		'&marker='+player.marker+
+		'&opponent='+oppName+
+		'&games='+player.gamesToWin+
+		'&gamesWon='+player.gamesWon+
+		'&targets='+player.targets+
+		'&targetOne='+firstTarget+
+		'&targetTwo='+secondTarget+
+		'&targetThree='+thirdTarget+
+		'&targetFour='+fourthTarget+
+		'&targetFive='+fifthTarget+
+		'&targetSix='+sixthTarget+
+		'&darts='+player.dartsUsed+
+		'&average='+player.average, true);
+	xmlhttp.send();
 }
 
 // CHECK ALL POSSIBILITES OF WINNING THE GAME
