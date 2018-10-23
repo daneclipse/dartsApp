@@ -295,6 +295,7 @@ $games = $_GET['games'];
 			marker: '',
 			gamesToWin: Number('<?=$games;?>'),
 			gamesWon: 0,
+			gameOutcome: '',
 			targets: 0,
 			targetsHit: [],
 			dartsUsed: 0,

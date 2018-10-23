@@ -218,6 +218,7 @@ else if ($game == 'ticTacToe')
 	$marker = $_GET['marker'];
 	$games = $_GET['games'];
 	$gamesWon = $_GET['gamesWon'];
+	$outcome = $_GET['outcome'];
 	$targets = $_GET['targets'];
 	$targetOne = $_GET['targetOne'];
 	$targetTwo = $_GET['targetTwo'];
@@ -228,7 +229,7 @@ else if ($game == 'ticTacToe')
 	$average = $_GET['average'];
 	$dartsUsed = $_GET['darts'];
 
-	$insertUser = "INSERT INTO ticTacToe (username, opponent, marker, games, gamesWon, targets, targetOne, targetTwo, targetThree, targetFour, targetFive, targetSix, dartsUsed, average, game_date) VALUES ('$user_username', '$opponent', '$marker', '$games', '$gamesWon', '$targets', '$targetOne', '$targetTwo', '$targetThree', '$targetFour', '$targetFive', '$targetSix', '$dartsUsed', '$average', NOW())";
+	$insertUser = "INSERT INTO ticTacToe (username, opponent, marker, games, gamesWon, gameOutcome, targets, targetOne, targetTwo, targetThree, targetFour, targetFive, targetSix, dartsUsed, average, game_date) VALUES ('$user_username', '$opponent', '$marker', '$games', '$gamesWon', '$outcome', '$targets', '$targetOne', '$targetTwo', '$targetThree', '$targetFour', '$targetFive', '$targetSix', '$dartsUsed', '$average', NOW())";
 	$insertQuery = mysqli_query($dbc, $insertUser);
 	$databaseRows = mysqli_affected_rows($dbc);
 	if ($databaseRows > 0) 

@@ -282,7 +282,10 @@ function endGame(player)
 	completeGameButton.onclick = function()
 	{
 		// UPDATE STATS & GO BACK TO ACCOUNT
-		updateStats(player);
+		for (var i = 0; i < players.players.length; i++) 
+		{
+			updateStats(players.players[i]);
+		}
 		var user_username = location.search.split('?username=')[1];
 		location.replace('../account.php?username=' + user_username);
 	}
@@ -386,6 +389,14 @@ function updateStats( player )
 		var fifthTarget = '';
 		var sixthTarget = '';
 	}
+	if (player.gamesWon == player.gamesToWin) 
+	{
+		player.gameOutcome = 'win';
+	}
+	else
+	{
+		player.gameOutcome = 'lost';
+	}
 	var xmlhttp;
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
@@ -401,6 +412,7 @@ function updateStats( player )
 		'&opponent='+oppName+
 		'&games='+player.gamesToWin+
 		'&gamesWon='+player.gamesWon+
+		'&outcome='+player.gameOutcome+
 		'&targets='+player.targets+
 		'&targetOne='+firstTarget+
 		'&targetTwo='+secondTarget+
