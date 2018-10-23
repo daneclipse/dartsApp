@@ -246,6 +246,7 @@ $games = $_GET['games'];
 			</svg><!-- CLOSE SVG/ DARTBOARD -->
 		</div><!-- CLOSE DIV WITH CLASS BOARD -->
 		<div class="gameButtons" id="nandcButtons">
+			<button class="redButton undo">Undo</button>
 			<button class="greenButton reset">new board</button>
 			<button class="redButton reset">reset</button>
 		</div>
@@ -299,6 +300,7 @@ $games = $_GET['games'];
 			targets: 0,
 			targetsHit: [],
 			dartsUsed: 0,
+			scores: [],
 			dartsMissed: 0,
 			average: 0
 		}

@@ -18,11 +18,9 @@ function newGame()
 			targetsUsed.push(randomTarget);
 			$(sections[i]).text(randomTarget);
 		}
-
 		$(sections[i]).removeClass('greenText');
 		$(sections[i]).removeClass('redText');
 		$(sections[i]).css('font-size', '24px');
-		
 	}
 }
 
@@ -88,6 +86,7 @@ single.on('click', function(e)
 		hit = 'miss';
 		checkDart(currentPlayer, hit);
 	}
+	currentPlayer.scores.push(hit);
 })
 
 double.on('click', function(e)
@@ -108,6 +107,7 @@ double.on('click', function(e)
 		hit = 'miss';
 		checkDart(currentPlayer, hit);
 	}
+	currentPlayer.scores.push(hit);
 })
 
 treble.on('click', function(e)
@@ -124,6 +124,7 @@ treble.on('click', function(e)
 		hit = 'miss';
 		checkDart(currentPlayer, hit);	
 	}
+	currentPlayer.scores.push(hit);
 	
 })
 
@@ -133,6 +134,7 @@ board.on('click', function(e)
 	e.stopPropagation();
 	var hit = 'miss';
 	checkDart(currentPlayer, hit);
+	currentPlayer.scores.push(hit);
 })
 
 resetButton.on('click', function()
@@ -152,6 +154,7 @@ function resetStats(player)
 	player.dartsMissed = 0;
 	player.targets = 0;
 	player.targetsHit = [];
+	player.scores = [];
 }
 
 function checkDart(player, score)
@@ -270,6 +273,106 @@ function checkBoard(area, player)
 			
 		}
 	}
+}
+
+var undo = $('.undo');
+// UNDO FUNCTION WHEN UNDO BUTTON IS CLICKED
+undo.on('click', function()
+{
+	var currentPlayer = players.players[players.current];
+	// IF DART = 0, NEED TO CHANGE THE PLAYER TO PREVIOUS PLAYER & GET THEIR LAST SET OF SCORES
+	if (dart == 0) 
+	{
+		// IF FIRST PLAYER HAS AN ITEM IN THE SCORES ARRAY - MEANING THE GAME HASNT JUST STARTED/ A DART HAS BEEN THROWN
+		if ($(players.players[0].scores).length > 0) 
+		{
+			playerGo();
+			var previousPlayer = players.players[players.current];
+			if (previousPlayer.marker == 'noughts') 
+			{
+				var marker = 'O';
+			}
+			else if (previousPlayer.marker == 'crosses')
+			{
+				var marker = 'X';
+			}
+			$(nameSection).text(previousPlayer.name + ' - ' + marker);
+
+			checkLastDart(previousPlayer);
+
+			var lastThrow = previousPlayer.scores[previousPlayer.scores.length - 1];
+			var secondLastThrow = previousPlayer.scores[previousPlayer.scores.length - 2];
+
+			$(firstSeciton).text(secondLastThrow);
+			$(secondSection).text(lastThrow);
+			$(thirdSection).text('');
+
+			dart = 2;
+		}
+		else
+		{
+			return;
+		}
+	}
+	else if (dart == 1)
+	{
+		checkLastDart(currentPlayer);
+
+		$(firstSeciton).text('');
+		dart = 0;
+	}
+	else if (dart == 2)
+	{
+		checkLastDart(currentPlayer);
+
+		$(secondSection).text('');
+		dart = 1;
+	}
+})
+
+// CHECKS LAST DART TO SEE IF WAS A TARGET ON THE TIC TAC TOE BOARD
+// IF SO - REMOVE MARKER AND REPLACE WITH ORIGINAL TARGET
+// TAKE AWAY CLASSES AND RETURN TO NORMAL FONT SIZE
+// TAKE AWAY TARGET FROM TARGETSHIT ARRAY & TAKE ONE FROM TARGETS
+// IF NOT - TAKE ONE FROM DARTS MISSED
+// TAKE ONE FROM DARTS USED
+// REMOVE LAST SCORE FROM SCORES ARRAY
+function checkLastDart(player)
+{
+	var latestScore = player.scores[player.scores.length - 1];
+	for (var i = 0; i < targetsUsed.length; i++) 
+	{
+		if (latestScore == targetsUsed[i]) 
+		{
+			console.log('target hit, ' + targetsUsed[i]);
+			for (var j = 0; j < sections.length; j++) 
+			{
+				var text = $(sections[j]).text();
+				if ($.inArray(text, targetsUsed) > -1) 
+				{
+					console.log('in array');
+				}
+				else
+				{
+					$(sections[i]).text(targetsUsed[i]);
+					$(sections[i]).removeClass('greenText redText');
+					$(sections[i]).css('font-size', '24px');
+				}
+			}
+			player.targetsHit.pop();
+			player.targets--;
+		}
+		else
+		{
+			console.log('last dart missed');
+		}
+	}
+	if (latestScore == 'miss') 
+	{
+		player.dartsMissed--;
+	}
+	player.dartsUsed--;
+	player.scores.pop();
 }
 
 function endGame(player)
