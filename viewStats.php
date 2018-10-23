@@ -28,6 +28,7 @@ $user_username = $_GET['username'];
                 <a class="viewStatsButton" href="100DartsAt/view100DartsStats.php?username=<?=$user_username;?>">100 Darts Stats</a>
                 <a class="viewStatsButton" href="roundTheWorld/viewWorldStats.php?username=<?=$user_username;?>">Round the world stats</a>
                 <a class="viewStatsButton" href="cricket/viewCricketStats.php?username=<?=$user_username;?>">Cricket stats</a>
+                <a class="viewStatsButton" href="noughts&crosses/viewN&CStats.php?username=<?=$user_username;?>">Tic Tac Toe stats</a>
             </div><!-- CLOSE DIV WITH ID VIEWSTATSBUTTON -->
         </div><!-- CLOSE DIV WITH CLASS PAGE -->
 
