@@ -404,6 +404,7 @@ function createOrder( player, index )
 	$(moveDown).addClass('button redButton fa fa-angle-down');
 	$(buttons).addClass('right');
 	section.textContent = player.name;
+	$(section).css('text-transform', 'uppercase');
 	if (index == 0) 
 	{
 		$(buttons).append(moveDown);

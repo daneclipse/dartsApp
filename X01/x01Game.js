@@ -359,6 +359,7 @@ function legWinner( player )
 	$('.page').append(statsArea);
 	for (var i = 0; i < players.players.length; i++) 
 	{
+		players.players[i].average = Number((players.players[i].totalScored / players.players[i].numDarts).toFixed(2));
 		showLegStats(players.players[i]);
 	}
 	if (player.legsWon == player.legsToWin) 
@@ -574,6 +575,10 @@ function showLegStats(player)
 		if (checkoutPercentStat != 0) 
 		{
 			var doubleHit = player.doubleHit[player.doubleHit.length - 1];
+			if (doubleHit == 25) 
+			{
+				var doubleHit = 'bullseye';
+			}
 		}
 		else
 		{
@@ -796,7 +801,9 @@ undo.on('click', function()
 	if ($(board).is(':hidden')) 
 	{
 		$(board).show();
-		$('.playerBox').show();
+		$('.game').show();
+		$('#checkoutArea').show();
+		$('#friendly').show();
 		$('.statsArea').remove();
 		$('.nextLegButton').remove();
 		$(completeGameButton).remove();
@@ -828,6 +835,7 @@ undo.on('click', function()
 			$(prevPlayer.secondDartSection).text(lastThrow);
 			$(prevPlayer.totalScoredSection).text(prevPlayer.totalScored);
 			$(prevPlayer.targetLeftSection).text(prevPlayer.targetLeft);
+			checkCheckout(2, prevPlayer);
 		}
 		dart = 2;
 		$('.legWonBox')[$('.legWonBox').length - 1].remove();
