@@ -1,4 +1,5 @@
 var numDartsSection = $('.numDartsLeft');
+var targetText = $('.target');
 
 var single = $('.single');
 var double = $('.double');
@@ -7,6 +8,8 @@ var board = $('.board');
 var undo = $('#undoScore');
 var dart = 0;
 var targetNumber = players[0].targetNumber;
+
+$(targetText).text('darts left at ' + targetNumber);
 
 var singlesHitArea = $('#singlesHit');
 var doublesHitArea = $('#doublesHit');
@@ -17,7 +20,7 @@ var dartsMissedArea = $('#dartsMissed');
 
 var completeGameButton = document.createElement('button');
 completeGameButton.textContent = 'complete game';
-$(completeGameButton).addClass('completeGame greenButton');
+$(completeGameButton).addClass('button completeGame greenButton');
 
 var friendly = $('#friendly');
 var wire = $('#refwire');
@@ -224,7 +227,7 @@ undo.on('click', function()
 	if($('.board').is(':hidden'))
 	{
 		$('.board').show();
-		$('.playerBox').show();
+		$('.game').show();
 		$(completeGameButton).remove();
 		var firstScore = player.segments[player.segments.length - 1];
 		$(player.firstDartSection).text(firstScore);
@@ -342,7 +345,7 @@ function undoHit( player )
 // complete game - update stats - go back to account
 function finishGame()
 {
-	$('.playerBox').hide();
+	$('.game').hide();
 	$('.board').hide();
 	$('.page').append(completeGameButton);
 
