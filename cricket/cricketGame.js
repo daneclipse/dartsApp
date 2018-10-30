@@ -399,8 +399,8 @@ function finishGame( player )
 	}
 	var completeGame = document.createElement('button');
 	completeGame.textContent = 'complete game';
-	$(completeGame).addClass('endGameScore');
-	$('.game').append(completeGame);
+	$(completeGame).addClass('button greenButton endGameScore');
+	$('.page').append(completeGame);
 	completeGame.onclick = function()
 	{
 		for (var i = 0; i < players.players.length; i++) 
@@ -423,12 +423,13 @@ function endOfGame(player)
 		player.wickets = 0;
 	}
 	$('.board').hide();
-	$('.scoreboard').hide();
+	$('.game').hide();
+	$('#friendly').hide();
 	players.players[1].inningsScore.push(players.players[1].totalScored);
 	var endGameScore = document.createElement('p');
 	endGameScore.textContent = players.players[1].totalScored + ' for ' + Number(10 - player.wickets);
 	$(endGameScore).addClass('endGameScore');
-	$('.game').append(endGameScore);
+	$('.page').append(endGameScore);
 	var gameOutcome = document.createElement('p');
 	var completeScoring = document.createElement('button');
 	$(gameOutcome).addClass('endGameScore');
@@ -542,8 +543,9 @@ function endOfGame(player)
 	{
 		showStats(players.players[i]);
 	}
-	$(completeScoring).addClass('endGameScore');
-	$('.game').append(completeScoring);
+	$(completeScoring).addClass('button greenButton endGameScore');
+	$(completeScoring).css('margin-top', '100px');
+	$('.page').append(completeScoring);
 	nextInnings(completeScoring);
 }
 
@@ -554,8 +556,10 @@ function showStats(player)
 	$(playerStatsArea).addClass(player.name);
 	var viewLegStats = document.createElement('button');
 	viewLegStats.textContent = 'View ' + player.name + 's leg stats';
+	$(viewLegStats).addClass('button greenButton');
 	var hideStatsButton = document.createElement('button');
 	hideStatsButton.textContent = 'Hide stats';
+	$(hideStatsButton).addClass('button redButton');
 	$(playerStatsArea).append(viewLegStats)
 	$('.game').append(playerStatsArea);
 
@@ -621,7 +625,8 @@ function nextInnings(button)
 			dart = 0;
 		}
 		$('.board').show();
-		$('.scoreboard').show();
+		$('.game').show();
+		$('#friendly').show();
 		$('.playerStatsArea').remove();
 		$(firstSection).text('');
 		$(secondSection).text('');
@@ -793,7 +798,7 @@ undo.on('click', function()
 	if ($('.board').is(':hidden')) 
 	{
 		$('.board').show();
-		$('.scoreboard').show();
+		$('.game').show();
 		$('.endGameScore').remove();
 		if (currentPlayer.playerType == 'bowler') 
 		{
