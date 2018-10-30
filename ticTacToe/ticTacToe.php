@@ -46,6 +46,12 @@ $games = $_GET['games'];
 			<button class="redButton" id="reset">reset</button>
 			<button class="greenButton" id="newBoard">new board</button>
 		</div>
+		<div class="scoreboard" id="nandcPlayerboard">
+			<p class="innerPlayerboard" id="nandcName">adsfads - O</p>
+			<div class="innerPlayerboard" id="nandcFirst"></div>
+			<div class="innerPlayerboard" id="nandcSecond"></div>
+			<div class="innerPlayerboard" id="nandcThird"></div>
+		</div>
 	</div>
 
 	<script

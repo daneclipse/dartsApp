@@ -34,6 +34,7 @@ include('connection.php');
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="../css/general.css">
 	<link rel="stylesheet" type="text/css" href="../css/game.css">
+	<link rel="stylesheet" type="text/css" href="../css/x01.css">
 </head>
 <body>
 <!-- 
@@ -43,13 +44,17 @@ include('connection.php');
 		<a href="../index.php">Home</a>
 	</div> -->
 
-	<div class="page">
+	<div class="page" id="x01Page">
 
 			<div class="playerOrder">
 				<div class="playersToOrder"></div>
 			</div>
 
 			<span class="quitGame">X</span>
+
+			<div class="game" id="x01Game">
+				<p id="checkoutArea">t20 t20 bullseye</p>
+			</div>
 
 			<div class="board" id="board">
 				<svg height="100%" version="1.1" viewBox="-225 -225 450 450" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -250,13 +255,9 @@ include('connection.php');
 				</svg><!-- CLOSE SVG/ DARTBOARD -->
 			</div><!-- CLOSE DIV WITH CLASS BOARD -->
 
-			<div class="game">
-				<div class="gameButtons">
-					<button class="redButton" id="undoScore">undo</button>
-					<button class="greenButton" id="friendly">Friendly</button>
-				</div>
-				<p id="checkoutArea"></p>
-				<p id="stats"></p>
+			<div class="gameButtons">
+				<button class="button redButton" id="undoScore">undo</button>
+				<button class="button greenButton" id="friendly">Friendly</button>
 			</div>
 	</div><!-- CLOSE DIV WITH CLASS PAGE -->
 
@@ -319,7 +320,7 @@ if(user != '')
 var playerOrder = $('.playerOrder');
 var playersToOrder = $('.playersToOrder');
 var submitOrder = document.createElement('button');
-$(submitOrder).addClass('greenButton startGameButton');
+$(submitOrder).addClass('greenButton button');
 
 if (opponent != '') 
 {
@@ -365,9 +366,9 @@ function arraymove(arr, fromIndex, toIndex)
 function orderSelection()
 {
 	$('.board').hide();
-	$('#undoScore').hide();
-	$('#friendly').hide();
-	$('#checkoutArea').hide();
+	$('.game').hide();
+	$('.gameButtons').hide();
+	$('.quitGame').hide();
 	submitOrder.textContent = 'submit order';
 	playerOrder.prepend(submitOrder);
 	for (var i = 0; i < players.players.length; i++) 
@@ -380,8 +381,9 @@ function orderSelection()
 		if (x) 
 		{
 			$('.board').show();
-			$('#undoScore').show();
-			$('#friendly').show();
+			$('.game').show();
+			$('.gameButtons').show();
+			$('.quitGame').show();
 			players.players[0].playerThrow = true;
 			localStorage.players = JSON.stringify(players.players);
 			playerOrder.remove();
@@ -398,8 +400,8 @@ function createOrder( player, index )
 	var moveUp = document.createElement('button');
 	var moveDown = document.createElement('button');
 	var buttons = document.createElement('div');
-	$(moveUp).addClass('greenButton fa fa-angle-up');
-	$(moveDown).addClass('redButton fa fa-angle-down');
+	$(moveUp).addClass('button greenButton fa fa-angle-up');
+	$(moveDown).addClass('button redButton fa fa-angle-down');
 	$(buttons).addClass('right');
 	section.textContent = player.name;
 	if (index == 0) 

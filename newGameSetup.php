@@ -314,8 +314,10 @@ trad.on('click', function()
 	$('.oppOption').on('click', function()
 	{
 		// STOPS USER FROM CLICKING ON TARGET OR LEG BEFORE AN OPPONENT HAS BEEN SELECTED
-		$('.targetOption').off();
-		$('.legsOption').off();
+		$('#targetHeading').show();
+		$('.targetOption').show();
+		$('#legsHeading').show();
+		$('.legsOption').show();
 		$(startButton).remove();
 
 		// IF FORM IS SHOWING, NEED TO REMOVE IT & APPEND TARGET & LEGS DIV
@@ -342,6 +344,10 @@ trad.on('click', function()
 		// IF GUEST SELECTED - ADDS INPUT & BUTTON TO ENTER GUEST NAME
 		else if (oppSelected == 'guest')
 		{
+			$('#targetHeading').hide();
+			$('.targetOption').hide();
+			$('#legsHeading').hide();
+			$('.legsOption').hide();
 			$('.targetOption').css('opacity', '0.2');
 			$('.legsOption').css('opacity', '0.2');
 			$('.oppOption').css('opacity', '0.2');
@@ -349,7 +355,6 @@ trad.on('click', function()
 			$('.opponent').empty();
 			$('.opponent').append(guestInput);
 			$('.opponent').append(confirmInput);
-			
 			confirmInput.onclick = function()
 			{
 				var guestName = $(guestInput).val();
@@ -358,10 +363,10 @@ trad.on('click', function()
 					$(this).remove();
 					$(guestInput).remove();
 					$('.opponent').append('<p id="guestName">' + guestName + '</p>');
-				}
-				else
-				{
-					$('.targetOption').off();
+					$('#targetHeading').show();
+					$('.targetOption').show();
+					$('#legsOption').show();
+					$('.legsOption').show();
 				}
 			}
 		}
@@ -618,7 +623,7 @@ wordlGame.on('click', function()
 	$(sectionTitle).text('choose target');
 	var singleSection = document.createElement('p');
 	$(singleSection).attr({'class' : 'option worldOption', 'data-value' : 'singles'});
-	$(singleSection).text('trebles');
+	$(singleSection).text('singles');
 	var doubleSection = document.createElement('p');
 	$(doubleSection).attr({'class' : 'option worldOption', 'data-value' : 'doubles'});
 	$(doubleSection).text('doubles');

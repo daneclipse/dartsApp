@@ -44,6 +44,18 @@ html, body
 	fill: #eee;
 }
 
+.button
+{
+	font-size: 24px;
+	padding: 10px 20px;
+	color: #fff;
+}
+
+.button:hover
+{
+	cursor: pointer;
+}
+
 .redButton 
 {
 	background-color: #d9534f;

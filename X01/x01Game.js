@@ -106,6 +106,8 @@ if(players.players.length > 1)
 // FUNCITON TO CHECK THE CHECKOUT, IF YOU CAN CHECK IT OUT, SHOWS CHECKOUT IN A BOX & FLASHES SEGMENT TO YOU NEED
 function checkCheckout( dartNum, player )
 {
+	var firstBox = $('.playerBox')[0];
+	$(firstBox).css('margin-top', '0');
 	if (player.targetLeft >= 111 && player.targetLeft <= 170) 
 	{
 		$(checkoutArea).show();
@@ -143,6 +145,7 @@ function checkCheckout( dartNum, player )
 	else
 	{
 		$(checkoutArea).hide();
+		$(firstBox).css('margin-top', '300px');
 	}
 }
 
@@ -340,11 +343,12 @@ $(nextLegButton).addClass('nextLegButton');
 function legWinner( player )
 {
 	alert(player.name + ' won the leg');
-	$(legWonBox).clone().appendTo(player.nameSection);
+	$(legWonBox).clone().appendTo(player.section);
 	player.doublePercent = (1 / player.dartsAtDouble) * 100;
 	$('#checkoutArea').empty();
 	$('#checkoutArea').hide();
 	$('#friendly').hide();
+	$('#undoScore').css('margin-top', '50px');
 	for (var i = 0; i < players.players.length; i++) 
 	{
 		changeOrder(i);
@@ -368,13 +372,15 @@ function legWinner( player )
 	else
 	{
 		$('.page').append(nextLegButton);
+		$(nextLegButton).addClass('button greenButton');
 		$(nextLegButton).on('click', function()
 		{
 			$('.statsArea').empty();
 			$('.statsArea').remove();
 			$('.board').show();
-			$('.playerBox').show();
+			$('.game').show();
 			$('#friendly').show();
+			$('#undoScore').css('margin-top', '0');
 			$(this).remove();
 			for (var i = 0; i < players.players.length; i++) 
 			{
@@ -544,13 +550,15 @@ function gameWinner( player )
 function showLegStats(player)
 {
 	$('.board').hide();
-	$('.playerBox').hide();
+	$('.game').hide();
 	var playerStatsArea = document.createElement('div');
 	$(playerStatsArea).addClass('playerStatsArea');
 	$(playerStatsArea).addClass(player.name);
 	var viewLegStats = document.createElement('button');
 	viewLegStats.textContent = 'View ' + player.name + 's leg stats';
 	var hideStatsButton = document.createElement('button');
+	$(viewLegStats).addClass('button greenButton');
+	$(hideStatsButton).addClass('button redButton');
 	hideStatsButton.textContent = 'Hide stats';
 	$(playerStatsArea).append(viewLegStats)
 	$('.statsArea').append(playerStatsArea);
