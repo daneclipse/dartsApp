@@ -39,7 +39,32 @@ friendly.on('click', function(evt)
 
 var completeGameButton = document.createElement('button');
 completeGameButton.textContent = 'complete game';
-$(completeGameButton).addClass('completeGame greenButton');
+$(completeGameButton).addClass('button greenButton');
+
+
+// CHECK FUNCTION
+function changeColour()
+{
+	var scorecard = $('.inner_half');
+	for (var i = 0; i < scorecard.length; i++) 
+	{	
+		var inner_text = $(scorecard[i]).children().text();
+		var hitArea = $('.' + inner_text).parent();
+		if (inner_text == number) 
+		{
+			$(scorecard[i]).css('opacity', '1');
+			$(scorecard[i]).css('background-color', '#333');
+			$(hitArea).css('background-color', '#333');
+		}
+		else
+		{
+			$(scorecard[i]).css('opacity', '0.2');
+			$(scorecard[i]).css('background-color', '#f7f5fa');
+		}
+	}
+}
+
+changeColour();
 
 
 function markScore(num, numHit, score)
@@ -83,10 +108,10 @@ function markScore(num, numHit, score)
 		}
 		else
 		{
-			console.log('numHit: '+ numHit + ', numberNeeded: ' + number);
+			console.log('numHit: '+ numHit + ', numberNeeded: ' + num);
 			players[0].dartsMissed++;
-			$(missedSection).text(players[0].dartsMissed);
-			players[0].scores.push(0);
+			$('#missed').text(players[0].dartsMissed);
+			players[0].scores.push(score);
 		}
 	}
 	else
@@ -185,8 +210,11 @@ treble.on('click', function(e)
 
 board.on('click', function()
 {
-	players[0].numDarts++;
-	players[0].dartsMissed++;
+	// players[0].numDarts++;
+	// players[0].dartsMissed++;
+	var segmentHit = 0;
+	var score = 0;
+	markScore(number, segmentHit, score);
 })
 
 undo.on('click', function()
@@ -249,6 +277,8 @@ undo.on('click', function()
 		if (players[0].numDarts < 0) 
 		{
 			players[0].numDarts = 0;
+			players[0].dartsMissed = 0;
+			$(missedSection).text(0);
 		}
 		if (players[0].scores[players[0].scores.length - 1] != 0) 
 		{

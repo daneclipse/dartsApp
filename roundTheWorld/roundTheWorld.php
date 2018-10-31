@@ -13,6 +13,7 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="../css/general.css">
 	<link rel="stylesheet" type="text/css" href="../css/game.css">
+	<link rel="stylesheet" type="text/css" href="../css/world.css">
 </head>
 <body>
 
@@ -25,74 +26,91 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 
 	<div class="page" id="worldPage">
 		<span class="quitGame">X</span>
-		<h3>
-			<?php
+		<div class="game" id="worldGame">
+			<h3>
+				<?php
 
-			if ($gameType == 'singles') 
-			{
-				echo 'Hit every single, extra points for doubles & trebles hit<br />';
-				echo '1 point for single, 2 points for double, 3 points for treble';
-			}
-			else if ($gameType == 'doubles')
-			{
-				echo 'Hit every double, minus points for singles & trebles hit<br />';
-				echo '2 points for double, minus 1 for single, minus 3 for treble';
-			}
-			else if ($gameType == 'trebles')
-			{
-				echo 'Hit every treble, minus points for singles & doubles hit<br />';
-				echo '3 points for treble, minus 1 for single, minus 2 for double';
-			}
+				if ($gameType == 'singles') 
+				{
+					echo 'Hit every single, extra points for doubles & trebles hit<br />';
+					echo '1 point for single, 2 points for double, 3 points for treble';
+				}
+				else if ($gameType == 'doubles')
+				{
+					echo 'Hit every double, minus points for singles & trebles hit<br />';
+					echo '2 points for double, minus 1 for single, minus 3 for treble';
+				}
+				else if ($gameType == 'trebles')
+				{
+					echo 'Hit every treble, minus points for singles & doubles hit<br />';
+					echo '3 points for treble, minus 1 for single, minus 2 for double';
+				}
 
-			?>
-		</h3>
-		<br />
-		<div class="scoreboard" id="worldScoreboard">
-			<div class="half numbersNeeded">
-				<div class="inner_half"><p class="regularText">1</p></div>
-				<div class="inner_half"><p class="regularText">2</p></div>
-				<div class="inner_half"><p class="regularText">3</p></div>
-				<div class="inner_half"><p class="regularText">4</p></div>
-				<div class="inner_half"><p class="regularText">5</p></div>
-				<div class="inner_half"><p class="regularText">6</p></div>
-				<div class="inner_half"><p class="regularText">7</p></div>
-				<div class="inner_half"><p class="regularText">8</p></div>
-				<div class="inner_half"><p class="regularText">9</p></div>
-				<div class="inner_half"><p class="regularText">10</p></div>
-				<div class="inner_half"><p class="regularText">11</p></div>
-				<div class="inner_half"><p class="regularText">12</p></div>
-				<div class="inner_half"><p class="regularText">13</p></div>
-				<div class="inner_half"><p class="regularText">14</p></div>
-				<div class="inner_half"><p class="regularText">15</p></div>
-				<div class="inner_half"><p class="regularText">16</p></div>
-				<div class="inner_half"><p class="regularText">17</p></div>
-				<div class="inner_half"><p class="regularText">18</p></div>
-				<div class="inner_half"><p class="regularText">19</p></div>
-				<div class="inner_half"><p class="regularText">20</p></div>
+				?>
+			</h3>
+			<div class="currentTarget">Aim at<p id="aimAt"></p></div>
+			<div class="scoreboard" id="worldScoreboard">
+				<!-- DIV FOR THE FIRST 10 TARGET -->
+				<div class="quarter numbersNeeded">
+					<div class="inner_half"><p class="regularText">1</p></div>
+					<div class="inner_half"><p class="regularText">2</p></div>
+					<div class="inner_half"><p class="regularText">3</p></div>
+					<div class="inner_half"><p class="regularText">4</p></div>
+					<div class="inner_half"><p class="regularText">5</p></div>
+					<div class="inner_half"><p class="regularText">6</p></div>
+					<div class="inner_half"><p class="regularText">7</p></div>
+					<div class="inner_half"><p class="regularText">8</p></div>
+					<div class="inner_half"><p class="regularText">9</p></div>
+					<div class="inner_half"><p class="regularText">10</p></div>
+				</div>
+				<!-- DIV FOR THE FIRST 10 SCORES  -->
+				<div class="quarter numbersHit">
+					<div class="inner_half"><p class="regularText 1"></p></div>
+					<div class="inner_half"><p class="regularText 2"></p></div>
+					<div class="inner_half"><p class="regularText 3"></p></div>
+					<div class="inner_half"><p class="regularText 4"></p></div>
+					<div class="inner_half"><p class="regularText 5"></p></div>
+					<div class="inner_half"><p class="regularText 6"></p></div>
+					<div class="inner_half"><p class="regularText 7"></p></div>
+					<div class="inner_half"><p class="regularText 8"></p></div>
+					<div class="inner_half"><p class="regularText 9"></p></div>
+					<div class="inner_half"><p class="regularText 10"></p></div>
+				</div>
+				<!-- DIV FOR THE SECOND 10 TARGETS -->
+				<div class="quarter numbersNeeded">
+					<div class="inner_half"><p class="regularText">11</p></div>
+					<div class="inner_half"><p class="regularText">12</p></div>
+					<div class="inner_half"><p class="regularText">13</p></div>
+					<div class="inner_half"><p class="regularText">14</p></div>
+					<div class="inner_half"><p class="regularText">15</p></div>
+					<div class="inner_half"><p class="regularText">16</p></div>
+					<div class="inner_half"><p class="regularText">17</p></div>
+					<div class="inner_half"><p class="regularText">18</p></div>
+					<div class="inner_half"><p class="regularText">19</p></div>
+					<div class="inner_half"><p class="regularText">20</p></div>
+				</div>
+				<!-- DIV FOR THE SECOND 10 SCORES -->
+				<div class="quarter numbersHit">
+					<div class="inner_half"><p class="regularText" id="11"></p></div>
+					<div class="inner_half"><p class="regularText" id="12"></p></div>
+					<div class="inner_half"><p class="regularText" id="13"></p></div>
+					<div class="inner_half"><p class="regularText" id="14"></p></div>
+					<div class="inner_half"><p class="regularText" id="15"></p></div>
+					<div class="inner_half"><p class="regularText" id="16"></p></div>
+					<div class="inner_half"><p class="regularText" id="17"></p></div>
+					<div class="inner_half"><p class="regularText" id="18"></p></div>
+					<div class="inner_half"><p class="regularText" id="19"></p></div>
+					<div class="inner_half"><p class="regularText" id="20"></p></div>
+				</div>
+			</div><!-- CLOSE DIV WITH CLASS SCOREBOARD -->
+			<div class="lower_scoreboard">
+				<div class="worldInner_scoreboard">Singles Hit<p class="worldScore" id="gameSingles"></p></div>
+				<div class="worldInner_scoreboard">Doubles Hit<p class="worldScore" id="gameDoubles"></p></div>
+				<div class="worldInner_scoreboard">Trebles Hit<p class="worldScore" id="gameTrebles"></p></div>
+				<div class="worldInner_scoreboard">Game Score<p class="worldScore" id="gameScore"></p></div>
+				<div class="worldInner_scoreboard">Darts Missed<p class="worldScore" id="missed"></p></div>
 			</div>
-			<div class="half numbersHit">
-				<div class="inner_half"><p class="regularText" id="1"></p></div>
-				<div class="inner_half"><p class="regularText" id="2"></p></div>
-				<div class="inner_half"><p class="regularText" id="3"></p></div>
-				<div class="inner_half"><p class="regularText" id="4"></p></div>
-				<div class="inner_half"><p class="regularText" id="5"></p></div>
-				<div class="inner_half"><p class="regularText" id="6"></p></div>
-				<div class="inner_half"><p class="regularText" id="7"></p></div>
-				<div class="inner_half"><p class="regularText" id="8"></p></div>
-				<div class="inner_half"><p class="regularText" id="9"></p></div>
-				<div class="inner_half"><p class="regularText" id="10"></p></div>
-				<div class="inner_half"><p class="regularText" id="11"></p></div>
-				<div class="inner_half"><p class="regularText" id="12"></p></div>
-				<div class="inner_half"><p class="regularText" id="13"></p></div>
-				<div class="inner_half"><p class="regularText" id="14"></p></div>
-				<div class="inner_half"><p class="regularText" id="15"></p></div>
-				<div class="inner_half"><p class="regularText" id="16"></p></div>
-				<div class="inner_half"><p class="regularText" id="17"></p></div>
-				<div class="inner_half"><p class="regularText" id="18"></p></div>
-				<div class="inner_half"><p class="regularText" id="19"></p></div>
-				<div class="inner_half"><p class="regularText" id="20"></p></div>
-			</div>
-		</div><!-- CLOSE DIV WITH CLASS SCOREBOARD -->
+		</div><!-- CLOSE DIV WITH CLASS GAME -->
 		<div class="board" id="board">
 			<svg height="100%" version="1.1" viewBox="-225 -225 450 450" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -291,19 +309,9 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 
 			</svg><!-- CLOSE SVG/ DARTBOARD -->
 		</div><!-- CLOSE DIV WITH CLASS BOARD -->
-		<div class="game" id="worldGame">
-			<div class="gameButtons">
-				<button class="redButton" id="undoScore">undo</button>
-				<button class="greenButton" id="friendly">Friendly</button>
-			</div>
-			<div class="lower_scoreboard">
-				<div class="worldInner_scoreboard">Aim at<p class="worldScore" id="aimAt"></p></div>
-				<div class="worldInner_scoreboard">Singles Hit<p class="worldScore" id="gameSingles"></p></div>
-				<div class="worldInner_scoreboard">Doubles Hit<p class="worldScore" id="gameDoubles"></p></div>
-				<div class="worldInner_scoreboard">Trebles Hit<p class="worldScore" id="gameTrebles"></p></div>
-				<div class="worldInner_scoreboard">Game Score<p class="worldScore" id="gameScore"></p></div>
-				<div class="worldInner_scoreboard">Darts Missed<p class="worldScore" id="missed"></p></div>
-			</div>
+		<div class="gameButtons">
+			<button class="button redButton" id="undoScore">undo</button>
+			<button class="button greenButton" id="friendly">Friendly</button>
 		</div>
 	</div><!-- CLOSE DIV WITH CLASS PAGE -->
 
