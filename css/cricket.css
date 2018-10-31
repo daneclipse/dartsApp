@@ -134,8 +134,28 @@
 	text-transform: uppercase;
 }
 
+.endGameScore
+{
+	margin-top: 20px;
+	clear: both;
+}
 
+/* AREA TO DISPLAY STATS AFTER GAME HAS FINISHED */
+.playerStatsArea
+{
+	margin: 20px 0;
+	text-align: center;
+}
 
+.playerStatsArea h2
+{
+	margin: 10px 0;
+}
+
+.playerStatsArea table
+{
+	margin: 20px auto;
+}
 
 
 

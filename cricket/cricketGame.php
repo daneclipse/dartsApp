@@ -280,7 +280,6 @@ $innings = $_GET['innings'];
 				<button class="button redButton" id="undoScore">undo</button>
 				<button class="button greenButton" id="friendly">Friendly</button>
 			</div>
-		<p id="stats"></p>
 	</div>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

@@ -510,12 +510,14 @@ function endOfGame(player)
 	$('.game').hide();
 	$('#friendly').hide();
 	players.players[1].inningsScore.push(players.players[1].totalScored);
-	var endGameScore = document.createElement('p');
-	endGameScore.textContent = players.players[1].totalScored + ' for ' + Number(10 - player.wickets);
-	$(endGameScore).addClass('endGameScore');
-	$('.page').append(endGameScore);
+	/* PARAGRAPH TO SAY THE SCORE AFTER (120 - 10 FOR EXAMPLE)*/
+	// var endGameScore = document.createElement('p');
+	// endGameScore.textContent = players.players[1].totalScored + ' for ' + Number(10 - player.wickets);
+	// $(endGameScore).addClass('endGameScore');
+	// $('.page').append(endGameScore);
 	var gameOutcome = document.createElement('p');
 	var completeScoring = document.createElement('button');
+	$(completeScoring).addClass('button greenButton endGameScore');
 	$(gameOutcome).addClass('endGameScore');
 	// IF BOTH PLAYERS HAVE BAT & BOWLED - END OF FIRST INNINGS - START NEW INNINGS - POSSIBLY UPDATE STATS FOR EVERY INNINGS? - THEN RESET STATS FOR NEW INNINGS
 	if (players.players[0].bowled == 1 && players.players[0].batted == 1) 
@@ -535,7 +537,7 @@ function endOfGame(player)
 				players.players[1].winMethod = 'runs';
 				players.players[1].difference = '-'+runDifference;
 				$(gameOutcome).text(players.players[0].name + ' won by ' + runDifference + ' runs');
-				$('.game').append(gameOutcome);
+				$('.page').append(gameOutcome);
 				finishGame(players.players[0]);
 			}
 			else if ( firstPlayerScore < secondPlayerScore)
@@ -546,7 +548,7 @@ function endOfGame(player)
 				players.players[0].winMethod = 'runs';
 				players.players[0].difference = '-'+runDifference;
 				$(gameOutcome).text(players.players[1].name + ' won by ' + runDifference + ' runs');
-				$('.game').append(gameOutcome);
+				$('.page').append(gameOutcome);
 				finishGame(players.players[1]);
 			}
 			else
@@ -559,6 +561,7 @@ function endOfGame(player)
 		else
 		{
 			completeScoring.textContent = 'next innings';
+			$('.page').append(completeScoring);
 			$(gameInningsSection).text('Second Innings');
 		}
 
@@ -583,6 +586,7 @@ function endOfGame(player)
 		else 
 		{
 			completeScoring.textContent = 'change order';
+			$('.page').append(completeScoring);
 			$(gameInningsSection).text('Second Innings');
 		}
 	}
@@ -621,15 +625,14 @@ function endOfGame(player)
 	else
 	{
 		completeScoring.textContent = 'change order';
+		$('.page').append(completeScoring);
 	}
 	// ADD BUTTONS TO VIEW STATS OF THE GAME
 	for (var i = 0; i < players.players.length; i++) 
 	{
 		showStats(players.players[i]);
 	}
-	$(completeScoring).addClass('button greenButton endGameScore');
-	$(completeScoring).css('margin-top', '100px');
-	$('.page').append(completeScoring);
+	$('.gameButtons').css('float', 'none');
 	nextInnings(completeScoring);
 }
 
@@ -639,16 +642,16 @@ function showStats(player)
 	$(playerStatsArea).addClass('playerStatsArea');
 	$(playerStatsArea).addClass(player.name);
 	var viewLegStats = document.createElement('button');
-	viewLegStats.textContent = 'View ' + player.name + 's leg stats';
 	$(viewLegStats).addClass('button greenButton');
 	var hideStatsButton = document.createElement('button');
 	hideStatsButton.textContent = 'Hide stats';
 	$(hideStatsButton).addClass('button redButton');
 	$(playerStatsArea).append(viewLegStats)
-	$('.game').append(playerStatsArea);
+	$('.page').append(playerStatsArea);
 
 	if (player.playerType == 'bowler') 
 	{	
+		viewLegStats.textContent = 'Bowlers stats';
 		viewLegStats.onclick =  function()
 		{
 			var bullseye = player.bullseyes;
@@ -664,13 +667,14 @@ function showStats(player)
 			var wicketsTaken = 10 - player.wickets;
 			var runsConceded = players.players[1].totalScored;
 			$('.'+player.name).append(
-				'<h2>'+player.name + ' stats</h2><table><tr><th>Wickets Taken</th><th>Num Darts</th><th>Percentage</th><th>Bullseyes Hit</th><th>Bulleyes %</th><th>Outerbulls Hit</th><th>Outerbulls %</th><th>Runs Conceded</th></tr><tr><td>'+wicketsTaken+'</td><td>'+numDarts+'</td><td>'+average+'</td><td>'+bullseye+'</td><td>'+averageBulls+'</td><td>'+outer+'<td>'+averageOuter+'</td><td>'+runsConceded+'</td></tr></table>');
+				'<h2>Bowler - '+player.name + '</h2><table><tr><th>Wickets Taken</th><th>Num Darts</th><th>Percentage</th><th>Bullseyes Hit</th><th>Bulleyes %</th><th>Outerbulls Hit</th><th>Outerbulls %</th><th>Runs Conceded</th></tr><tr><td>'+wicketsTaken+'</td><td>'+numDarts+'</td><td>'+average+'</td><td>'+bullseye+'</td><td>'+averageBulls+'</td><td>'+outer+'<td>'+averageOuter+'</td><td>'+runsConceded+'</td></tr></table>');
 			$('.'+player.name).append(hideStatsButton);
 			$(this).remove();
 		}
 	}
 	else if (player.playerType == 'batsman') 
 	{
+		viewLegStats.textContent = 'Batsmans stats';
 		viewLegStats.onclick =  function()
 		{
 			var runsScored = player.totalScored;
@@ -683,7 +687,7 @@ function showStats(player)
 			var over = player.O41;
 			var under = player.U41;
 			$('.'+player.name).append(
-				'<h2>'+player.name + ' stats</h2><table><tr><th>Wickets Fallen</th><th>Runs Scored</th><th>Num Darts</th><th>Average Runs Per Dart</th><th>Average Runs Per Wicket</th><th>Over 41</th><th>41 or Under</th></tr><tr><td>'+wicketsFallen+'</td><td>'+runsScored+'</td><td>'+numDarts+'</td><td>'+average+'</td><td>'+averageWicket+'</td><td>'+over+'<td>'+under+'</td></tr></table>');
+				'<h2>Batsman - '+player.name + '</h2><table><tr><th>Wickets Fallen</th><th>Runs Scored</th><th>Num Darts</th><th>Average Runs Per Dart</th><th>Average Runs Per Wicket</th><th>Over 41</th><th>41 or Under</th></tr><tr><td>'+wicketsFallen+'</td><td>'+runsScored+'</td><td>'+numDarts+'</td><td>'+average+'</td><td>'+averageWicket+'</td><td>'+over+'<td>'+under+'</td></tr></table>');
 			$('.'+player.name).append(hideStatsButton);
 			$(this).remove();
 		}
@@ -711,6 +715,7 @@ function nextInnings(button)
 		$('.board').show();
 		$('.game').show();
 		$('#friendly').show();
+		$('.gameButtons').css('float', 'right');
 		$('.playerStatsArea').remove();
 		$(firstSection).text('');
 		$(secondSection).text('');
@@ -731,7 +736,7 @@ function nextInnings(button)
 		$('#gameWickets').text('0');
 		if ($(players.players[1].inningsScore).length != 0 ) 
 		{
-			$(firstInningsSection).text('First Innings Score - ' + players.players[1].inningsScore[0]);
+			$(firstInningsSection).text(players.players[1].inningsScore[0]);
 		}
 		if ($(players.players[0].inningsScore).length == 2) 
 		{
@@ -884,6 +889,7 @@ undo.on('click', function()
 		$('.board').show();
 		$('.game').show();
 		$('.endGameScore').remove();
+		$('.playerStatsArea').remove();
 		if (currentPlayer.playerType == 'bowler') 
 		{
 			currentPlayer.bowled--;
