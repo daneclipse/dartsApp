@@ -122,6 +122,7 @@ function playerGo()
 	$('#playerTypeSection').text(players.players[players.current].playerType);
 };
 
+
 function scoreBatsman( player, score, text )
 {
 	player.currentDarts++;
@@ -130,9 +131,18 @@ function scoreBatsman( player, score, text )
 	{
 		if(checkBully(player, score))
 		{
-			text = 'WICKET!';
-			player.runOuts++;
+			if (score == 25) 
+			{
+				text = 'WICKET!';
+				player.runOuts++;
+			}
+			else if (score == 50)
+			{
+				text = '2 WICKETS!';
+				player.runOuts = player.runOuts + 2;
+			}
 			wicketTaken(player);
+			score = 0;
 		}
 		player.firstDart = score;	
 		player.turnScore = score;
@@ -141,28 +151,48 @@ function scoreBatsman( player, score, text )
 		firstSection.text(text);
 		$(secondSection).text('');
 		$(thirdSection).text('');
+		$(totalSection).text('');
 	}
 	else if (dart == 2)
 	{
 		if(checkBully(player, score))
 		{
-			text = 'WICKET!';
-			player.runOuts++;
+			if (score == 25) 
+			{
+				text = 'WICKET!';
+				player.runOuts++;
+			}
+			else if (score == 50)
+			{
+				text = '2 WICKETS!';
+				player.runOuts = player.runOuts + 2;
+			}
 			wicketTaken(player);
+			score = 0;
 		}
 		player.secondDart = score;
 		player.turnScore = player.turnScore + score;
 		player.scores.push(score);
 		player.textScores.push(text);
 		secondSection.text(text);
+		$(totalSection).text('');
 	}
 	else if (dart == 3)
 	{
 		if(checkBully(player, score))
 		{
-			text = 'WICKET!';
-			player.runOuts++;
+			if (score == 25) 
+			{
+				text = 'WICKET!';
+				player.runOuts++;
+			}
+			else if (score == 50)
+			{
+				text = '2 WICKETS!';
+				player.runOuts = player.runOuts + 2;
+			}
 			wicketTaken(player);
+			score = 0;
 		}
 		player.thirdDart = score;
 		player.turnScore = player.turnScore + score;
@@ -177,7 +207,7 @@ function scoreBatsman( player, score, text )
 			totalSection.text(turnRuns);
 			player.totalScored = player.totalScored + turnRuns;
 			checkScores(player);
-			gameScoreSection.text(player.totalScored + ' - ');
+			gameScoreSection.text(player.totalScored);
 			$('#gameWickets').text(10 - player.wickets);
 			for (var i = 0; i < wicketScoreSection.length; i++) 
 			{
@@ -198,7 +228,7 @@ function scoreBatsman( player, score, text )
 			player.U41++;
 			totalSection.text(turnRuns);
 			player.totalScored = player.totalScored + turnRuns;
-			gameScoreSection.text(player.totalScored + ' - ');
+			gameScoreSection.text(player.totalScored);
 			for (var i = 0; i < wicketScoreSection.length; i++) 
 			{
 				if ($(wicketScoreSection[i]).attr('id') == 11 - player.wickets) 
@@ -211,6 +241,7 @@ function scoreBatsman( player, score, text )
 				}
 			}
 		}
+		player.turnScores.push(turnRuns);
 		dart = 0;
 		playerGo();
 		// $(firstSection).text('');
@@ -245,6 +276,7 @@ function checkBully(player, score)
 	}
 }
 
+var total = 0;
 function scoreBowler( player, score, text, className )
 {
 	player.currentDarts++;
@@ -254,10 +286,12 @@ function scoreBowler( player, score, text, className )
 		if (score == 50) 
 		{
 			text = '2 WICKETS!';
+			var numWicket = 2;
 		}
 		else
 		{
 			text = 'WICKET!';
+			var numWicket = 1;
 		}
 		wicketTaken(player);
 	}
@@ -268,17 +302,17 @@ function scoreBowler( player, score, text, className )
 		player.wides++;
 		players.players[1].runsScored.push(score);
 		players.players[1].totalScored = players.players[1].totalScored + score;
-		$(gameScoreSection).text(players.players[1].totalScored + ' - ');
+		$(gameScoreSection).text(players.players[1].totalScored);
 		var text = 'added ' + score + ' runs';
+		var numWicket = 0;
 	}
 	else
 	{
 		score = 0;
 		text = 'miss';
+		var numWicket = 0;
 		player.dartsMissed++;
 	}
-
-	$(totalSection).text('');
 
 	if (dart == 1) 
 	{
@@ -287,20 +321,70 @@ function scoreBowler( player, score, text, className )
 		firstSection.text(text);
 		$(secondSection).text('');
 		$(thirdSection).text('');
+		total = numWicket;
+		if (total > 0) 
+		{
+			if (total > 1) 
+			{
+				$(totalSection).text(total + ' wickets');
+			}
+			else
+			{
+				$(totalSection).text(total + ' wicket');
+			}
+		}
+		else
+		{
+			$(totalSection).text('0 wickets');
+		}
 	}
 	else if (dart == 2)
 	{
 		player.scores.push(score);
 		player.textScores.push(text);
 		secondSection.text(text);
+		total = total + numWicket;
+		if (total > 0) 
+		{
+			if (total > 1) 
+			{
+				$(totalSection).text(total + ' wickets');
+			}
+			else
+			{
+				$(totalSection).text(total + ' wicket');
+			}
+		}
+		else
+		{
+			$(totalSection).text('0 wickets');
+		}
 	}
 	else if (dart == 3)
 	{
 		player.scores.push(score);
 		player.textScores.push(text);
 		thirdSection.text(text);
+		total = total + numWicket;
+		if (total > 0) 
+		{
+			if (total > 1) 
+			{
+				$(totalSection).text(total + ' wickets');
+			}
+			else
+			{
+				$(totalSection).text(total + ' wicket');
+			}
+		}
+		else
+		{
+			$(totalSection).text('0 wickets');
+		}
+		player.turnScores.push(total + ' wickets');
 		playerGo();
 		dart = 0;
+		total = 0;
 		// $(firstSection).text('');
 		// $(secondSection).text('');
 		// $(thirdSection).text('');
@@ -341,7 +425,7 @@ function wicketTaken(player)
 				$(wicketSection[i - 1]).css('opacity', '0.2');
 			}
 			$(gameWicketsSection).text( 10 - player.wickets );
-			$(gameScoreSection).text(players.players[1].totalScored + ' - ');
+			$(gameScoreSection).text(players.players[1].totalScored);
 		}
 	}
 	// ADD THE TOTAL SCORE WHEN THE WICKET IS TAKEN
@@ -643,7 +727,7 @@ function nextInnings(button)
 		$('.endGameScore').remove();
 		$('#bowlerName').text(players.players[0].name);
 		$('#nameSection').text(players.players[0].name);
-		$(gameScoreSection).text('0 - ');
+		$(gameScoreSection).text('0');
 		$('#gameWickets').text('0');
 		if ($(players.players[1].inningsScore).length != 0 ) 
 		{
@@ -657,7 +741,7 @@ function nextInnings(button)
 		{
 			var totalOppScore = players.players[0].inningsScore[0];
 		}
-		$(oppScoreSection).text(players.players[0].name + ' - ' + totalOppScore);
+		$(oppScoreSection).text(totalOppScore);
 	}
 }
 
@@ -807,6 +891,9 @@ undo.on('click', function()
 			currentPlayer.gamesPlayed--;
 			currentPlayer.gamesWon--;
 			var lastText = currentPlayer.textScores[currentPlayer.textScores.length - 1];
+			var lastTotal = currentPlayer.turnScores[currentPlayer.turnScores.length - 1];
+			total = lastTotal;
+			var lastTook = Number(players.players[0].turnScores[0].split(' ')[0]);
 		}
 		else
 		{
@@ -821,8 +908,10 @@ undo.on('click', function()
 			prevPlayer.totalScored = runs;
 			prevPlayer.runsScored.pop();
 			var lastText = prevPlayer.textScores[prevPlayer.textScores.length - 1];
+			var lastTotal = prevPlayer.turnScores[prevPlayer.turnScores.length - 1];
 		}
 		$(thirdSection).text(lastText);
+		$(totalSection).text(lastTotal);
 		dart = 3;
 	}
 	else
@@ -836,6 +925,8 @@ undo.on('click', function()
 				var lastText = prevPlayer.textScores[prevPlayer.textScores.length - 1];
 				var secondText = prevPlayer.textScores[prevPlayer.textScores.length - 2];
 				var thirdText = prevPlayer.textScores[prevPlayer.textScores.length - 3];
+				var lastTotal = prevPlayer.turnScores[prevPlayer.turnScores.length - 1];
+				$(totalSection).text(lastTotal);
 				$(thirdSection).text(lastText);
 				$(secondSection).text(secondText);
 				$(firstSection).text(thirdText);
@@ -851,6 +942,8 @@ undo.on('click', function()
 						var lastThrow = currentPlayer.scores[currentPlayer.scores.length - 1];
 						var secondLast = currentPlayer.scores[currentPlayer.scores.length - 2];
 						var thirdLast = currentPlayer.scores[currentPlayer.scores.length - 3];
+						currentPlayer.turnScores.pop();
+						$(totalSection).text('');
 						currentPlayer.turnScore = lastThrow + secondLast + thirdLast;
 						undoBatsman(currentPlayer, lastThrow);
 						if (currentPlayer.turnScore > 41)
@@ -881,7 +974,7 @@ undo.on('click', function()
 						currentPlayer.thirdDart = 0;
 						$(thirdSection).text('');
 						currentPlayer.turnScore = secondLast + thirdLast;
-						$('#gameScore').text(currentPlayer.totalScored + ' - ');
+						$('#gameScore').text(currentPlayer.totalScored);
 						$(wicketScoreSection[10 - currentPlayer.wickets]).text('');
 						$(wicketScoreSection[10 - currentPlayer.wickets]).css('opacity', '1');
 						dart = 2;
@@ -913,6 +1006,21 @@ undo.on('click', function()
 						var lastThrow = currentPlayer.scores[currentPlayer.scores.length - 1];
 						var secondLast = currentPlayer.scores[currentPlayer.scores.length - 2];
 						var thirdLast = currentPlayer.scores[currentPlayer.scores.length - 3];
+						var lastTook = Number(players.players[0].turnScores[0].split(' ')[0]);
+						total = lastTook;
+						currentPlayer.turnScores.pop();
+						if (lastTook > 0) 
+						{
+							if (lastThrow == 25) 
+							{
+								total = total - 1;
+							}
+							else if (lastThrow == 50)
+							{
+								total = total - 2;
+							}
+						}
+						$(totalSection).text(total + ' wickets');
 						undoBowler(currentPlayer, lastThrow);
 						currentPlayer.thirdDart = 0;
 						$(thirdSection).text('');
@@ -920,8 +1028,21 @@ undo.on('click', function()
 					}
 					else if (dart == 2)
 					{
+						var lastTook = Number($('#totalSection').text().split(' ')[0]);
 						var lastThrow = currentPlayer.scores[currentPlayer.scores.length - 1];
 						var secondLast = currentPlayer.scores[currentPlayer.scores.length - 2];
+						if (lastTook > 0) 
+						{
+							if (lastThrow == 25) 
+							{
+								total = lastTook - 1;
+							}
+							else if (lastThrow == 50)
+							{
+								total = lastTook - 2;
+							}
+						}
+						$(totalSection).text(total + ' wickets');
 						undoBowler(currentPlayer, lastThrow);
 						currentPlayer.secondDart = 0;
 						$(secondSection).text('');
@@ -930,6 +1051,19 @@ undo.on('click', function()
 					else if (dart == 1)
 					{
 						var lastThrow = currentPlayer.scores[currentPlayer.scores.length - 1];
+						var lastTook = Number($('#totalSection').text().split(' ')[0]);
+						if (lastTook > 0) 
+						{
+							if (lastThrow == 25) 
+							{
+								total = lastTook - 1;
+							}
+							else if (lastThrow == 50)
+							{
+								total = lastTook - 2;
+							}
+						}
+						$(totalSection).text(' ');
 						undoBowler(currentPlayer, lastThrow);
 						currentPlayer.firstDart = 0;
 						$(firstSection).text('');
@@ -976,7 +1110,7 @@ function undoBowler(player, lastThrow)
 		player.trebles--;
 		player.wides--;
 		players.players[1].totalScored = players.players[1].totalScored - score;
-		$('#gameScore').text(players.players[1].totalScored + ' - ');
+		$('#gameScore').text(players.players[1].totalScored);
 	}
 	undoBulls(player, lastThrow);
 }

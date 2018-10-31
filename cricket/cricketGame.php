@@ -38,11 +38,11 @@ $innings = $_GET['innings'];
 		<div class="game">
 
 			<div class="gameScoreboard">
-				<p class="inner_gameScoreboard" id="gameInnings">First Innings</p>
-				<p class="inner_gameScoreboard" id="gameScore">0 - </p>
-				<p class="inner_gameScoreboard" id="gameWickets"> 0</p>
-				<p class="inner_gameScoreboard" id="firstInningsScore"></p>
-				<p class="inner_gameScoreboard" id="oppScore"></p>
+				<h3 class="inner_gameScoreboard" id="gameInnings">First Innings</p>
+				<h3 class="inner_gameScoreboard half_inner">Total <p class="enterScore" id="gameScore"></p></h3>
+				<h3 class="inner_gameScoreboard half_inner">Wickets <p class="enterScore" id="gameWickets"></p></h3>
+				<h3 class="inner_gameScoreboard clear">First Innings <p class="enterScore" id="firstInningsScore"></p></h3>
+				<h3 class="inner_gameScoreboard clear">Opponent Score <p class="enterScore" id="oppScore"></p></h3>
 			</div>
 			<div class="half_scoreboard bowlerArea">
 				<div class="inner_half"><p class="bowlerScore" id="bowlerOne">1</div>
@@ -69,7 +69,8 @@ $innings = $_GET['innings'];
 				<div class="inner_half"><p class="batterScore" id="10"></p></div>
 			</div>
 			<div class="scoreboard" id="cricketScoreboard">
-				<div class="inner_scoreboard"><p id="nameSection"></p><p id="playerTypeSection"></p></div>
+				<div class="inner_scoreboard"><p id="nameSection"></p></div>
+				<div class="inner_scoreboard"><p id="playerTypeSection"></p></div>
 				<div class="inner_scoreboard"><p id="firstSection"></p></div>
 				<div class="inner_scoreboard"><p id="secondSection"></p></div>
 				<div class="inner_scoreboard"><p id="thirdSection"></p></div>
@@ -312,6 +313,7 @@ $innings = $_GET['innings'];
 			textScores: [],
 			runsScored: [],
 			wicketsTaken: [],
+			turnScores: [],
 			O41: 0,
 			U41: 0,
 			outerBulls: 0,
