@@ -65,16 +65,16 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 				</div>
 				<!-- DIV FOR THE FIRST 10 SCORES  -->
 				<div class="quarter numbersHit">
-					<div class="inner_half"><p class="regularText 1"></p></div>
-					<div class="inner_half"><p class="regularText 2"></p></div>
-					<div class="inner_half"><p class="regularText 3"></p></div>
-					<div class="inner_half"><p class="regularText 4"></p></div>
-					<div class="inner_half"><p class="regularText 5"></p></div>
-					<div class="inner_half"><p class="regularText 6"></p></div>
-					<div class="inner_half"><p class="regularText 7"></p></div>
-					<div class="inner_half"><p class="regularText 8"></p></div>
-					<div class="inner_half"><p class="regularText 9"></p></div>
-					<div class="inner_half"><p class="regularText 10"></p></div>
+					<div class="inner_half"><p class="regularText" id="num1"></p></div>
+					<div class="inner_half"><p class="regularText" id="num2"></p></div>
+					<div class="inner_half"><p class="regularText" id="num3"></p></div>
+					<div class="inner_half"><p class="regularText" id="num4"></p></div>
+					<div class="inner_half"><p class="regularText" id="num5"></p></div>
+					<div class="inner_half"><p class="regularText" id="num6"></p></div>
+					<div class="inner_half"><p class="regularText" id="num7"></p></div>
+					<div class="inner_half"><p class="regularText" id="num8"></p></div>
+					<div class="inner_half"><p class="regularText" id="num9"></p></div>
+					<div class="inner_half"><p class="regularText" id="num10"></p></div>
 				</div>
 				<!-- DIV FOR THE SECOND 10 TARGETS -->
 				<div class="quarter numbersNeeded">
@@ -91,16 +91,16 @@ $gameType = $_GET['game']; // single, double, treble etc ..
 				</div>
 				<!-- DIV FOR THE SECOND 10 SCORES -->
 				<div class="quarter numbersHit">
-					<div class="inner_half"><p class="regularText" id="11"></p></div>
-					<div class="inner_half"><p class="regularText" id="12"></p></div>
-					<div class="inner_half"><p class="regularText" id="13"></p></div>
-					<div class="inner_half"><p class="regularText" id="14"></p></div>
-					<div class="inner_half"><p class="regularText" id="15"></p></div>
-					<div class="inner_half"><p class="regularText" id="16"></p></div>
-					<div class="inner_half"><p class="regularText" id="17"></p></div>
-					<div class="inner_half"><p class="regularText" id="18"></p></div>
-					<div class="inner_half"><p class="regularText" id="19"></p></div>
-					<div class="inner_half"><p class="regularText" id="20"></p></div>
+					<div class="inner_half"><p class="regularText" id="num11"></p></div>
+					<div class="inner_half"><p class="regularText" id="num12"></p></div>
+					<div class="inner_half"><p class="regularText" id="num13"></p></div>
+					<div class="inner_half"><p class="regularText" id="num14"></p></div>
+					<div class="inner_half"><p class="regularText" id="num15"></p></div>
+					<div class="inner_half"><p class="regularText" id="num16"></p></div>
+					<div class="inner_half"><p class="regularText" id="num17"></p></div>
+					<div class="inner_half"><p class="regularText" id="num18"></p></div>
+					<div class="inner_half"><p class="regularText" id="num19"></p></div>
+					<div class="inner_half"><p class="regularText" id="num20"></p></div>
 				</div>
 			</div><!-- CLOSE DIV WITH CLASS SCOREBOARD -->
 			<div class="lower_scoreboard">

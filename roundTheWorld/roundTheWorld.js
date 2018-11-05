@@ -43,28 +43,35 @@ $(completeGameButton).addClass('button greenButton');
 
 
 // CHECK FUNCTION
-function changeColour()
+function changeColour(number)
 {
-	var scorecard = $('.inner_half');
-	for (var i = 0; i < scorecard.length; i++) 
-	{	
-		var inner_text = $(scorecard[i]).children().text();
-		var hitArea = $('.' + inner_text).parent();
-		if (inner_text == number) 
-		{
-			$(scorecard[i]).css('opacity', '1');
-			$(scorecard[i]).css('background-color', '#333');
-			$(hitArea).css('background-color', '#333');
+	if (number >= 1)
+	{
+		var scorecard = $('.inner_half');
+		for (var i = 0; i < scorecard.length; i++) 
+		{	
+			var inner_text = Number($(scorecard[i]).children().text());
+			if (inner_text == number)
+			{
+				$(scorecard[i]).css('opacity', '1');
+				$(scorecard[i]).css('background-color', '#333');
+				$(scorecard[i]).css('color', '#fff');
+			}
+			else
+			{
+				$(scorecard[i]).css('background-color', '#f7f5fa');
+				$(scorecard[i]).css('color', '#333');
+				$(scorecard[i]).css('opacity', '0.2');
+			}
 		}
-		else
-		{
-			$(scorecard[i]).css('opacity', '0.2');
-			$(scorecard[i]).css('background-color', '#f7f5fa');
-		}
+	}
+	else
+	{
+		return;
 	}
 }
 
-changeColour();
+changeColour(number);
 
 
 function markScore(num, numHit, score)
@@ -105,6 +112,7 @@ function markScore(num, numHit, score)
 					scoreTrebleGame(score, numHit);
 				}
 			}
+		changeColour(numHit + 1);
 		}
 		else
 		{
@@ -122,7 +130,7 @@ function markScore(num, numHit, score)
 
 function scoreDart(score, numHit)
 {
-	var segment = document.getElementById(numHit);
+	var segment = document.getElementById('num' + numHit);
 	if (score == 'single') 
 	{
 		players[0].singlesHit++;
@@ -282,6 +290,7 @@ undo.on('click', function()
 		}
 		if (players[0].scores[players[0].scores.length - 1] != 0) 
 		{
+			changeColour(number - 1);
 			if (players[0].scores[players[0].scores.length - 1] == 3 || players[0].scores[players[0].scores.length - 1] == -3) 
 			{
 				players[0].treblesHit--;
@@ -342,16 +351,16 @@ function checkUndo(player, num)
 		$(aimSection).text(players[0].targetNum);
 		player.totalScored = 0;
 		$(scoreSection).text(player.totalScored);
-		var segment = document.getElementById(players[0].targetNum);
-		$(segment).empty();
+		var segment = document.getElementById('num' + players[0].targetNum);
+		$(segment).text('');
 	}
 	else
 	{
-		var segment = document.getElementById(players[0].targetNum - 1);
-		$(segment).empty();
 		// player.targetNum = player.targetNum - num;
 		player.targetNum = player.targetNum - 1;
 		number = player.targetNum;
+		var segment = document.getElementById('num' + players[0].targetNum);
+		$(segment).text('');
 		$(aimSection).text(players[0].targetNum);
 		player.totalScored = player.totalScored - num;
 		$(scoreSection).text(players[0].totalScored);

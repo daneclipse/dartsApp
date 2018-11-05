@@ -46,6 +46,11 @@
 	height: 10%;
 }
 
+.regularText
+{
+	height: 100%;
+}
+
 .numbersNeeded
 {
 	border-right: 2px solid black;
