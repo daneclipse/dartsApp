@@ -1109,14 +1109,17 @@ function undoBowler(player, lastThrow)
 	{
 		player.dartsMissed++;
 	}
-	var lastText = player.textScores[player.textScores.length - 1];
-	if (lastText.includes('added')) 
+	if (player.textScores.length > 0) 
 	{
-		var score = Number(lastText.split(' ')[1]);
-		player.trebles--;
-		player.wides--;
-		players.players[1].totalScored = players.players[1].totalScored - score;
-		$('#gameScore').text(players.players[1].totalScored);
+		var lastText = player.textScores[player.textScores.length - 1];
+		if (lastText.includes('added')) 
+		{
+			var score = Number(lastText.split(' ')[1]);
+			player.trebles--;
+			player.wides--;
+			players.players[1].totalScored = players.players[1].totalScored - score;
+			$('#gameScore').text(players.players[1].totalScored);
+		}
 	}
 	undoBulls(player, lastThrow);
 }
@@ -1137,6 +1140,8 @@ function undoBulls(player, lastThrow)
 					{
 						if (i == j) 
 						{
+							$(wicketScoreSection[j]).css('opacity', '1');
+							$(wicketScoreSection[j - 1]).css('opacity', '1');
 							$(wicketScoreSection[j]).text('');
 							$(wicketScoreSection[j - 1]).text('');
 						}
@@ -1144,7 +1149,8 @@ function undoBulls(player, lastThrow)
 				}
 			}
 			player.bullseyes--;
-			player.wickets = player.wickets + 2;
+			players.players[0].wickets = players.players[0].wickets + 2;
+			players.players[1].wickets = players.players[1].wickets + 2;
 		}
 		else
 		{
@@ -1157,18 +1163,21 @@ function undoBulls(player, lastThrow)
 					{
 						if (i == j) 
 						{
+							$(wicketScoreSection[j]).css('opacity', '1');
 							$(wicketScoreSection[j]).text('');
 						}
 					}
 				}
 			}
 			player.outerBulls--;
-			player.wickets++;
+			players.players[0].wickets++;
+			players.players[1].wickets++;
 		}
 	}
 	player.scores.pop();
 	player.textScores.pop();
-	player.wicketsTaken.pop();
+	players.players[0].wicketsTaken.pop();
+	players.players[1].wicketsTaken.pop();
 	$('#gameWickets').text(10 - player.wickets);
 }
 
