@@ -17,14 +17,29 @@ $games = $_GET['games'];
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="../css/general.css">
 	<link rel="stylesheet" type="text/css" href="../css/game.css">
+	<link rel="stylesheet" type="text/css" href="../css/nandc.css">
 </head>
 <body>
 
 <div class="page">
 
-		<div class="playerOrder">
-			<p>Top player is 'noughts' and throws first</p>
-			<div class="playersToOrder"></div>
+	<span class="quitGame">X</span>
+
+	<div class="playerOrder">
+		<p>Top player is 'noughts' and throws first</p>
+		<div class="playersToOrder"></div>
+	</div>
+
+	<div class="gameButtons" id="topButtons">
+		<button class="button redButton reset">reset</button>
+		<button class="button greenButton reset">new board</button>
+	</div>
+
+	<div class="game" id="nandcGame">
+		
+		<div class="ticScoreboard">
+			<p class="half">Noughts<span id="nought"></span></p>
+			<p class="half">Crosses<span id="cross"></span></p>
 		</div>
 
 		<div class="targetBoard">
@@ -39,7 +54,13 @@ $games = $_GET['games'];
 			<div class="innerTarget"><p id="targetNine" class="targetText rowThree colThree diagOne"></p></div>
 		</div>
 
-	<span class="quitGame">X</span>
+		<div class="scoreboard" id="nandcPlayerboard">
+			<div class="innerPlayerboard" id="nandcName"></div>
+			<div class="innerPlayerboard" id="nandcFirst"></div>
+			<div class="innerPlayerboard" id="nandcSecond"></div>
+			<div class="innerPlayerboard" id="nandcThird"></div>
+		</div>
+	</div>
 
 	<div class="board" id="nandcBoard">
 		<svg height="100%" version="1.1" viewBox="-225 -225 450 450" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -239,22 +260,10 @@ $games = $_GET['games'];
 
 		</svg><!-- CLOSE SVG/ DARTBOARD -->
 	</div><!-- CLOSE DIV WITH CLASS BOARD -->
-	<div class="game" id="nandcGame">
-		<div class="ticScoreboard">
-			<div class="half">Noughts<p id="nought"></p></div>
-			<div class="half">Crosses<p id="cross"></p></div>
-		</div>
-		<div class="scoreboard" id="nandcPlayerboard">
-			<div class="innerPlayerboard" id="nandcName"></div>
-			<div class="innerPlayerboard" id="nandcFirst"></div>
-			<div class="innerPlayerboard" id="nandcSecond"></div>
-			<div class="innerPlayerboard" id="nandcThird"></div>
-		</div>
-		<div class="gameButtons" id="nandcButtons">
-			<button class="redButton undo">Undo</button>
-			<button class="greenButton reset">new board</button>
-			<button class="redButton reset">reset</button>
-		</div>
+
+	<div class="gameButtons" id="nandcButtons">
+		<button class="button redButton" id="undoScore">undo</button>
+		<button class="button greenButton" id="friendly">friendly</button>
 	</div>
 </div>
 <script
@@ -315,7 +324,7 @@ $games = $_GET['games'];
 	var playerOrder = $('.playerOrder');
 	var playersToOrder = $('.playersToOrder');
 	var submitOrder = document.createElement('button');
-	$(submitOrder).addClass('greenButton startGameButton');
+	$(submitOrder).addClass('button greenButton');
 
 	if (opponent != '') 
 	{
@@ -362,6 +371,8 @@ $games = $_GET['games'];
 	{
 		$('.targetBoard').hide();
 		$('.game').hide();
+		$('.board').hide();
+		$('.gameButtons').hide();
 		submitOrder.textContent = 'submit order';
 		playerOrder.prepend(submitOrder);
 		for (var i = 0; i < players.players.length; i++) 
@@ -375,6 +386,8 @@ $games = $_GET['games'];
 			{
 				$('.targetBoard').show();
 				$('.game').show();
+				$('.board').show();
+				$('.gameButtons').show();
 				localStorage.players = JSON.stringify(players.players);
 				players.players[0].marker = 'noughts';
 				players.players[1].marker = 'crosses';

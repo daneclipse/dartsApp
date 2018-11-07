@@ -2,6 +2,7 @@ var targetsUsed =[];
 var sections = $('.targetText');
 function newGame()
 {
+	targetsUsed = [];
 	for (var i = 0; i < sections.length; i++) 
 	{
 		var randomTarget = possibleTargets[Math.floor(Math.random()*possibleTargets.length)].target;
@@ -20,7 +21,7 @@ function newGame()
 		}
 		$(sections[i]).removeClass('greenText');
 		$(sections[i]).removeClass('redText');
-		$(sections[i]).css('font-size', '24px');
+		// $(sections[i]).css('font-size', '24px');
 	}
 }
 
@@ -71,22 +72,7 @@ single.on('click', function(e)
 	var currentPlayer = players.players[players.current];
 	e.stopPropagation();
 	var hit = 's' + $(this).attr('data-value');
-	if (hit == 's25') 
-	{
-		hit = 'outerbull';
-	}
-	// CHECK TO SEE IF NUMBER HIT ON DARTBOARD IS IN THE TARGETS USED ARRAY
-	// IF NOT THEN HIT = MISS - AS IT IS NOT ONE OF THE TARGETS ON THE TIC TAC TOE BOARD
-	if ($.inArray(hit, targetsUsed) > -1) 
-	{
-		checkDart(currentPlayer, hit);
-	}
-	else
-	{
-		hit = 'miss';
-		checkDart(currentPlayer, hit);
-	}
-	currentPlayer.scores.push(hit);
+	scoreDart(hit, targetsUsed, currentPlayer);
 })
 
 double.on('click', function(e)
@@ -94,20 +80,7 @@ double.on('click', function(e)
 	var currentPlayer = players.players[players.current];
 	e.stopPropagation();
 	var hit = 'd' + $(this).attr('data-value');
-	if (hit == 'd25') 
-	{
-		hit = 'bull';
-	}
-	if ($.inArray(hit, targetsUsed) > -1) 
-	{
-		checkDart(currentPlayer, hit);
-	}
-	else
-	{
-		hit = 'miss';
-		checkDart(currentPlayer, hit);
-	}
-	currentPlayer.scores.push(hit);
+	scoreDart(hit, targetsUsed, currentPlayer);
 })
 
 treble.on('click', function(e)
@@ -115,18 +88,35 @@ treble.on('click', function(e)
 	var currentPlayer = players.players[players.current];
 	e.stopPropagation();
 	var hit = 't' + $(this).attr('data-value');
-	if ($.inArray(hit, targetsUsed) > -1) 
+	scoreDart(hit, targetsUsed, currentPlayer);
+})
+
+function scoreDart(hit, array, player)
+{
+	if (hit == 'd25') 
 	{
-		checkDart(currentPlayer, hit);
+		hit = 'bull';
+	}
+	else if (hit == 's25') 
+	{
+		hit = 'outerbull';
+	}
+
+	if ($.inArray(hit, array) > -1) 
+	{
+		if ($.inArray(hit, player.targetsHit) > -1) 
+		{
+			hit = 'miss';
+		}
+		checkDart(player, hit);
 	}
 	else
 	{
 		hit = 'miss';
-		checkDart(currentPlayer, hit);	
+		checkDart(player, hit);	
 	}
-	currentPlayer.scores.push(hit);
-	
-})
+	player.scores.push(hit);
+}
 
 board.on('click', function(e)
 {
@@ -222,7 +212,7 @@ function checkArea(player, score)
 					player.targets++;
 					$(sections[i]).text('O');
 					$(sections[i]).addClass('greenText');
-					$(sections[i]).css('font-size', '40px');
+					// $(sections[i]).css('font-size', '40px');
 					checkGame(player);
 				}
 				else if (player.marker == 'crosses')
@@ -231,7 +221,7 @@ function checkArea(player, score)
 					player.targets++;
 					$(sections[i]).text('X');
 					$(sections[i]).addClass('redText');
-					$(sections[i]).css('font-size', '40px');
+					// $(sections[i]).css('font-size', '40px');
 					checkGame(player);
 				}
 			}
@@ -240,7 +230,7 @@ function checkArea(player, score)
 	// NEED TO ADD SOMETHING THAT ADD ONE TO DARTSMISSED IF THE NUMBER HIT ISNT IN THE TIC TAC TOE BOARD
 }
 
-// CHECKS THE BOAD TO SEE IF THERE ARE 3 OF THE SAME MARKER
+// CHECKS THE BOARD TO SEE IF THERE ARE 3 OF THE SAME MARKER
 function checkBoard(area, player)
 {
 	var first = $(area[0]).text();
@@ -275,7 +265,7 @@ function checkBoard(area, player)
 	}
 }
 
-var undo = $('.undo');
+var undo = $('#undoScore');
 // UNDO FUNCTION WHEN UNDO BUTTON IS CLICKED
 undo.on('click', function()
 {
@@ -347,7 +337,7 @@ function checkLastDart(player)
 			console.log('target hit, ' + targetsUsed[i]);
 			for (var j = 0; j < sections.length; j++) 
 			{
-				var text = $(sections[j]).text();
+				var text = $(sections[j]).textContent;
 				if ($.inArray(text, targetsUsed) > -1) 
 				{
 					console.log('in array');
@@ -356,7 +346,6 @@ function checkLastDart(player)
 				{
 					$(sections[i]).text(targetsUsed[i]);
 					$(sections[i]).removeClass('greenText redText');
-					$(sections[i]).css('font-size', '24px');
 				}
 			}
 			player.targetsHit.pop();
