@@ -60,12 +60,29 @@ newGame();
 var resetButton = $('.reset');
 var completeGameButton = document.createElement('button');
 $(completeGameButton).text('complete game');
-$(completeGameButton).addClass('greenButton');
+$(completeGameButton).addClass('button greenButton');
 
 $(nameSection).text(players.players[0].name + ' - O');
+$(nameSection).css('background-color', '#91c46b');
 $(firstSeciton).text('');
 $(secondSection).text('');
 $(thirdSection).text('');
+
+var friendly = $('#friendly');
+var wire = $('#refwire');
+friendly.on('click', function(evt)
+{
+	evt.stopPropagation();
+	if ( $('.board').hasClass('scale') ) 
+	{
+		wire.attr({'y1': '16.20', 'x1': '2.566'});
+	} 
+	else 
+	{
+		wire.attr({'y1': '21.20', 'x1': '3.566'});
+	}
+	$('.board').toggleClass('scale');
+});
 
 single.on('click', function(e)
 {
@@ -123,8 +140,7 @@ board.on('click', function(e)
 	var currentPlayer = players.players[players.current];
 	e.stopPropagation();
 	var hit = 'miss';
-	checkDart(currentPlayer, hit);
-	currentPlayer.scores.push(hit);
+	scoreDart(hit, targetsUsed, currentPlayer);
 })
 
 resetButton.on('click', function()
@@ -186,6 +202,14 @@ function checkDart(player, score)
 		$(firstSeciton).text('');
 		$(secondSection).text('');
 		$(thirdSection).text('');
+		if (newPlayer.marker == 'noughts') 
+		{
+			$(nameSection).css('background-color', '#91c46b');
+		}
+		else if (newPlayer.marker == 'crosses')
+		{
+			$(nameSection).css('background-color', '#d9534f');
+		}
 	}
 
 }
@@ -366,8 +390,9 @@ function checkLastDart(player)
 
 function endGame(player)
 {
-	$('.targetBoard').hide();
+	$('#topButtons').hide();
 	$('.game').hide();
+	$('.board').hide();
 	$('.page').append(player.name + ' won');
 	showStats(player);
 	$('.page').append(completeGameButton);

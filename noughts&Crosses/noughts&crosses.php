@@ -347,14 +347,14 @@ $games = $_GET['games'];
 		else
 		{
 			$(playerOrder).hide();
-			$.getScript('../ticTacToe/possibleTargets.js');
+			$.getScript('possibleTargets.js');
 			$.getScript('noughts&crosses.js');
 		}
 	}
 	else
 	{
 		$(playerOrder).hide();
-		$.getScript('../ticTacToe/possibleTargets.js');
+		$.getScript('possibleTargets.js');
 		$.getScript('noughts&crosses.js');
 	}
 
@@ -393,7 +393,7 @@ $games = $_GET['games'];
 				players.players[1].marker = 'crosses';
 				playerOrder.remove();
 				$(this).remove();
-				$.getScript('../ticTacToe/possibleTargets.js');
+				$.getScript('possibleTargets.js');
 				$.getScript('noughts&crosses.js');
 			}
 		}
