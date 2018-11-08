@@ -1,3 +1,5 @@
+<!-- USED TO BE LOGIN.PHP -->
+
 <?php
 
 include('connection.php');
@@ -9,75 +11,76 @@ include('connection.php');
 <head>
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
 </head>
 <body>
 
-	<div class="navBar">
-		<a href="register.php">Register</a>
-		<a href="login.php">Log in</a>
-		<a href="newGameSetup.php">Quick Game</a>
-	</div><!-- CLOSES DIV WITH CLASS NAVBAR -->
+	<?php 
 
-	<div class="page">
-		<div class="gameOptions">
-			<div class="gameOption">
-				<h2>X01</h2>
-				<p class="gameInfo hidden" id="x01Info">
-					Traditional game of darts. Can select target score, number of players & number of legs.
-				</p>
-				<p class="showGameInfo fa fa-info-circle"></p>
-			</div>
+		if (isset($_POST['submit'])) 
+		{
+			$user_username = $_POST['username'];
+			$user_password = $_POST['password'];
 
-			<div class="gameOption">
-				<h2>100 Darts</h2>
-				<p class="gameInfo hidden" id="x01Info">
-					Choose a target to throw 100 darts at, score the maximum points possible.
-				</p>
-				<p class="showGameInfo fa fa-info-circle"></p>
-			</div>
+			if (!empty($user_username) && !empty($user_password)) 
+			{
+				include('connection.php');
 
-			<div class="gameOption">
-				<h2>Cricket</h2>
-				<p class="gameInfo hidden" id="x01Info">
-					Bowler needs to bowl the batsman out for the lowest score possible. Get a wicket by hitting the bullseye and score runs by scoring over 41.
-				</p>
-				<p class="showGameInfo fa fa-info-circle"></p>
-			</div>
+				$select = "SELECT * FROM users WHERE username='" . $user_username . "'";
+				$selectQuery = mysqli_query($dbc, $select);
+				$selectRows = mysqli_num_rows($selectQuery);
 
-			<div class="gameOption">
-				<h2>Round the world</h2>
-				<p class="gameInfo hidden" id="x01Info">
-					Hit every number on the board in the least darts possible.
-				</p>
-				<p class="showGameInfo fa fa-info-circle"></p>
-			</div>
+				if ($selectRows > 0) 
+				{
+					while ($row = mysqli_fetch_array($selectQuery)) 
+					{
+						$dbPassword = $row['password'];	
+						if ($dbPassword === $user_password) 
+						{
+							header('Location: account.php?username=' . $user_username);
+						}
+						else
+						{
+							echo '<p class="redButton alertMessage">Incorrect password</p>';
+						}
+					}
+				}
+				else
+				{
+					echo '<p class="redButton alertMessage">Invalid username</p>';
+				}
+				
+			}
+			else
+			{
+				header('Location: index.php');
+			}
+		}
 
-			<div class="gameOption">
-				<h2>Tic Tac Toe</h2>
-				<p class="gameInfo hidden" id="x01Info">
-					Game of tic tac toe, using targets on the dartboard.
-				</p>
-				<p class="showGameInfo fa fa-info-circle"></p>
-			</div>
-		</div>
-	</div>
+	?>
+	<div class="form smallForm">
+		<form action="index.php" method="post">
+			<input type="text" name="username" placeholder="Username">
+			<input type="password" name="password" placeholder="Password">
+			<input class="button greenButton" type="submit" name="submit" value="Log in">
+		</form>
+	</div><!-- CLOSES DIV WITH CLASS FORM -->
+	<p><a href="register.php">dont have an account, sign up</a></p>
+	<p><a href="newGameSetup.php">dont want an account, play a quick game</a></p>
 
-			<script
+	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
 <script type="text/javascript">
-
-// var navHeight = $('.navBar').height();
-// $('.navBar').children().css('line-height', navHeight + 'px');
-
-$('.showGameInfo').on('click', function()
-{
-	$($(this).siblings('.gameInfo')[0]).toggleClass('hidden');
-})
+	var alertMessage = $('.alertMessage');
+	$(alertMessage).slideDown(1000, function(){
+		setTimeout(function(){
+			$(alertMessage).slideUp(500)
+		}, 2000);
+	})
 
 </script>
 </body>

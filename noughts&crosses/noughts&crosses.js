@@ -21,6 +21,9 @@ function newGame()
 		}
 		$(sections[i]).removeClass('greenText');
 		$(sections[i]).removeClass('redText');
+		$(firstSeciton).text('');
+		$(secondSection).text('');
+		$(thirdSection).text('');
 		// $(sections[i]).css('font-size', '24px');
 	}
 }
@@ -121,6 +124,7 @@ function scoreDart(hit, array, player)
 
 	if ($.inArray(hit, array) > -1) 
 	{
+		// IF HIT IS IN PLAYER.TARGETSHIT (IF PLAYER HAS ALREADY HIT THIS NUMBER) - HIT = MISS
 		if ($.inArray(hit, player.targetsHit) > -1) 
 		{
 			hit = 'miss';
@@ -232,26 +236,21 @@ function checkArea(player, score)
 			{
 				if (player.marker == 'noughts') 
 				{
-					player.targetsHit.push(text);
-					player.targets++;
 					$(sections[i]).text('O');
 					$(sections[i]).addClass('greenText');
-					// $(sections[i]).css('font-size', '40px');
-					checkGame(player);
 				}
 				else if (player.marker == 'crosses')
 				{
-					player.targetsHit.push(text);
-					player.targets++;
 					$(sections[i]).text('X');
 					$(sections[i]).addClass('redText');
-					// $(sections[i]).css('font-size', '40px');
-					checkGame(player);
 				}
+				// $(sections[i]).css('font-size', '40px');
+				player.targetsHit.push(text);
+				player.targets++;
+				checkGame(player);
 			}
 		}
 	}
-	// NEED TO ADD SOMETHING THAT ADD ONE TO DARTSMISSED IF THE NUMBER HIT ISNT IN THE TIC TAC TOE BOARD
 }
 
 // CHECKS THE BOARD TO SEE IF THERE ARE 3 OF THE SAME MARKER
@@ -412,13 +411,14 @@ function endGame(player)
 function showStats(player)
 {
 	var average = Number((player.targets / player.dartsUsed) * 100);
-	player.average = average;
+	var avg = average.toFixed(2);
+	player.average = avg;
 	var table = '<table>';
 	table += '<tr><th>Darts Used</th><th>Total Targets</th><th>Targets Hit</th><th>Average</th></tr>';
 	table += '<tr><td>' + player.dartsUsed + '</td>';
 	table += '<td>' + player.targets + '</td>';
 	table += '<td>' + player.targetsHit + '</td>';
-	table += '<td>' + average + '%</tr>';
+	table += '<td>' + avg + '%</tr>';
 	table += '</table>';
 	$('.page').append(table);
 }

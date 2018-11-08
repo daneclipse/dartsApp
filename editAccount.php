@@ -31,9 +31,25 @@ if ($dataRows > 0) {
 <body>
 
 	<div class="navBar">
-		<h1 class="accountName"><?= $user_username;?></h1>
-		<a href="account.php?username=<?=$user_username;?>">Back to account</a>
-		<span class="logOutButton"><a href="login.php" >Log out</a></span>
+		<div class="navbar_image icon_clicked" id="user_div">
+			<a href="editAccount.php?username=<?=$user_username;?>">
+				<img src="images/white_icons/user_icon.png" id="user_icon">
+			</a>
+		</div>
+		<p class="logOutButton"><a href="index.php">log out</a></p>
+		<div class="navbar_image">
+			<a href="account.php?username=<?=$user_username;?>">
+				<img src="images/white_icons/home_icon.png">
+			</a>
+		</div>
+		<div class="navbar_image">
+			<a href="newGameSetup.php?username=<?=$user_username;?>">
+				<img src="images/white_icons/game_icon.png">
+			</a>
+		</div>
+		<div class="navbar_image">
+			<img src="images/white_icons/stats_icon.png">
+		</div>
 	</div>
 
 	<div class="page">

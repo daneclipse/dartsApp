@@ -8,11 +8,12 @@
 </head>
 <body>
 
-	<div class="navBar">
+<!-- 	<div class="navBar">
 		<a href="index.php">Home</a>
 		<a href="login.php">Log in</a>
 		<a href="gameSetup.php">Quick Game</a>
-	</div><!-- CLOSES DIV WITH CLASS NAVBAR -->
+	</div> 
+-->
 
 	<div class="page">
 		<?php
@@ -68,15 +69,15 @@
 				}
 			}
 		?>
-		<h1>Register</h1>
 		<div class="form">
 			<form action="register.php" method="post">
 				<input type="text" name="username" placeholder="Username"><br />
 				<input type="email" name="email" placeholder="Email"><br />
 				<input type="password" name="password" placeholder="Password"><br />
-				<input class="submitForm greenButton" type="submit" name="submit" value="Register">
+				<input class="button greenButton" type="submit" name="submit" value="Register">
 			</form>
 		</div><!-- CLOSES DIV WITH CLASS FORM -->
+		<p><a href="index.php">already have an account, log in</a></p>
 	</div><!-- CLOSES DIV WITH CLASS PAGE -->
 
 		<script

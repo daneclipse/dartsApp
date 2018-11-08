@@ -16,7 +16,7 @@ html, body
 	max-width: 1920px;
 	max-height: 1080px;
 	margin: 0 auto;
-	background-color: #f5f7fa;
+	background-color: #333;
 /*	overflow: hidden;*/
 }
 /* DARKER BG - #a4a6a8*/
@@ -25,7 +25,7 @@ html, body
 {
 	width: 100%;
 	height: 100%;
-	padding: 50px;
+	padding: 100px;
 }
 
 /* COLOURS */
@@ -44,11 +44,12 @@ html, body
 	fill: #eee;
 }
 
+/* BUTTONS */
+
 .button
 {
-	font-size: 24px;
-	padding: 10px 20px;
 	color: #fff;
+	text-align: center;
 }
 
 .button:hover
@@ -95,89 +96,60 @@ html, body
 /* NAVIGATION BAR */
 .navBar 
 {
-	width: 100%;
-	background-color: #333;
-	height: 80px;
+	height: 100%;
+	background-color: #000;
+	width: 100px;
+	float: left;
 }
 
-.navBar a 
+.navbar_image
 {
+	width: 100px;
+	height: 100px;
+	padding-top: 20px;
+	background-color: #000;
+}
+
+.navbar_image img
+{
+	width: 60px;
+	height: 60px;
 	color: #fff;
-	height: 100%;
-	width: 33.3%;
-	float: left;
-	text-decoration: none;
-	text-align: center;
-	font-size: 30px;
-	line-height: 80px;
 }
 
-.navBar a:hover 
+/* MAKES USER ICON BIGGER */
+#user_icon
 {
-	background-color: black;
+	height: 100px;
+	width: 100px;
 }
 
-/* WHEN ACCOUNT NAME IS DISPLAYED IN NAVBAR */
-.navBar h1
+#user_div
 {
-	height: 100%;
-	background-color: #f5f7fa;
-	font-size: 50px;
-	line-height: 80px;
-	float: left;
-	text-align: left;
-	padding-left: 20px;
+	padding: 0;
+}
+
+.navbar_image:hover
+{
+	cursor: pointer;
+	background-color: #333;
+}
+
+.icon_clicked
+{
+	background-color: #333;
 }
 
 /* WHEN LOGGED INTO ACCOUNT, CHANGES LOG OUT COLOUR TO RED */
 .logOutButton a
 {
 	color: #d9534f;
+	font-size: 26px;
 }
 
-/* GAME OPTIONS - INDEX.PHP, GAMESETUP.PHP */
-.hidden 
+.logOutButton a:hover
 {
-	visibility: hidden;
-}
-
-.gameOptions 
-{
-	width: 100%;
-	height: 200px;
-	margin: 20px 0;
-}
-
-.gameOption 
-{
-	width: 20%;
-	height: 100%;
-	float: left;
-	text-align: center;
-	background-color: #fff;
-	border: 5px solid #f5f7fa;
-	border-radius: 25px;
-	padding: 10px;
-}
-
-.gameOption h2 
-{
-	height: 50px;
-}
-
-.gameInfo 
-{
-	height: 100px;
-}
-
-.showGameInfo 
-{
-	height: 20px;
-}
-
-.showGameInfo:hover 
-{
-	cursor: pointer;
+	color: #bc2e29;
 }
 
 /* FORM - REGISTER.PHP, LOGIN.PHP */
@@ -187,6 +159,8 @@ html, body
 	background-color: #fff;
 	margin: 50px auto;
 	height: 300px;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
 input 
@@ -194,10 +168,9 @@ input
 	width: 100%;
 	height: 75px;
 	border: none;
-	border-radius: 5px;
 	text-align: left;
 	padding-left: 20px;
-	font-size: 24px;
+	font-size: 30px;
 	line-height: 75px;
 }
 
@@ -207,21 +180,10 @@ input:focus
 	outline: none;
 }
 
-.submitForm 
-{
-	color: #fff;
-	text-align: center;
-}
-
-.submitForm:hover 
-{
-	cursor: pointer;
-	background-color: #719952;
-}
-
 .smallForm
 {
 	height: 225px;
+	margin-top: 200px;
 }
 
 /* ALERT MESSAGE */
@@ -234,6 +196,91 @@ input:focus
 	margin: 20px auto;
 }
 
+/* INDEX.PHP */
+p, a
+{
+	color: #ccc;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
 
+p a:hover
+{
+	cursor: pointer;
+	color: #fff;
+}
+
+/* ACCOUNT.PHP */
+
+.accountName
+{
+	font-size: 40px;
+	text-align: left;
+	color: #fff;
+	margin-left: 100px;
+	margin-bottom: 50px;
+}
+
+.content
+{
+	width: 1500px;
+	height: 750px;
+	background-color: #ccc;
+	border-radius: 10px;
+	margin-left: 50px;
+	overflow: hidden;
+}
+
+.listOfGames
+{
+	height: 100%;
+	width: 200px;
+	background-color: #fff;
+	float: left;
+}
+
+.game
+{
+	height: 20%;
+	width: 100%;
+}
+
+.game p
+{
+	font-size: 60px;
+	line-height: 150px;
+	color: #000;
+}
+
+.game img
+{
+	width: 80px;
+	height: 80px;
+	margin-top: 35px;
+}
+
+.game:hover
+{
+	cursor: pointer;
+	background-color: #ccc;
+}
+
+.game_clicked
+{
+	background-color: #ccc;
+}
+
+.game_info
+{
+	width: 1200px;
+	height: 650px;
+	border: 2px solid white;
+	margin: 50px 250px;
+}
+
+.game_info p
+{
+	color: #000;
+}
 
 
