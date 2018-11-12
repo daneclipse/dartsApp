@@ -13,19 +13,23 @@ html, body
 {
 	height: 100%;
 	width: 100%;
-	max-width: 1920px;
-	max-height: 1080px;
+/*	max-width: 1920px;
+	max-height: 1080px;*/
 	margin: 0 auto;
-	background-color: #333;
-/*	overflow: hidden;*/
+}
+
+a
+{
+	text-decoration: none;
 }
 /* DARKER BG - #a4a6a8*/
 
-.page 
+.page
 {
-	width: 100%;
 	height: 100%;
-	padding: 100px;
+	min-height: 500px;
+	overflow: hidden;
+	background-color: #f7f5fa;
 }
 
 /* COLOURS */
@@ -45,10 +49,10 @@ html, body
 }
 
 /* BUTTONS */
-
 .button
 {
-	color: #fff;
+	color: #eee;
+	font-size: 24px;
 	text-align: center;
 }
 
@@ -93,194 +97,110 @@ html, body
 	transform: scale(1.3);
 }
 
-/* NAVIGATION BAR */
-.navBar 
+/* NAVBAR */
+.navbar
 {
 	height: 100%;
+	width: 200px;
 	background-color: #000;
-	width: 100px;
-	float: left;
-}
-
-.navbar_image
-{
-	width: 100px;
-	height: 100px;
 	padding-top: 20px;
-	background-color: #000;
-}
-
-.navbar_image img
-{
-	width: 60px;
-	height: 60px;
-	color: #fff;
-}
-
-/* MAKES USER ICON BIGGER */
-#user_icon
-{
-	height: 100px;
-	width: 100px;
-}
-
-#user_div
-{
-	padding: 0;
-}
-
-.navbar_image:hover
-{
-	cursor: pointer;
-	background-color: #333;
-}
-
-.icon_clicked
-{
-	background-color: #333;
-}
-
-/* WHEN LOGGED INTO ACCOUNT, CHANGES LOG OUT COLOUR TO RED */
-.logOutButton a
-{
-	color: #d9534f;
-	font-size: 26px;
-}
-
-.logOutButton a:hover
-{
-	color: #bc2e29;
 }
 
 /* FORM - REGISTER.PHP, LOGIN.PHP */
-.form 
+.form
 {
-	width: 500px;
-	background-color: #fff;
+	width: 300px;
+	height: 350px;
 	margin: 50px auto;
-	height: 300px;
-	border-radius: 10px;
-	overflow: hidden;
-}
-
-input 
-{
-	width: 100%;
-	height: 75px;
-	border: none;
-	text-align: left;
-	padding-left: 20px;
-	font-size: 30px;
-	line-height: 75px;
-}
-
-input:focus 
-{
-	background-color: #f5f7fa;
-	outline: none;
 }
 
 .smallForm
 {
-	height: 225px;
-	margin-top: 200px;
+	height: 300px;
+}
+
+.messages
+{
+	height: 50px;
+}
+
+.form_inputs
+{
+	width: 100%;
+	height: 200px;
+	margin-top: 50px;
+}
+
+.smallForm_inputs
+{
+	height: 150px;
+}
+
+.form_inputs input
+{
+	width: 100%;
+	height: 50px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+form input
+{
+	width: 100%;
+	height: 50px;
+	border: 2px solid #f7f5fa;
+	border-radius: 5px;
+}
+
+input
+{
+	font-size: 20px;
+	line-height: 44px;
+}
+
+input:focus
+{
+	outline: none;
+}
+
+/* TEXT AT THE BOTTOM OF THE FORM */
+.form_message a
+{
+	color: #777;
+}
+
+.form_message a:hover
+{
+	color: #000;
 }
 
 /* ALERT MESSAGE */
 .alertMessage
 {
-	width: 800px;
-	padding: 20px;
-	font-size: 40px;
-	color: #fff;
-	margin: 20px auto;
-}
-
-/* INDEX.PHP */
-p, a
-{
-	color: #ccc;
-	text-decoration: none;
-	margin-bottom: 10px;
-}
-
-p a:hover
-{
-	cursor: pointer;
-	color: #fff;
-}
-
-/* ACCOUNT.PHP */
-
-.accountName
-{
-	font-size: 40px;
-	text-align: left;
-	color: #fff;
-	margin-left: 100px;
-	margin-bottom: 50px;
-}
-
-.content
-{
-	width: 1500px;
-	height: 750px;
-	background-color: #ccc;
-	border-radius: 10px;
-	margin-left: 50px;
-	overflow: hidden;
-}
-
-.listOfGames
-{
-	height: 100%;
-	width: 200px;
-	background-color: #fff;
-	float: left;
-}
-
-.game
-{
-	height: 20%;
 	width: 100%;
+	color: #fff;
+	padding: 20px 0;
 }
 
-.game p
-{
-	font-size: 60px;
-	line-height: 150px;
-	color: #000;
-}
 
-.game img
-{
-	width: 80px;
-	height: 80px;
-	margin-top: 35px;
-}
 
-.game:hover
-{
-	cursor: pointer;
-	background-color: #ccc;
-}
 
-.game_clicked
-{
-	background-color: #ccc;
-}
 
-.game_info
-{
-	width: 1200px;
-	height: 650px;
-	border: 2px solid white;
-	margin: 50px 250px;
-}
 
-.game_info p
-{
-	color: #000;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

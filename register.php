@@ -16,68 +16,73 @@
 -->
 
 	<div class="page">
-		<?php
-			if (isset($_POST['submit'])) 
-			{
-				include('connection.php');
-
-				$user_username = $_POST['username'];
-				$email = $_POST['email'];
-				$user_password = $_POST['password'];
-
-				if (!empty($user_username) && !empty($email) && !empty($user_password)) 
-				{
-					$select = "SELECT * FROM users WHERE username='" . $user_username . "'";
-					$selectQuery = mysqli_query($dbc, $select);
-					$selectRows = mysqli_num_rows($selectQuery);
-
-					if ($selectRows > 0) 
+		<div class="form">
+			<div class="messages">
+				<?php
+					if (isset($_POST['submit'])) 
 					{
-						echo '<p class="redButton alertMessage">Username taken</p>';
-					}
-					else
-					{
-						$insert = "INSERT INTO users (username, email, password) VALUES ('$user_username', '$email', '$user_password')";
-						$insertQuery = mysqli_query($dbc, $insert);
-						$result = mysqli_affected_rows($dbc);
+						include('connection.php');
 
-						if ($result > 0) 
+						$user_username = $_POST['username'];
+						$email = $_POST['email'];
+						$user_password = $_POST['password'];
+
+						if (!empty($user_username) && !empty($email) && !empty($user_password)) 
 						{
-							$insertUserStats = "INSERT INTO userStats (username, legsPlayed, legsWon, highestOut, highestScore, totalScored, dartsThrown, average) VALUES ('$user_username', '0', '0', '0', '0', '0', '0', '0')";
-							$insertUserStatsQuery = mysqli_query($dbc, $insertUserStats);
-							$rows = mysqli_affected_rows($dbc);
+							$select = "SELECT * FROM users WHERE username='" . $user_username . "'";
+							$selectQuery = mysqli_query($dbc, $select);
+							$selectRows = mysqli_num_rows($selectQuery);
 
-							if ($rows > 0) 
+							if ($selectRows > 0) 
 							{
-								header('Location: registered.php?username=' . $user_username);
+								echo '<p class="redButton alertMessage">Username taken</p>';
 							}
 							else
 							{
-								echo 'not added to userStats';
+								$insert = "INSERT INTO users (username, email, password) VALUES ('$user_username', '$email', '$user_password')";
+								$insertQuery = mysqli_query($dbc, $insert);
+								$result = mysqli_affected_rows($dbc);
+
+								if ($result > 0) 
+								{
+									$insertUserStats = "INSERT INTO userStats (username, legsPlayed, legsWon, highestOut, highestScore, totalScored, dartsThrown, average) VALUES ('$user_username', '0', '0', '0', '0', '0', '0', '0')";
+									$insertUserStatsQuery = mysqli_query($dbc, $insertUserStats);
+									$rows = mysqli_affected_rows($dbc);
+
+									if ($rows > 0) 
+									{
+										header('Location: registered.php?username=' . $user_username);
+									}
+									else
+									{
+										echo 'not added to userStats';
+									}
+								}
+								else
+								{
+									echo '<p class="redButton alertMessage">System error</p>';
+								}
+								
 							}
 						}
 						else
 						{
-							echo '<p class="redButton alertMessage">System error</p>';
+							echo '<p class="redButton alertMessage">Fill out all fields</p>';
 						}
-						
 					}
-				}
-				else
-				{
-					echo '<p class="redButton alertMessage">Fill out all fields</p>';
-				}
-			}
-		?>
-		<div class="form">
+				?>
+			</div>
 			<form action="register.php" method="post">
-				<input type="text" name="username" placeholder="Username"><br />
-				<input type="email" name="email" placeholder="Email"><br />
-				<input type="password" name="password" placeholder="Password"><br />
+				<div class="form_inputs">	
+					<input type="text" name="username" placeholder="Username">
+					<input type="email" name="email" placeholder="Email">
+					<input type="password" name="password" placeholder="Password">
+				</div>
 				<input class="button greenButton" type="submit" name="submit" value="Register">
 			</form>
 		</div><!-- CLOSES DIV WITH CLASS FORM -->
-		<p><a href="index.php">already have an account, log in</a></p>
+		<p class="form_message"><a href="index.php">already have an account? login here</a></p>
+
 	</div><!-- CLOSES DIV WITH CLASS PAGE -->
 
 		<script

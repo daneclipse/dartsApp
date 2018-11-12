@@ -21,133 +21,78 @@ if ($numRows <= 0)
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link rel="stylesheet" type="text/css" href="css/account.css">
 </head>
 <body>
 
-
-<!-- <div class="navBar">
-	<div class="accountName">
-		<h1><?= $user_username;?></h1>
-		<span class="logOutButton"><a href="index.php">Log out</a></span>
-	</div>
-	<a href="editAccount.php?username=<?=$user_username;?>">Edit account details</a>
-	<p id="gamesButton">Start a game</p>
-	<div class="listOfGames hide">
-		<a href="newGameSetup.php?username=<?=$user_username;?>">X01</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Cricket</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">100 Darts</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Round the world</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Tic Tac Toe</a>
-	</div>
-
-	<p id="statsButton">View Stats</p>
-	<div class="listOfStats hide">
-		<a href="X01/viewX01Stats.php?username=<?=$user_username;?>">X01</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Cricket</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">100 Darts</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Round the world</a>
-		<a href="newGameSetup.php?username=<?=$user_username;?>">Tic Tac Toe</a>
-	</div>
-</div> 
-
-
-<div class="page">
-	<div class="gameOptions">
-		<div class="gameOption">
-			<h2>X01</h2>
-			<p class="gameInfo hidden" id="x01Info">
-				Traditional game of darts. Can select target score, number of players & number of legs.
-			</p>
-			<p class="showGameInfo fa fa-info-circle"></p>
-		</div>
-
-		<div class="gameOption">
-			<h2>100 Darts</h2>
-			<p class="gameInfo hidden" id="x01Info">
-				Choose a target to throw 100 darts at, score the maximum points possible.
-			</p>
-			<p class="showGameInfo fa fa-info-circle"></p>
-		</div>
-
-		<div class="gameOption">
-			<h2>Cricket</h2>
-			<p class="gameInfo hidden" id="x01Info">
-				Bowler needs to bowl the batsman out for the lowest score possible. Get a wicket by hitting the bullseye and score runs by scoring over 41.
-			</p>
-			<p class="showGameInfo fa fa-info-circle"></p>
-		</div>
-
-		<div class="gameOption">
-			<h2>Round the world</h2>
-			<p class="gameInfo hidden" id="x01Info">
-				Hit every number on the board in the least darts possible.
-			</p>
-			<p class="showGameInfo fa fa-info-circle"></p>
-		</div>
-
-		<div class="gameOption">
-			<h2>Tic Tac Toe</h2>
-			<p class="gameInfo hidden" id="x01Info">
-				Game of tic tac toe, using targets on the dartboard.
-			</p>
-			<p class="showGameInfo fa fa-info-circle"></p>
-		</div>
-	</div>
-</div> -->
-
-<div class="navBar">
-	<div class="navbar_image" id="user_div">
-		<a href="editAccount.php?username=<?=$user_username;?>">
-			<img src="images/white_icons/user_icon.png" id="user_icon">
-		</a>
-	</div>
-	<p class="logOutButton"><a href="index.php">log out</a></p>
-	<div class="navbar_image icon_clicked">
-		<a href="account.php?username=<?=$user_username;?>">
-			<img src="images/white_icons/home_icon.png">
-		</a>
-	</div>
-	<div class="navbar_image">
-		<a href="newGameSetup.php?username=<?=$user_username;?>">
-			<img src="images/white_icons/game_icon.png">
-		</a>
-	</div>
-	<div class="navbar_image">
-		<img src="images/white_icons/stats_icon.png">
-	</div>
-</div>
-
-<div class="page">
-	<h1 class="accountName">Welcome, <?=$user_username;?></h1>
-	<div class="content">
-		<div class="listOfGames">
-			<div class="game game_clicked" id="trad">
-				<p>X01</p>
-			</div>
-			<div class="game" id="cricket">
-				<img src="images/cricket_icon.png">
-			</div>
-			<div class="game" id="rtw">
-				<img src="images/rtw_icon.png">
-			</div>
-			<div class="game" id="nandc">
-				<img src="images/nandc_icon.png">
-			</div>
-			<div class="game" id="darts">
-				<img src="images/dart_icon.png">
-			</div>
-		</div>
-		<div class="game_info">
-			<div class="game_text">
-				<h2>X01</h2>
-				<p>X01 is a traditional game of darts, where the first person to hit the target possible, ending on a double, wins the game.</p>
-			</div>
-			<a href="gameSetup.php?username=<?=$user_username;?>" class="button greenButton">start game</a>
+	<div class="page">
+		<div class="user_area">
+			<h2><?=$user_username;?></h2>
+			<p>Logout</p>
 		</div>
 		
+		<div class="account_areas">
+			<div class="game_names">
+				<div class="game_name game_selected" id="x01">
+					<p>X01</p>
+				</div>
+				<div class="game_name" id="cricket">
+					<p>Cricket</p>				
+				</div>
+				<div class="game_name" id="hundred">
+					<p>100 Darts</p>			
+				</div>
+				<div class="game_name" id="nandc">
+					<p>Noughts & Crosses</p>		
+				</div>
+				<div class="game_name" id="rtw">
+					<p>Round the world</p>	
+				</div>
+			</div>
+			<div class="game_info">
+				<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>
+			</div>
+		</div>
+		<div class="account_areas" id="user_stats">
+			<div class="user_stats" id="x01_stats">
+				<h2>X01 title</h2>
+				<?php
+					$stats = "SELECT * FROM userStats WHERE username = '$user_username'";
+					$stats_query = mysqli_query($dbc, $stats);
+					$numRows = mysqli_num_rows($stats_query);
+					if ($numRows > 0) 
+					{
+						while($row = mysqli_fetch_array($stats_query))
+						{
+							$legsPlayed = $row['legsPlayed'];
+							$legsWon = $row['legsWon'];
+						}
+						echo '<table><tr><th>Legs Played</th><th>Legs Won</th></tr><tr><td>' . $legsPlayed . '</td><td>' . $legsWon . '</td></tr></table>';
+					}
+					else
+					{
+						echo 'no stats';
+					}
+				?>
+			</div>
+			<div class="user_stats" id="cricket_stats">
+				<h2>Cricket title</h2>
+				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>0</td><td>0</td></tr></table>
+			</div>
+			<div class="user_stats" id="hundred_stats">
+				<h2>100 Darts title</h2>
+				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>1</td><td>1</td></tr></table>
+			</div>
+			<div class="user_stats" id="nandc_stats">
+				<h2>Noughts & crosses title</h2>
+				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>15</td><td>3</td></tr></table>
+			</div>
+			<div class="user_stats" id="rtw_stats">
+				<h2>RTW title</h2>
+				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>50</td><td>32</td></tr></table>
+			</div>
+		</div>
 	</div>
-</div>
-
 
 
 <script
@@ -155,63 +100,41 @@ if ($numRows <= 0)
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script type="text/javascript">
-  	var nav_icons = $('.navbar_image');
-  	$(nav_icons).on('click', function()
+  	var gameTabs = $('.game_name');
+  	gameTabs.on('click', function()
   	{
-  		for (var i = 0; i < icons.length; i++) 
+  		for (var i = 0; i < gameTabs.length; i++) 
   		{
-  			if ($(nav_icons[i]).hasClass('icon_clicked')) 
+  			$(gameTabs).removeClass('game_selected');
+  			$(this).addClass('game_selected');
+  			if ($(this).attr('id') == 'x01') 
   			{
-  				$(nav_icons[i]).removeClass('icon_clicked');
+  				$('.game_info').html(x01_info);
+  			}
+  			else
+  			{
+  				$('.game_info').empty();
   			}
   		}
-  		$(this).addClass('icon_clicked');
   	})
 
-  	var game_icons = $('.game');
-  	$(game_icons).on('click', function()
+  	var x01_info = '<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>';
+  	var myIndex = 0;
+  	function carousel() 
   	{
-  		for (var i = 0; i < game_icons.length; i++) 
-  		{
-  			if ($(game_icons[i]).hasClass('game_clicked')) 
-  			{
-  				$(game_icons[i]).removeClass('game_clicked');
-  			}
-  		}
-  		$(this).addClass('game_clicked');
-  		var id = $(this).attr('id');
-  		if (id == 'trad') 
-  		{
-	  		$('.game_text').html(traditional);
-	  	}
-	  	else if (id == 'cricket')
-	  	{
-	  		$('.game_text').html(cricket);
-	  	}
-	  	else if (id == 'rtw')
-	  	{
-	  		$('.game_text').html(rtw);
-	  	}
-	  	else if (id == 'nandc')
-	  	{
-	  		$('.game_text').html(nandc);
-	  	}
-	  	else if (id == 'darts')
-	  	{
-	  		$('.game_text').html(darts)
-	  	}
-	  	else
-	  	{
-	  		$('.game_text').empty();
-	  	}
-  	})
+	    var x = $('.user_stats');
+	    for (var i = 0; i < x.length; i++) 
+	    {
+	       x[i].style.display = "none";  
+	    }
+	    myIndex++;
+	    if (myIndex > x.length) {myIndex = 1}    
+	    x[myIndex-1].style.display = "block";  
+	    setTimeout(carousel, 5000); // Change image every 5 seconds
+	}
 
-  	var traditional = '<h2>X01</h2><p>X01 is a traditional game of darts, where the first person to hit the target possible, ending on a double, wins the game.</p>';
-  	var cricket = '<h2>Cricket</h2><p>Cricket is a game between two players, one bowler, one batsman. The bowler has to hit 10 bullseye to bowl the batsman out. The batsman scores runs for every score over 41.</p>';
-  	var rtw = '<h2>Round the world</h2><p>Round the world is a single player game, where the player needs to hit every section of the dart board, in the fewest darts possible.</p>';
-  	var nandc = '<h2>Tic tac toe</h2><p>Typical game of tic tac toe, but to get a marker on the board you have to hit designated targets on the dartboard.<p>';
-  	var darts = '<h2>100 Darts</h2><p>Single player game, where the player chooses a target and has 100 darts to throw, scoring as high as possible.</p>';
-
+	carousel();
+ 
   </script>
 </body>
 </html>

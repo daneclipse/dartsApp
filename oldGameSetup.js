@@ -18,6 +18,7 @@ $(confirmInput).addClass('greenButton setupButton');
 var form = document.createElement('form');
 $(form).addClass('form');
 var inputName = document.createElement('input');
+var inputPassword = document.createElement('input');
 var submitInput = document.createElement('input');
 $(form).attr({
 	'class': 'form',
