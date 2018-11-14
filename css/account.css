@@ -1,3 +1,4 @@
+/* AREA TO DISPLAY USER ICON, NAME & LOGOUT BUTTON */
 .user_area
 {
     height: 150px;
@@ -5,6 +6,22 @@
     float: right;
 }
 
+.user_area a img
+{
+    height: 80px;
+}
+
+.user_area h2
+{
+    height: 30px;
+}
+
+.user_area a
+{
+    font-size: 14px;
+}
+
+/* AREAS TO DISPLAY GAME INFO & STATS */
 .account_areas
 {
     width: 80%;
@@ -45,6 +62,20 @@
     height: 250px;
     margin: 0 auto;
     margin-top: 20px;
+}
+
+.game_info p
+{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.game_info a
+{
+    float: right;
+    border-radius: 10px;
 }
 
 /* AREA/ TABLE TO CYCLE THROUGH OVERALL STATS FOR EACH GAME */

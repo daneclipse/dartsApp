@@ -1,0 +1,36 @@
+.game_setup
+{
+	width: 80%;
+	height: 500px;
+	margin: 0 auto;
+}
+
+.setup_option
+{
+	height: 100%;
+	width: 30%;
+	margin: 0 1.6%;
+	float: left;
+}
+
+.option
+{
+	width: 100%;
+	background-color: #fff;
+	border-radius: 10px;
+	font-size: 24px;
+	padding: 20px 0;
+	margin-top: 10px;
+}
+
+#opp_login
+{
+	font-size: 24px;
+	padding: 20px 0;
+	margin-top: 10px;
+}
+
+.opp_input
+{
+	padding-left: 10px;
+}

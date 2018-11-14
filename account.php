@@ -27,8 +27,9 @@ if ($numRows <= 0)
 
 	<div class="page">
 		<div class="user_area">
+			<a href="editAccount.php?username=<?=$user_username;?>"><img src="images/user_icon.png"></a>
 			<h2><?=$user_username;?></h2>
-			<p>Logout</p>
+			<a class="logOutButton" href="index.php">Logout</a>
 		</div>
 		
 		<!-- AREA TO SHOW INFORMATION ABOUT EACH GAME -->
@@ -51,8 +52,10 @@ if ($numRows <= 0)
 				</div>
 			</div>
 			<div class="game_info">
-				<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>
-				<a class="button greenButton" href="newGameSetup.php?username=<?=$user_username;?>&game=x01">start game</a>
+				<p>
+					Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.
+				</p>
+				<a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=x01">start game</a>
 			</div>
 		</div>
 		<!-- AREA THAT CYCLES THROUGH THE USERS STATS -->
@@ -120,9 +123,26 @@ if ($numRows <= 0)
   		{
   			$(gameTabs).removeClass('game_selected');
   			$(this).addClass('game_selected');
-  			if ($(this).attr('id') == 'x01') 
+  			var id = $(this).attr('id');
+  			if (id == 'x01') 
   			{
   				$('.game_info').html(x01_info);
+  			}
+  			else if (id == 'cricket')
+  			{
+  				$('.game_info').html(cricket_info);
+  			}
+  			else if (id == 'hundred')
+  			{
+  				$('.game_info').html(hundred_info);
+  			}
+  			else if (id == 'nandc')
+  			{
+  				$('.game_info').html(nandc_info);
+  			}
+  			else if (id == 'rtw')
+  			{
+  				$('.game_info').html(rtw_info);
   			}
   			else
   			{
@@ -131,8 +151,12 @@ if ($numRows <= 0)
   		}
   	})
 
-  	var x01_info = '<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>';
- //  	var myIndex = 0;
+  	var x01_info = '<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p><a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=x01">start game</a>';
+ 	var cricket_info = '<p>CRICKET INFO</p><a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=cricket">start game</a>';
+ 	var hundred_info = '<p>HUNDRED DARTS INFO.</p><a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=hundred">start game</a>';
+ 	var nandc_info = '<p>NOUGHTS & CROSSES INFO.</p><a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=nandc">start game</a>';
+	var rtw_info = '<p>ROUND THE WORLD INFO.</p><a class="button greenButton" href="gameSetup.php?username=<?=$user_username;?>&game=rtw">start game</a>';
+  	var myIndex = 0;
  //  	function carousel() 
  //  	{
 	//     var x = $('.user_stats');

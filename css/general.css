@@ -32,6 +32,11 @@ a
 	background-color: #f7f5fa;
 }
 
+.opaque
+{
+	opacity: 0.2;
+}
+
 /* COLOURS */
 .green 
 {
@@ -54,6 +59,7 @@ a
 	color: #eee;
 	font-size: 24px;
 	text-align: center;
+	padding: 10px 20px;
 }
 
 .button:hover
@@ -79,6 +85,17 @@ a
 .greenButton:hover
 {
 	background-color: #6ca441;
+}
+
+.logOutButton
+{
+	color: #d9534f;
+}
+
+.logOutButton:hover
+{
+	cursor: pointer;
+	color: #bc2e29;
 }
 
 /* FRIENDLY OPTION */
@@ -140,22 +157,17 @@ a
 {
 	width: 100%;
 	height: 50px;
-	text-align: left;
-	padding-left: 10px;
-}
-
-form input
-{
-	width: 100%;
-	height: 50px;
-	border: 2px solid #f7f5fa;
-	border-radius: 5px;
+	font-size: 20px;
+	line-height: 44px;
 }
 
 input
 {
-	font-size: 20px;
-	line-height: 44px;
+	width: 100%;
+	border: 2px solid #f7f5fa;
+	border-radius: 5px;
+	text-align: left;
+	padding-left: 10px;
 }
 
 input:focus
