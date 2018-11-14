@@ -31,6 +31,7 @@ if ($numRows <= 0)
 			<p>Logout</p>
 		</div>
 		
+		<!-- AREA TO SHOW INFORMATION ABOUT EACH GAME -->
 		<div class="account_areas">
 			<div class="game_names">
 				<div class="game_name game_selected" id="x01">
@@ -51,8 +52,10 @@ if ($numRows <= 0)
 			</div>
 			<div class="game_info">
 				<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>
+				<a class="button greenButton" href="newGameSetup.php?username=<?=$user_username;?>&game=x01">start game</a>
 			</div>
 		</div>
+		<!-- AREA THAT CYCLES THROUGH THE USERS STATS -->
 		<div class="account_areas" id="user_stats">
 			<div class="user_stats" id="x01_stats">
 				<h2>X01 title</h2>
@@ -67,7 +70,17 @@ if ($numRows <= 0)
 							$legsPlayed = $row['legsPlayed'];
 							$legsWon = $row['legsWon'];
 						}
-						echo '<table><tr><th>Legs Played</th><th>Legs Won</th></tr><tr><td>' . $legsPlayed . '</td><td>' . $legsWon . '</td></tr></table>';
+						$average = ($legsWon / $legsPlayed) * 100;
+						$winAverage = round($average, 2);
+						echo 
+						'<table>
+							<tr>
+								<th>Legs Played</th><th>Win %</th><th>Legs Won</th>
+							</tr>
+							<tr>
+								<td>' . $legsPlayed . '</td><td>' . $winAverage . '</td><td>' . $legsWon . '</td>
+							</tr>
+						</table>';
 					}
 					else
 					{
@@ -75,22 +88,22 @@ if ($numRows <= 0)
 					}
 				?>
 			</div>
-			<div class="user_stats" id="cricket_stats">
+<!-- 			<div class="user_stats" id="cricket_stats">
 				<h2>Cricket title</h2>
-				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>0</td><td>0</td></tr></table>
+				<table><tr><th>Games Played</th><th>Win %</th><th>Games Won</th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table>
 			</div>
 			<div class="user_stats" id="hundred_stats">
 				<h2>100 Darts title</h2>
-				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>1</td><td>1</td></tr></table>
+				<table><tr><th>Single %</th><th>Double %</th><th>Treble %</th></tr><tr><td>30</td><td>2</td><td>10</td></tr></table>
 			</div>
 			<div class="user_stats" id="nandc_stats">
 				<h2>Noughts & crosses title</h2>
-				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>15</td><td>3</td></tr></table>
+				<table><tr><th>Games Played</th><th>Win %</th><th>Games Won</th></tr><tr><td>15</td><td>20</td><td>3</td></tr></table>
 			</div>
 			<div class="user_stats" id="rtw_stats">
 				<h2>RTW title</h2>
-				<table><tr><th>games playerd</th><th>games won</th></tr><tr><td>50</td><td>32</td></tr></table>
-			</div>
+				<table><tr><th>Games Played</th><th>Hit %</th><th>Best Score</th></tr><tr><td>50</td><td>60</td><td>100</td></tr></table>
+			</div> -->
 		</div>
 	</div>
 
@@ -119,21 +132,21 @@ if ($numRows <= 0)
   	})
 
   	var x01_info = '<p>Traditional game of darts, where the first person to 0 by hitting a double wins the leg. Set up the game by selecting an opponent, target and legs needed to win the game. Game can be set up for a single player or play against a guest or user. After each leg you can view stats for each player. The winner is the person who wins the number of legs selected before the start of the game.</p>';
-  	var myIndex = 0;
-  	function carousel() 
-  	{
-	    var x = $('.user_stats');
-	    for (var i = 0; i < x.length; i++) 
-	    {
-	       x[i].style.display = "none";  
-	    }
-	    myIndex++;
-	    if (myIndex > x.length) {myIndex = 1}    
-	    x[myIndex-1].style.display = "block";  
-	    setTimeout(carousel, 5000); // Change image every 5 seconds
-	}
+ //  	var myIndex = 0;
+ //  	function carousel() 
+ //  	{
+	//     var x = $('.user_stats');
+	//     for (var i = 0; i < x.length; i++) 
+	//     {
+	//        x[i].style.display = "none";  
+	//     }
+	//     myIndex++;
+	//     if (myIndex > x.length) {myIndex = 1}    
+	//     x[myIndex-1].style.display = "block";  
+	//     setTimeout(carousel, 5000); // Change image every 5 seconds
+	// }
 
-	carousel();
+	// carousel();
  
   </script>
 </body>
